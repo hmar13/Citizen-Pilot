@@ -1,12 +1,19 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import Contacts from './screens/Contacts';
+<<<<<<< HEAD
 import Dashboard from './screens/Dashboard';
+=======
+import Projects from './screens/Projects';
+import Favourites from './screens/Favourites';
+
+>>>>>>> f0d37b67357014f68c3b3739aaefcefb8559c910
 const RootStack = createStackNavigator();
 
 export default function MainRootStack() {
   return (
     <RootStack.Navigator>
+<<<<<<< HEAD
       {/* { <RootStack.Screen name='Welcome' component={Welcome} />
       <RootStack.Screen name='Login' component={Login} />
       <RootStack.Screen name='Register' component={Register} /> */}
@@ -22,6 +29,19 @@ export default function MainRootStack() {
       <RootStack.Screen name='CurrentProposals' component={CurrentProposals} />
       <RootStack.Screen name='Favourites' component={Favourites} />
       <RootStack.Screen name='Projects' component={Projects} />} */}
+=======
+      {/* <RootStack.Screen name='Welcome' component={Welcome} /> */}
+      {/* <RootStack.Screen name='Login' component={Login} /> */}
+      {/* <RootStack.Screen name='Register' component={Register} /> */}
+      {/* <RootStack.Screen name='Dashboard' component={Dashboard} /> */}
+      {/* <RootStack.Screen name='News' component={News} /> */}
+      {/* <RootStack.Screen name='Contacts' component={Contacts} /> */}
+      {/* <RootStack.Screen name='ReportProblem' component={ReportProblem} /> */}
+      {/* <RootStack.Screen name='ProposeSolution' component={ProposeSolution} /> */}
+      {/* <RootStack.Screen name='CurrentProposals' component={CurrentProposals} /> */}
+      <RootStack.Screen name='Favourites' component={Favourites} />
+      {/* <RootStack.Screen name='Projects' component={Projects} /> */}
+>>>>>>> f0d37b67357014f68c3b3739aaefcefb8559c910
     </RootStack.Navigator>
   );
 }
