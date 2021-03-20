@@ -10,7 +10,11 @@ export default function MainRootStack() {
       {/* { <RootStack.Screen name='Welcome' component={Welcome} />
       <RootStack.Screen name='Login' component={Login} />
       <RootStack.Screen name='Register' component={Register} /> */}
-      <RootStack.Screen name="Dashboard" component={Dashboard} />
+      <RootStack.Screen
+        name="Dashboard"
+        component={Dashboard}
+        options={{ headerShown: false }}
+      />
       {/* <RootStack.Screen name='News' component={News} /> 
       <RootStack.Screen name='Contacts' component={Contacts} /> 
        <RootStack.Screen name='ReportProblem' component={ReportProblem} />

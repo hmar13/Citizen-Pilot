@@ -4,8 +4,7 @@ export const news: newsInterface[] = [
   {
     id: '1',
     title: 'tinder for cows',
-    description:
-      'lonley cows are looking for love, this new application by Matthew Dodsworth is one of a kind',
+    description: 'This new application by Matthew Dodsworth is one of a kind',
     location: 'Matthews Farm',
     date: '20/02/1952',
     img:
