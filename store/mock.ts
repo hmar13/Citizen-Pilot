@@ -1,4 +1,4 @@
-userData = [
+const userData = [
   {
     email: 'example@gmail.com',
     password: 'examplePassword',
@@ -13,10 +13,11 @@ userData = [
   },
 ];
 
-report = [
+const report = [
   {
     category: 'Traffic Lights',
-    img: 'https://assets3.thrillist.com/v1/image/1797521/414x310/crop;jpeg_quality=65.jpg',
+    img:
+      'https://assets3.thrillist.com/v1/image/1797521/414x310/crop;jpeg_quality=65.jpg',
     description: 'Broken traffic lights on 52 anne street.',
     longitude: 5.251,
     latitude: 25.325,
@@ -39,22 +40,24 @@ report = [
   },
 ];
 
-solutionProposals = [
+const solutionProposals = [
   {
     title: 'build more benchs',
     description: 'benchs',
     location: 'everywhere',
-    img: 'https://www.riverco.co.uk/wp-content/uploads/2019/05/traditional_bench.jpg',
+    img:
+      'https://www.riverco.co.uk/wp-content/uploads/2019/05/traditional_bench.jpg',
   },
   {
     title: 'build less benchs',
     description: 'less benchs',
     location: 'less places',
-    img: 'https://www.therusticcompany.com/wp-content/uploads/2017/01/solid-oak-bench.jpg',
+    img:
+      'https://www.therusticcompany.com/wp-content/uploads/2017/01/solid-oak-bench.jpg',
   },
 ];
 
-news = [
+const news = [
   {
     title: 'tinder for cows',
     description:
@@ -97,7 +100,7 @@ news = [
   },
 ];
 
-currentProposals = [
+const currentProposals = [
   {
     title: 'build more benchs',
     description: 'benchs',
@@ -114,7 +117,7 @@ currentProposals = [
   },
 ];
 
-contacts = [
+const contacts = [
   {
     title: 'Mayor',
     firstName: 'Harry',
@@ -131,7 +134,7 @@ contacts = [
   },
 ];
 
-whatAreWeWorkingOn = [
+const whatAreWeWorkingOn = [
   {
     title: 'The bench',
     description: 'Birthday present for Corona from the council',
@@ -148,12 +151,14 @@ whatAreWeWorkingOn = [
   },
   {
     title: 'Ipads for primary school students',
-    description: 'We think all the students should use the latest technology for studying',
+    description:
+      'We think all the students should use the latest technology for studying',
     location: 'Primary school',
     img: '',
     progressDescription: 'getting resources',
   },
 ];
+
 export {
   userData,
   report,
