@@ -1,12 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import {
-  StyleSheet,
-  View,
-  Dimensions,
-  ScrollView,
-  Platform,
-  Alert,
-} from 'react-native';
+import { StyleSheet, View, ScrollView, Platform, Alert } from 'react-native';
 import { Button, Card } from 'react-native-paper';
 import * as ImagePicker from 'expo-image-picker';
 

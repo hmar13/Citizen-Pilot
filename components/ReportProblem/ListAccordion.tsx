@@ -7,7 +7,7 @@ export default function ListAccordion(): JSX.Element {
   const handlePress = () => setExpanded(!expanded);
 
   return (
-    <List.Section title="Accordions">
+    <List.Section>
       <List.Accordion
         title="Choose a category"
         expanded={expanded}
