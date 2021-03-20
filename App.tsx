@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, SafeAreaView } from 'react-native';
 import { Provider } from 'react-redux';
-import reducers from './store/reducer';
+import {reducers} from './store/reducer';
 import { createStore, applyMiddleware } from 'redux';
 import { NavigationContainer } from '@react-navigation/native';
 import MainRootStack from './RootStack';

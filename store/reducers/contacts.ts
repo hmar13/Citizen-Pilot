@@ -1,5 +1,5 @@
 import { PayloadAction } from '@reduxjs/toolkit';
-import { contacts } from '../mock';
+import { contacts } from '../mocks/contactMocks';
 
 const initialState = {
   contacts: contacts,
