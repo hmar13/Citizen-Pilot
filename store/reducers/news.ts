@@ -1,16 +1,16 @@
 import { PayloadAction } from '@reduxjs/toolkit';
-import { contacts } from '../mock';
+import { news } from '../mocks/newsMocks';
 
 const initialState = {
-  contacts: contacts,
+  news: news,
 };
 
-export const cityContacts = (
+export const newsData = (
   state = initialState,
   action: PayloadAction<string>,
 ) => {
   switch (action.type) {
-    case 'contacts':
+    case 'news':
       return state;
   }
   return state;
