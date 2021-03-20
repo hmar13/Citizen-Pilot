@@ -9,7 +9,7 @@ import SafeViewAndroid from './components/SafeViewAndroid';
 
 const store = createStore(reducers);
 
-export default function App () {
+export default function App() {
   return (
     <Provider store={store}>
       <SafeAreaView style={SafeViewAndroid.AndroidSafeArea}>
