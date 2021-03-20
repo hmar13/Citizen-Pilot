@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View, FlatList } from 'react-native';
-import { useSelector, TypedUseSelectorHook } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { RootState } from '../store/reducer';
 import ContactItems from '../components/ContactComponents/ContactItems';
 
