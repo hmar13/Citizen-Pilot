@@ -1,12 +1,25 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, StyleSheet } from 'react-native';
+import { TextInput } from 'react-native-paper';
+import CameraComponent from '../components/ReportProblem/CameraComponent';
+import ListAccordion from '../components/ReportProblem/ListAccordion';
+
 
 export default function ReportProblem(): JSX.Element {
+  const [text, setText] = React.useState('');
+
   return (
     <View style={styles.container}>
+      <ListAccordion />
       <View>
-        <Text>Dropdown list</Text>
-        <Text>Take a picture</Text>
+        <CameraComponent />
+        <TextInput
+          label="Description"
+          multiline
+          value={text}
+          mode="outlined"
+          onChangeText={input => setText(input)}
+        />
       </View>
     </View>
   );

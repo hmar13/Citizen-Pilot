@@ -1,5 +1,6 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
+import { Provider as PaperProvider } from 'react-native-paper';
 import { StyleSheet, SafeAreaView } from 'react-native';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
@@ -12,11 +13,13 @@ const store = createStore(reducers);
 export default function App(): JSX.Element {
   return (
     <Provider store={store}>
-      <SafeAreaView style={SafeViewAndroid.AndroidSafeArea}>
-        <NavigationContainer>
-          <MainRootStack />
-        </NavigationContainer>
-      </SafeAreaView>
+      <PaperProvider>
+        <SafeAreaView style={SafeViewAndroid.AndroidSafeArea}>
+          <NavigationContainer>
+            <MainRootStack />
+          </NavigationContainer>
+        </SafeAreaView>
+      </PaperProvider>
     </Provider>
   );
 }
