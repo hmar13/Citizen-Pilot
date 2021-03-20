@@ -4,7 +4,10 @@ import { View, Text, StyleSheet } from 'react-native';
 export default function ReportProblem(): JSX.Element {
   return (
     <View style={styles.container}>
-      <Text>Hello</Text>
+      <View>
+        <Text>Dropdown list</Text>
+        <Text>Take a picture</Text>
+      </View>
     </View>
   );
 }

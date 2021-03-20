@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
-/* eslint-disable import/prefer-default-export */
 
 import { PayloadAction } from '@reduxjs/toolkit';
 import { userData } from '../mock';
