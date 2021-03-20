@@ -1,4 +1,4 @@
-userData = [
+const userData: {}[] = [
   {
     email: 'example@gmail.com',
     password: 'examplePassword',
@@ -13,7 +13,7 @@ userData = [
   },
 ];
 
-report = [
+const report: {}[] = [
   {
     category: 'Traffic Lights',
     img: 'https://assets3.thrillist.com/v1/image/1797521/414x310/crop;jpeg_quality=65.jpg',
@@ -39,7 +39,7 @@ report = [
   },
 ];
 
-solutionProposals = [
+const solutionProposals: {}[] = [
   {
     title: 'build more benchs',
     description: 'benchs',
@@ -54,7 +54,7 @@ solutionProposals = [
   },
 ];
 
-news = [
+const news: {}[] = [
   {
     title: 'tinder for cows',
     description:
@@ -97,7 +97,7 @@ news = [
   },
 ];
 
-currentProposals = [
+const currentProposals: {}[] = [
   {
     title: 'build more benchs',
     description: 'benchs',
@@ -114,7 +114,7 @@ currentProposals = [
   },
 ];
 
-contacts = [
+const contacts: {}[] = [
   {
     title: 'Mayor',
     firstName: 'Harry',
@@ -131,7 +131,7 @@ contacts = [
   },
 ];
 
-whatAreWeWorkingOn = [
+const whatAreWeWorkingOn: {}[] = [
   {
     title: 'The bench',
     description: 'Birthday present for Corona from the council',

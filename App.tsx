@@ -1,7 +1,7 @@
-import React, { forwardRef } from 'react';
-import { StyleSheet, Text, View, SafeAreaView } from 'react-native';
+import React from 'react';
+import { StyleSheet, SafeAreaView } from 'react-native';
 import { Provider } from 'react-redux';
-import reducers from './store/index.js';
+import reducers from './store/reducer';
 import { createStore } from 'redux';
 import { NavigationContainer } from '@react-navigation/native';
 import MainRootStack from './RootStack';
