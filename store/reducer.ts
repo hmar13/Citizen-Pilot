@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
-import { user } from './reducers/user';
-import { cityContacts } from './reducers/contacts';
+import user from './reducers/user';
+import cityContacts from './reducers/contacts';
 
 // Combining both reducers
 export const reducers = combineReducers({

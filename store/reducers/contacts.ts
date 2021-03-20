@@ -1,5 +1,5 @@
-/* eslint-disable import/prefer-default-export */
-/* eslint-disable default-case */
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
+
 import { PayloadAction } from '@reduxjs/toolkit';
 import { contacts } from '../mock';
 
@@ -7,10 +7,13 @@ const initialState = {
   contacts,
 };
 
-export const cityContacts = (state = initialState, action: PayloadAction<string>) => {
+const cityContacts = (state = initialState, action: PayloadAction<string>) => {
   switch (action.type) {
     case 'contacts':
       return state;
+    default:
+      return state;
   }
-  return state;
 };
+
+export default cityContacts;
