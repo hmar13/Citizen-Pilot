@@ -1,4 +1,6 @@
-const userData: {}[] = [
+/* eslint-disable prettier/prettier */
+
+const userData: { email: string, password: string, fName: string, lName: string }[] = [
   {
     email: 'example@gmail.com',
     password: 'examplePassword',
@@ -13,7 +15,7 @@ const userData: {}[] = [
   },
 ];
 
-const report: {}[] = [
+const report: { category: string, img: string, description: string, longitude: number, latitude: number }[] = [
   {
     category: 'Traffic Lights',
     img:
@@ -40,7 +42,7 @@ const report: {}[] = [
   },
 ];
 
-const solutionProposals: {}[] = [
+const solutionProposals: { title: string, description: string, location: string, img: string }[] = [
   {
     title: 'build more benchs',
     description: 'benchs',
@@ -57,7 +59,7 @@ const solutionProposals: {}[] = [
   },
 ];
 
-const news: {}[] = [
+const news: { title: string, description: string, location: string, date: string, img: string }[] = [
   {
     title: 'tinder for cows',
     description:
@@ -100,7 +102,7 @@ const news: {}[] = [
   },
 ];
 
-const currentProposals: {}[] = [
+const currentProposals: { title: string, description: string, location: string, img: string, votes: number }[] = [
   {
     title: 'build more benchs',
     description: 'benchs',
@@ -117,11 +119,9 @@ const currentProposals: {}[] = [
   },
 ];
 
-const contacts: {}[] = [
+const contacts: { title: string, phoneNumber: string, email: string, img: string }[] = [
   {
     title: 'Mayor',
-    firstName: 'Harry',
-    lastName: 'bossman',
     phoneNumber: '07896542341',
     email: 'harrydaboss@village.com',
     img:
@@ -131,10 +131,11 @@ const contacts: {}[] = [
     title: 'Police',
     phoneNumber: '000-555-242',
     email: 'policae@police.com',
+    img: ''
   },
 ];
 
-const whatAreWeWorkingOn: {}[] = [
+const whatAreWeWorkingOn: { title: string, description: string, location: string, img: string, progressDescription: string }[] = [
   {
     title: 'The bench',
     description: 'Birthday present for Corona from the council',

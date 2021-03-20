@@ -1,8 +1,10 @@
+/* eslint-disable import/prefer-default-export */
+/* eslint-disable default-case */
 import { PayloadAction } from '@reduxjs/toolkit';
 import { userData } from '../mock';
 
 const initialState = {
-  userData: userData
+  userData,
 };
 
 export const user = (state = initialState, action: PayloadAction<string>) => {
