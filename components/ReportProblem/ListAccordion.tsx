@@ -1,21 +1,20 @@
 import React, { useState } from 'react';
 import { List, Colors } from 'react-native-paper';
 
-export default function ListAccordion(): JSX.Element {
+export default function ListAccordion({ setCategoryTitle, categoryTitle }): JSX.Element {
   const [expanded, setExpanded] = useState(false);
-  const [title, setTitle] = useState('Choose a category');
 
   const handleAccordionView = () => setExpanded(!expanded);
 
   const handlePress = (newTitle: string) => {
-    setTitle(newTitle);
+    setCategoryTitle(newTitle);
     setExpanded(!expanded);
   };
 
   return (
     <List.Section>
       <List.Accordion
-        title={title}
+        title={categoryTitle}
         expanded={expanded}
         onPress={handleAccordionView}
         left={() => <List.Icon icon="star" color={Colors.blue500} />}

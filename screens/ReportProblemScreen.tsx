@@ -11,6 +11,7 @@ import ListAccordion from '../components/ReportProblem/ListAccordion';
 export default function ReportProblem(): JSX.Element {
   const dispatch = useDispatch();
   const [text, setText] = useState('');
+  const [categoryTitle, setCategoryTitle] = useState('Choose a category');
 
   // handles API call to save new problem to database
   function handleButtonClick() {
@@ -24,7 +25,10 @@ export default function ReportProblem(): JSX.Element {
         source={require('../assets/images/banner-horizontal.png')}
         style={styles.image}
       />
-      <ListAccordion />
+      <ListAccordion
+        setCategoryTitle={setCategoryTitle}
+        categoryTitle={categoryTitle}
+      />
       <View>
         <CameraComponent />
         <TextInput
