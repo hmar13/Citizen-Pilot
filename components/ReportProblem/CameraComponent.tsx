@@ -11,7 +11,7 @@ export default function Camera(): JSX.Element {
       if (Platform.OS !== 'web') {
         const { status } = await ImagePicker.requestCameraPermissionsAsync();
         if (status !== 'granted') {
-          Alert.alert('Sorry, we need camera  permissions to make this work!');
+          Alert.alert('Sorry, we need camera permissions');
         }
       }
     })();
@@ -60,10 +60,6 @@ export default function Camera(): JSX.Element {
 // const { height } = Dimensions.get('window');
 // const { width } = Dimensions.get('window');
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    marginBottom: '5%',
-  },
   button: {
     marginLeft: '5%',
     justifyContent: 'center',
@@ -71,7 +67,8 @@ const styles = StyleSheet.create({
     width: '50%',
     padding: 17,
     borderRadius: 15,
-    marginTop: '20%',
+    marginTop: '10%',
+    marginBottom: '15%',
   },
   image: {
     marginTop: '5%',
