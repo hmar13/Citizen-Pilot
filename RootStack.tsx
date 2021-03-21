@@ -1,17 +1,18 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
-import Contacts from './screens/Contacts';
-import Dashboard from './screens/Dashboard';
-import Projects from './screens/Projects';
-import Favourites from './screens/Favourites';
-import ReportProblem from './screens/ReportProblemScreen';
+// import Contacts from './screens/Contacts';
+// import Dashboard from './screens/Dashboard';
+// import Projects from './screens/Projects';
+// import Favourites from './screens/Favourites';
+// import ReportProblem from './screens/ReportProblemScreen';
+import WelcomeScreen from './screens/WelcomeScreen';
 
 const RootStack = createStackNavigator();
 
 export default function MainRootStack(): JSX.Element {
   return (
     <RootStack.Navigator>
-      {/* <RootStack.Screen name='Welcome' component={Welcome} /> */}
+      <RootStack.Screen name="Welcome" component={WelcomeScreen} />
       {/* <RootStack.Screen name='Login' component={Login} /> */}
       {/* <RootStack.Screen name='Register' component={Register} /> */}
       {/* <RootStack.Screen name='Dashboard' component={Dashboard} /> */}
