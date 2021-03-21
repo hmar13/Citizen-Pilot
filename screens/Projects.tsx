@@ -1,5 +1,7 @@
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
+
 import React from 'react';
-import { StyleSheet, Text, View, FlatList } from 'react-native';
+import { Text, View, FlatList } from 'react-native';
 import { useSelector } from 'react-redux';
 import { RootState } from '../store/reducer';
 import ProjectItems from '../components/ProjectComponents/ProjectItems';
@@ -19,7 +21,7 @@ const Projects = () => {
         <FlatList
           data={allProjects}
           keyExtractor={item => item.id}
-          renderItem={({item}) => (
+          renderItem={({ item }) => (
             <ProjectItems
               title={item.title}
               description={item.description}
@@ -31,9 +33,7 @@ const Projects = () => {
         />
       </View>
     </View>
-  )
-}
+  );
+};
 
 export default Projects;
-
-const styles = StyleSheet.create({});

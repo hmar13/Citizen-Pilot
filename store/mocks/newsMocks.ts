@@ -1,6 +1,6 @@
 import newsInterface from '../../interfaces/newsInterface';
 
-export const news: newsInterface[] = [
+const news: newsInterface[] = [
   {
     id: '1',
     title: 'tinder for cows',
@@ -47,3 +47,5 @@ export const news: newsInterface[] = [
       'https://yaleclimateconnections.org/wp-content/uploads/2020/11/1120_iota-sat-nov16_974.jpg',
   },
 ];
+
+export default news;

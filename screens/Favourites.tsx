@@ -1,5 +1,7 @@
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
+
 import React from 'react';
-import { StyleSheet, Text, View, FlatList } from 'react-native';
+import { Text, View, FlatList } from 'react-native';
 import { useSelector } from 'react-redux';
 import { RootState } from '../store/reducer';
 import FavouriteProposalItems from '../components/FavouriteComponents/FavouriteProposalItems';
@@ -8,7 +10,7 @@ import FavourteProjectItems from '../components/FavouriteComponents/FavouritePro
 const Favourites = () => {
   const myFavourites = useSelector((state: RootState) => {
     return state.myFavourites.favourites;
-  })
+  });
 
   return (
     <View>
@@ -20,16 +22,17 @@ const Favourites = () => {
         <FlatList
           data={myFavourites}
           keyExtractor={item => item.id}
-          renderItem={({item}) => (
-            item.votes ?
-            <FavouriteProposalItems
-              title={item.title}
-              description={item.description}
-              location={item.location}
-              vote={item.votes}
-              img={item.img}
-            /> : null
-          )}
+          renderItem={({ item }) =>
+            item.votes ? (
+              <FavouriteProposalItems
+                title={item.title}
+                description={item.description}
+                location={item.location}
+                vote={item.votes}
+                img={item.img}
+              />
+            ) : null
+          }
         />
       </View>
       <View>
@@ -37,21 +40,20 @@ const Favourites = () => {
         <FlatList
           data={myFavourites}
           keyExtractor={item => item.id}
-          renderItem={({item}) => (
-            !item.votes ?
-            <FavourteProjectItems
-              title={item.title}
-              description={item.description}
-              location={item.location}
-              img={item.img}
-            /> : null
-          )}
+          renderItem={({ item }) =>
+            !item.votes ? (
+              <FavourteProjectItems
+                title={item.title}
+                description={item.description}
+                location={item.location}
+                img={item.img}
+              />
+            ) : null
+          }
         />
       </View>
     </View>
-  )
-}
+  );
+};
 
 export default Favourites;
-
-const styles = StyleSheet.create({});

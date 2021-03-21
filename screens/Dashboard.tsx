@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
+
 import React from 'react';
 import {
   StyleSheet,
@@ -23,7 +25,7 @@ const Dashboard = () => {
         <ScrollView
           style={{ marginRight: 20 }}
           snapToInterval={350}
-          decelerationRate={'fast'}
+          decelerationRate="fast"
           horizontal={true}
           showsHorizontalScrollIndicator={false}
         >
