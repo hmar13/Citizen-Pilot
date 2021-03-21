@@ -4,16 +4,7 @@ import { useSelector } from 'react-redux';
 import { RootState } from '../store/reducer';
 import ContactItems from '../components/ContactComponents/ContactItems';
 
-<<<<<<< HEAD
 const Contacts = () => {
-=======
-
-const Contacts = () => {
-  const allContacts = useSelector((state: RootState) => {
-    return state.cityContacts.contacts;
-  });
-
->>>>>>> f0d37b67357014f68c3b3739aaefcefb8559c910
   return (
     <View>
       <View>
