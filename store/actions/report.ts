@@ -1,4 +1,3 @@
-/* eslint-disable import/prefer-default-export */
 import { SAVE_REPORT } from '../actions/ActionTypes';
 import problemInterface from '../../interfaces/problemInterface';
 

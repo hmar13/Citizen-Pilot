@@ -55,5 +55,9 @@
     "@typescript-eslint/no-shadow": [
       "error"
     ]
+    // "semi": [
+    //   "error",
+    //   "always"
+    // ]
   }
 }

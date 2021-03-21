@@ -4,35 +4,36 @@ import React from 'react';
 import { Text, View, FlatList } from 'react-native';
 import { useSelector } from 'react-redux';
 import { RootState } from '../store/reducer';
-import ContactItems from '../components/ContactComponents/ContactItems';
+import ProjectItems from '../components/ProjectComponents/ProjectItems';
 
-const Contacts = () => {
-  const allContacts = useSelector((state: RootState) => {
-    return state.cityContacts.contacts;
+const Projects = () => {
+  const allProjects = useSelector((state: RootState) => {
+    return state.cityProjects.projects;
   });
 
   return (
     <View>
       <View>
-        <Text>City Contacts</Text>
+        <Text>What are we working on</Text>
+        <Text>Here are all of the Projects happening in the area:</Text>
       </View>
       <View>
         <FlatList
-          data={allContacts}
+          data={allProjects}
           keyExtractor={item => item.id}
           renderItem={({ item }) => (
-            <ContactItems
+            <ProjectItems
               title={item.title}
-              phoneNumber={item.phoneNumber}
-              email={item.email}
+              description={item.description}
+              location={item.location}
+              projectedCompletion={item.projectedCompletion}
               img={item.img}
             />
           )}
         />
       </View>
-      {/* Add navigation to the bottom of the screen */}
     </View>
   );
 };
 
-export default Contacts;
+export default Projects;
