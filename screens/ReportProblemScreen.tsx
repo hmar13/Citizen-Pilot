@@ -1,18 +1,16 @@
-import React from 'react';
-import { View, StyleSheet, ScrollView } from 'react-native';
+/* eslint-disable global-require */
+import React, { useState } from 'react';
+import { View, StyleSheet, Image, Dimensions } from 'react-native';
 import { TextInput, Button } from 'react-native-paper';
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../store/reducer';
+import { useDispatch } from 'react-redux';
 import CameraComponent from '../components/ReportProblem/CameraComponent';
+import UrgentButton from '../components/ReportProblem/UrgentButtonComponent';
 import ListAccordion from '../components/ReportProblem/ListAccordion';
-import addNewReport from '../store/actions/report';
+// import addNewReport from '../store/actions/report';
 
 export default function ReportProblem(): JSX.Element {
   const dispatch = useDispatch();
-  const oldReports = useSelector((state: RootState) => {
-    return state.reportProblem.reportedProblem;
-  });
-  const [text, setText] = React.useState('');
+  const [text, setText] = useState('');
 
   // handles API call to save new problem to database
   function handleButtonClick() {
@@ -21,7 +19,11 @@ export default function ReportProblem(): JSX.Element {
   }
 
   return (
-    <ScrollView style={styles.container}>
+    <View style={styles.container}>
+      <Image
+        source={require('../assets/images/banner-horizontal.png')}
+        style={styles.image}
+      />
       <ListAccordion />
       <View>
         <CameraComponent />
@@ -34,37 +36,46 @@ export default function ReportProblem(): JSX.Element {
           onChangeText={input => setText(input)}
         />
       </View>
-      <Button
-        icon="email-send"
-        mode="contained"
-        style={styles.button}
-        onPress={handleButtonClick}
-      >
-        Submit
-      </Button>
-    </ScrollView>
+      <UrgentButton />
+      <View style={styles.bottom}>
+        <Button
+          icon="email-send"
+          mode="contained"
+          style={styles.button}
+          onPress={handleButtonClick}
+        >
+          Submit
+        </Button>
+      </View>
+    </View>
   );
 }
-
-// const { height } = Dimensions.get('window');
+const { width } = Dimensions.get('window');
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#E5E5E5',
   },
   button: {
-    marginRight: '10%',
     justifyContent: 'center',
-    alignSelf: 'flex-end',
+    alignSelf: 'center',
     height: 60,
     width: '50%',
-    padding: 17,
     borderRadius: 15,
-    marginTop: '20%',
   },
   input: {
-    width: '70%',
-    alignSelf: 'center',
+    width: '90%',
+    marginLeft: '5%',
+    alignSelf: 'flex-start',
     marginTop: 20,
+  },
+  bottom: {
+    flex: 1,
+    justifyContent: 'flex-end',
+    marginBottom: 36,
+  },
+  image: {
+    width,
+    height: '10%',
   },
 });
