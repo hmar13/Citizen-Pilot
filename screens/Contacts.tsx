@@ -9,7 +9,6 @@ const Contacts = () => {
   const allContacts = useSelector((state: RootState) => {
     return state.cityContacts.contacts;
   });
-
   return (
     <View>
       <View>

@@ -1,4 +1,6 @@
-const userData: {}[] = [
+/* eslint-disable prettier/prettier */
+
+const userData: { email: string, password: string, fName: string, lName: string }[] = [
   {
     email: 'example@gmail.com',
     password: 'examplePassword',
@@ -13,10 +15,11 @@ const userData: {}[] = [
   },
 ];
 
-const report: {}[] = [
+const report: { category: string, img: string, description: string, longitude: number, latitude: number }[] = [
   {
     category: 'Traffic Lights',
-    img: 'https://assets3.thrillist.com/v1/image/1797521/414x310/crop;jpeg_quality=65.jpg',
+    img:
+      'https://assets3.thrillist.com/v1/image/1797521/414x310/crop;jpeg_quality=65.jpg',
     description: 'Broken traffic lights on 52 anne street.',
     longitude: 5.251,
     latitude: 25.325,
@@ -39,22 +42,24 @@ const report: {}[] = [
   },
 ];
 
-const solutionProposals: {}[] = [
+const solutionProposals: { title: string, description: string, location: string, img: string }[] = [
   {
     title: 'build more benchs',
     description: 'benchs',
     location: 'everywhere',
-    img: 'https://www.riverco.co.uk/wp-content/uploads/2019/05/traditional_bench.jpg',
+    img:
+      'https://www.riverco.co.uk/wp-content/uploads/2019/05/traditional_bench.jpg',
   },
   {
     title: 'build less benchs',
     description: 'less benchs',
     location: 'less places',
-    img: 'https://www.therusticcompany.com/wp-content/uploads/2017/01/solid-oak-bench.jpg',
+    img:
+      'https://www.therusticcompany.com/wp-content/uploads/2017/01/solid-oak-bench.jpg',
   },
 ];
 
-const news: {}[] = [
+const news: { title: string, description: string, location: string, date: string, img: string }[] = [
   {
     title: 'tinder for cows',
     description:
@@ -97,7 +102,7 @@ const news: {}[] = [
   },
 ];
 
-const currentProposals: {}[] = [
+const currentProposals: { title: string, description: string, location: string, img: string, votes: number }[] = [
   {
     title: 'build more benchs',
     description: 'benchs',
@@ -114,7 +119,7 @@ const currentProposals: {}[] = [
   },
 ];
 
-const contacts: {}[] = [
+const contacts: { id: string, title: string, phoneNumber: string, email: string, img: string }[] = [
   {
     id: '1',
     title: 'Library',
@@ -146,7 +151,7 @@ const contacts: {}[] = [
   },
 ];
 
-const whatAreWeWorkingOn: {}[] = [
+const whatAreWeWorkingOn: { title: string, description: string, location: string, img: string, progressDescription: string }[] = [
   {
     title: 'The bench',
     description: 'Birthday present for Corona from the council',
@@ -163,12 +168,14 @@ const whatAreWeWorkingOn: {}[] = [
   },
   {
     title: 'Ipads for primary school students',
-    description: 'We think all the students should use the latest technology for studying',
+    description:
+      'We think all the students should use the latest technology for studying',
     location: 'Primary school',
     img: '',
     progressDescription: 'getting resources',
   },
 ];
+
 export {
   userData,
   report,
