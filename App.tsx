@@ -2,21 +2,20 @@ import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { Provider as PaperProvider } from 'react-native-paper';
 import { SafeAreaView } from 'react-native';
-import { Provider } from 'react-redux';
+import { Provider as StoreProvider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import ReduxThunk from 'redux-thunk';
 import logger from 'redux-logger';
-import { reducers } from './store/reducer';
-import MainRootStack from './RootStack';
 import SafeViewAndroid from './components/SafeViewAndroid';
+import MainRootStack from './RootStack';
+import { reducers } from './store/reducer';
 
 const middleware = applyMiddleware(ReduxThunk, logger);
-
 const store = createStore(reducers, middleware);
 
 export default function App(): JSX.Element {
   return (
-    <Provider store={store}>
+    <StoreProvider store={store}>
       <PaperProvider>
         <SafeAreaView style={SafeViewAndroid.AndroidSafeArea}>
           <NavigationContainer>
@@ -24,6 +23,6 @@ export default function App(): JSX.Element {
           </NavigationContainer>
         </SafeAreaView>
       </PaperProvider>
-    </Provider>
+    </StoreProvider>
   );
 }

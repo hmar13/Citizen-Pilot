@@ -1,5 +1,7 @@
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
+
 import { PayloadAction } from '@reduxjs/toolkit';
-import { favourites } from '../mocks/favouriteMocks';
+import favourites from '../mocks/favouriteMocks';
 
 const initialState = {
   favourites,

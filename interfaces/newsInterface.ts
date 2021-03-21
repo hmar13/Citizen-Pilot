@@ -1,9 +1,8 @@
-export default interface favouriteInterface {
+export default interface newsInterface {
   id: string;
-  type: string;
   title: string;
   description: string;
   location: string;
   img: string;
-  votes?: number;
+  date: string;
 }
