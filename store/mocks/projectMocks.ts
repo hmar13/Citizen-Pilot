@@ -1,6 +1,6 @@
 import projectedCompletion from '../../interfaces/projectInterface';
 
-export const projects: projectedCompletion[] = [
+const projects: projectedCompletion[] = [
   {
     id: '1',
     title: 'The bench',
@@ -20,9 +20,12 @@ export const projects: projectedCompletion[] = [
   {
     id: '3',
     title: 'Ipads for primary school students',
-    description: 'We think all the students should use the latest technology for studying',
+    description:
+      'We think all the students should use the latest technology for studying',
     location: 'Primary school',
     img: '',
     projectedCompletion: 'getting resources',
   },
-]
+];
+
+export default projects;

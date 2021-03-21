@@ -54,10 +54,10 @@
     "no-shadow": "off",
     "@typescript-eslint/no-shadow": [
       "error"
-    ],
-    "semi": [
-      "error",
-      "always"
     ]
+    // "semi": [
+    //   "error",
+    //   "always"
+    // ]
   }
 }

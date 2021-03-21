@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
+
 import React from 'react';
 import { Text, View, FlatList } from 'react-native';
 import { useSelector } from 'react-redux';

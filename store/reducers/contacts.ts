@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 
 import { PayloadAction } from '@reduxjs/toolkit';
-import { contacts } from '../mocks/contactMocks';
+import contacts from '../mocks/contactMocks';
 
 const initialState = {
   contacts,
