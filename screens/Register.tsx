@@ -12,13 +12,13 @@ export default function Register({ navigation }): JSX.Element {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
 
-  const emptyState = () => {
-    setFirstName('');
-    setLastName('');
-    setEmail('');
-    setPassword('');
-    setConfirmPassword('');
-  };
+  // const emptyState = () => {
+  //   setFirstName('');
+  //   setLastName('');
+  //   setEmail('');
+  //   setPassword('');
+  //   setConfirmPassword('');
+  // };
 
   return (
     <View style={styles.container}>
