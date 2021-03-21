@@ -9,5 +9,6 @@ export const reportedProblem: problemInterface[] = [
     description: 'library@village.com',
     longitude: 666,
     latitude: 23,
+    urgent: false,
   },
 ];

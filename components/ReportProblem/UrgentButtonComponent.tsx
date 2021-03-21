@@ -2,8 +2,20 @@ import React, { useState } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { RadioButton } from 'react-native-paper';
 
-export default function UrgentButton(): JSX.Element {
+interface urgencyStatus {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  setUrgency: any;
+}
+
+export default function UrgentButton({
+  setUrgency,
+}: urgencyStatus): JSX.Element {
   const [checked, setChecked] = useState('');
+
+  const handlePress = (isUrgent: boolean, name: string) => {
+    setChecked(name);
+    setUrgency(isUrgent);
+  };
 
   return (
     <View style={styles.container}>
@@ -12,7 +24,7 @@ export default function UrgentButton(): JSX.Element {
         uncheckedColor="red"
         color="red"
         status={checked === 'urgent' ? 'checked' : 'unchecked'}
-        onPress={() => setChecked('urgent')}
+        onPress={() => handlePress(true, 'urgent')}
       />
       <Text> This is urgent </Text>
       <RadioButton
@@ -20,7 +32,7 @@ export default function UrgentButton(): JSX.Element {
         uncheckedColor="green"
         color="green"
         status={checked === 'notUrgent' ? 'checked' : 'unchecked'}
-        onPress={() => setChecked('notUrgent')}
+        onPress={() => handlePress(false, 'notUrgent')}
       />
       <Text>Not urgent</Text>
     </View>

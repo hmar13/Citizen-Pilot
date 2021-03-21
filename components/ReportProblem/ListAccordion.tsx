@@ -2,9 +2,17 @@ import React, { useState } from 'react';
 import { View, Text, Dimensions, StyleSheet } from 'react-native';
 import { List, Colors } from 'react-native-paper';
 
-export default function ListAccordion({ setCategoryTitle, categoryTitle }): JSX.Element {
-  const [expanded, setExpanded] = useState(false);
+interface CategoryTitle {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  setCategoryTitle: any;
+  categoryTitle: string;
+}
 
+export default function ListAccordion({
+  setCategoryTitle,
+  categoryTitle,
+}: CategoryTitle): JSX.Element {
+  const [expanded, setExpanded] = useState(false);
   const handleAccordionView = () => setExpanded(!expanded);
 
   const handlePress = (newTitle: string) => {

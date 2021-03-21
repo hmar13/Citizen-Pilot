@@ -1,8 +1,15 @@
 /* eslint-disable global-require */
 import React, { useState } from 'react';
-import { View, StyleSheet, Image, Dimensions, Alert, Text } from 'react-native';
+import {
+  View,
+  StyleSheet,
+  Image,
+  Dimensions,
+  Alert,
+  Text,
+  ScrollView,
+} from 'react-native';
 import { TextInput, Button } from 'react-native-paper';
-// import { useDispatch } from 'react-redux';
 import CameraComponent from '../components/ReportProblem/CameraComponent';
 import UrgentButton from '../components/ReportProblem/UrgentButtonComponent';
 import ListAccordion from '../components/ReportProblem/ListAccordion';
@@ -11,33 +18,31 @@ import ListAccordion from '../components/ReportProblem/ListAccordion';
 export default function ReportProblem(): JSX.Element {
   const [text, setText] = useState('');
   const [categoryTitle, setCategoryTitle] = useState('Choose a category');
+  const [imageUri, setImageUri] = useState('');
+  const [urgency, setUrgency] = useState(true);
 
   // handles API call to save new problem to database
   function handleButtonClick() {
     if (categoryTitle === 'Choose a category') {
       Alert.alert('Please add a category');
     }
+    console.log(urgency);
     // dispatch(addNewReport());
     setText('');
   }
 
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       <Image
         source={require('../assets/images/banner-horizontal.png')}
         style={styles.image}
       />
-
       <ListAccordion
         setCategoryTitle={setCategoryTitle}
         categoryTitle={categoryTitle}
       />
-
       <View>
-        <View style={styles.camera}>
-          <Text style={styles.text}>Then take a picture</Text>
-          <CameraComponent />
-        </View>
+        <CameraComponent imageUri={imageUri} setImageUri={setImageUri} />
         <View style={styles.descriptionBox}>
           <Text style={styles.text}>Write a brief description</Text>
           <TextInput
@@ -52,7 +57,7 @@ export default function ReportProblem(): JSX.Element {
       </View>
       <View style={styles.urgent}>
         <Text style={styles.text}>How urgent is your problem?</Text>
-        <UrgentButton />
+        <UrgentButton setUrgency={setUrgency} />
       </View>
       <View style={styles.bottom}>
         <Button
@@ -64,9 +69,10 @@ export default function ReportProblem(): JSX.Element {
           Submit
         </Button>
       </View>
-    </View>
+    </ScrollView>
   );
 }
+
 const { height } = Dimensions.get('window');
 const { width } = Dimensions.get('window');
 const styles = StyleSheet.create({
@@ -81,22 +87,9 @@ const styles = StyleSheet.create({
     width: '50%',
     borderRadius: 15,
   },
-  category: {
-    backgroundColor: 'white',
-    height: height / 8,
-    width: width - 20,
-    alignSelf: 'center',
-    borderRadius: 10,
-    marginBottom: 7,
-    marginTop: 16,
-  },
-  camera: {
-    backgroundColor: 'white',
-    height: height / 6,
-    width: width - 20,
-    alignSelf: 'center',
-    borderRadius: 10,
-    marginBottom: 7,
+  bottom: {
+    marginTop: '15%',
+    marginBottom: '20%',
   },
   descriptionBox: {
     backgroundColor: 'white',
@@ -118,11 +111,6 @@ const styles = StyleSheet.create({
     marginLeft: '5%',
     alignSelf: 'flex-start',
     marginTop: 20,
-  },
-  bottom: {
-    flex: 1,
-    justifyContent: 'flex-end',
-    marginBottom: 36,
   },
   image: {
     width,
