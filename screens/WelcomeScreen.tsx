@@ -12,7 +12,9 @@ export default function WelcomeScreen(): JSX.Element {
       <View style={styles.secondColumn}>
         <LogoComponent />
         <Text style={styles.text}>Log in and make your {'\n'} voice heard</Text>
-        <ButtonComponent buttonText="Sign in" />
+        <View style={styles.buttonContainer}>
+          <ButtonComponent buttonText="Sign in" />
+        </View>
       </View>
     </View>
   );
@@ -34,5 +36,8 @@ const styles = StyleSheet.create({
     fontSize: 15,
     textAlign: 'center',
     fontStyle: 'italic',
+  },
+  buttonContainer: {
+    marginTop: '120%',
   },
 });

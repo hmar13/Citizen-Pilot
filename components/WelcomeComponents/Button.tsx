@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { Button } from 'react-native-paper';
 
 interface buttonT {
@@ -7,24 +7,19 @@ interface buttonT {
 }
 export default function ButtonComponent({ buttonText }: buttonT): JSX.Element {
   return (
-    <View style={styles.container}>
-      <Button
-        icon="arrow-right-circle-outline"
-        mode="contained"
-        contentStyle={{ flexDirection: 'row-reverse', width: 150 }}
-        color="#ffde59"
-        style={styles.button}
-      >
-        {buttonText}
-      </Button>
-    </View>
+    <Button
+      icon="arrow-right-circle-outline"
+      mode="contained"
+      contentStyle={{ flexDirection: 'row-reverse', width: 150 }}
+      color="#ffde59"
+      style={styles.button}
+    >
+      {buttonText}
+    </Button>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    marginTop: '120%',
-  },
   button: {
     justifyContent: 'center',
     alignSelf: 'center',
