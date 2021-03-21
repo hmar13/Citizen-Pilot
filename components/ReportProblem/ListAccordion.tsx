@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { List } from 'react-native-paper';
+import { List, Colors } from 'react-native-paper';
 
 export default function ListAccordion(): JSX.Element {
   const [expanded, setExpanded] = useState(false);
@@ -12,7 +12,7 @@ export default function ListAccordion(): JSX.Element {
         title="Choose a category"
         expanded={expanded}
         onPress={handlePress}
-        left={() => <List.Icon icon="star" />}
+        left={() => <List.Icon icon="star" color={Colors.blue500} />}
       >
         <List.Item onPress={handlePress} title="Roads and streets" />
         <List.Item onPress={handlePress} title="Transport" />
