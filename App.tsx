@@ -1,14 +1,14 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { Provider as PaperProvider } from 'react-native-paper';
-import { StyleSheet, SafeAreaView } from 'react-native';
+import { SafeAreaView } from 'react-native';
 import { Provider } from 'react-redux';
-import {reducers} from './store/reducer';
 import { createStore, applyMiddleware } from 'redux';
-import MainRootStack from './RootStack';
-import SafeViewAndroid from './components/SafeViewAndroid';
 import ReduxThunk from 'redux-thunk';
 import logger from 'redux-logger';
+import { reducers } from './store/reducer';
+import MainRootStack from './RootStack';
+import SafeViewAndroid from './components/SafeViewAndroid';
 
 const middleware = applyMiddleware(ReduxThunk, logger);
 
@@ -27,12 +27,3 @@ export default function App(): JSX.Element {
     </Provider>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
