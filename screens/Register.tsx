@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, StyleSheet, Text, TouchableOpacity, Alert } from 'react-native';
+import { View, StyleSheet, Text, TouchableOpacity } from 'react-native';
 import ButtonComponent from '../components/WelcomeComponents/Button';
 import BannerComponent from '../components/BannerComponent';
 import LogoComponent from '../components/LogoComponent';
@@ -121,27 +121,23 @@ const styles = StyleSheet.create({
   secondColumn: {
     alignItems: 'center',
     justifyContent: 'flex-start',
-    marginLeft: 36,
-    marginTop: -200,
-    marginBottom: 20,
+    marginLeft: '9%',
+    marginTop: '-100%',
+    marginBottom: '7%',
   },
   loginContainer: {
-    marginBottom: 40,
-  },
-  textInput: {
-    width: 200,
-    height: 30,
+    marginBottom: '20%',
   },
   text: {
     textAlign: 'center',
     fontSize: 16,
-    marginBottom: 20,
+    marginBottom: '13%',
     fontWeight: 'bold',
     color: '#FFDE59',
   },
   createAccount: {
     color: 'grey',
-    marginTop: 10,
+    marginTop: '5%',
     textAlign: 'center',
   },
 });

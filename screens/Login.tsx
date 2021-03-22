@@ -67,24 +67,20 @@ const styles = StyleSheet.create({
   secondColumn: {
     alignItems: 'center',
     justifyContent: 'flex-start',
-    marginLeft: 36,
+    marginLeft: '9%',
   },
   loginContainer: {
-    marginBottom: 120,
-  },
-  textInput: {
-    width: 200,
-    height: 30,
+    marginBottom: '55%',
   },
   text: {
     textAlign: 'center',
     fontSize: 16,
-    marginBottom: 30,
+    marginBottom: '15%',
     fontWeight: 'bold',
     color: '#FFDE59',
   },
   createAccount: {
     color: 'grey',
-    marginTop: 16,
+    marginTop: '9%',
   },
 });
