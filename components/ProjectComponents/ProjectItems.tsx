@@ -1,6 +1,14 @@
-import React from 'react';
-import { StyleSheet } from 'react-native';
+import React, { useState } from 'react';
+import {
+  StyleSheet,
+  TouchableOpacity,
+  View,
+  Text,
+  Button,
+  Image,
+} from 'react-native';
 import { Card, Title, Paragraph } from 'react-native-paper';
+import Modal from 'react-native-modal';
 
 interface ProjectItemsInterface {
   title: string;
@@ -17,16 +25,37 @@ const ProjectItems: React.FC<ProjectItemsInterface> = ({
   projectedCompletion,
   img,
 }) => {
+  const [isModalVisible, setModalVisible] = useState(false);
+  const toggleModal = () => {
+    setModalVisible(!isModalVisible);
+  };
+
   return (
-    <Card style={styles.container}>
-      <Card.Content>
-        <Title style={styles.title}>{title}</Title>
-        <Paragraph style={styles.location}>Where? {location}</Paragraph>
-        <Paragraph style={styles.progress}>
-          Progress: {projectedCompletion}
-        </Paragraph>
-      </Card.Content>
-    </Card>
+    <View>
+      <TouchableOpacity onPress={toggleModal}>
+        <Card style={styles.container}>
+          <Card.Content>
+            <Title style={styles.title}>{title}</Title>
+            <Paragraph style={styles.location}>Where? {location}</Paragraph>
+            <Paragraph style={styles.progress}>
+              Progress: {projectedCompletion}
+            </Paragraph>
+          </Card.Content>
+        </Card>
+      </TouchableOpacity>
+      <Modal isVisible={isModalVisible}>
+        <View style={styles.modal__container}>
+          <View style={styles.modal__information__container}>
+            <Text>{title}</Text>
+            <Image style={styles.image} source={{ uri: img }} />
+            <Text>Information: {description}</Text>
+            <Text>Location: {location}</Text>
+            <Text>Progress: {projectedCompletion}</Text>
+          </View>
+          <Button title="Hide" onPress={toggleModal} />
+        </View>
+      </Modal>
+    </View>
   );
 };
 
@@ -47,5 +76,19 @@ const styles = StyleSheet.create({
   },
   progress: {
     textAlign: 'right',
+  },
+  modal__container: {
+    flex: 1,
+    justifyContent: 'space-between',
+    backgroundColor: 'white',
+    paddingHorizontal: 20,
+    borderRadius: 15,
+  },
+  image: {
+    height: 200,
+    width: 200,
+  },
+  modal__information__container: {
+    alignItems: 'center',
   },
 });

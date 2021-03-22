@@ -13,8 +13,8 @@ const Projects = () => {
   return (
     <View style={styles.container}>
       <View style={styles.header__container}>
-        <Text>What we are working on</Text>
-        <Text>Here are all the current proposals</Text>
+        <Text style={styles.header__text}>What we are working on</Text>
+        <Text style={styles.header__text}>Here are all the current proposals</Text>
       </View>
       <FlatList
         style={styles.flatlist__container}
@@ -43,11 +43,17 @@ const styles = StyleSheet.create({
   },
   header__container: {
     backgroundColor: 'white',
-    marginRight: 20,
+    marginRight: 25,
     marginBottom: 15,
     borderBottomRightRadius: 30,
+    height: 70,
+    justifyContent: 'flex-end',
+    paddingBottom: 5,
   },
   flatlist__container: {
     paddingHorizontal: 25,
+  },
+  header__text: {
+    alignSelf: 'center',
   },
 });
