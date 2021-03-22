@@ -1,19 +1,19 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 
 import { PayloadAction } from '@reduxjs/toolkit';
-import { userData } from '../mock';
+import projects from '../mocks/projectMocks';
 
 const initialState = {
-  userData,
+  projects,
 };
 
-const user = (state = initialState, action: PayloadAction<string>) => {
+const cityProjects = (state = initialState, action: PayloadAction<string>) => {
   switch (action.type) {
-    case 'userData':
+    case 'projects':
       return state;
     default:
       return state;
   }
 };
 
-export default user;
+export default cityProjects;

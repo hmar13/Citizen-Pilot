@@ -1,12 +1,19 @@
 import { combineReducers } from 'redux';
-import { user } from './reducers/user';
-import { cityContacts } from './reducers/contacts';
-
+import user from './reducers/user';
+import cityContacts from './reducers/contacts';
+import cityProjects from './reducers/projects';
+import myFavourites from './reducers/favourites';
+import reportProblem from './reducers/report';
+import newsData from './reducers/news';
 
 // Combining both reducers
-const reducers = combineReducers({
+export const reducers = combineReducers({
   user,
   cityContacts,
+  cityProjects,
+  myFavourites,
+  reportProblem,
+  newsData,
 });
 
-export default reducers;
+export type RootState = ReturnType<typeof reducers>;
