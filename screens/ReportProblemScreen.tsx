@@ -13,6 +13,7 @@ import { TextInput, Button } from 'react-native-paper';
 import CameraComponent from '../components/ReportProblem/CameraComponent';
 import UrgentButton from '../components/ReportProblem/UrgentButtonComponent';
 import ListAccordion from '../components/ReportProblem/ListAccordion';
+import MapPinDrop from '../components/MapComponent/MapViewComponent';
 // import addNewReport from '../store/actions/report';
 
 export default function ReportProblem(): JSX.Element {
@@ -59,6 +60,10 @@ export default function ReportProblem(): JSX.Element {
         <Text style={styles.text}>How urgent is your problem?</Text>
         <UrgentButton setUrgency={setUrgency} />
       </View>
+      <View style={styles.map}>
+        <Text style={styles.mapText}>Please choose location</Text>
+        <MapPinDrop />
+      </View>
       <View style={styles.bottom}>
         <Button
           icon="email-send"
@@ -88,8 +93,9 @@ const styles = StyleSheet.create({
     borderRadius: 15,
   },
   bottom: {
-    marginTop: '15%',
-    marginBottom: '20%',
+    marginTop: '5%',
+    marginBottom: 20,
+    paddingBottom: 100,
   },
   descriptionBox: {
     backgroundColor: 'white',
@@ -101,10 +107,23 @@ const styles = StyleSheet.create({
   urgent: {
     marginTop: 7,
     backgroundColor: 'white',
-    height: height / 10,
+    height: height / 9,
     width: width - 20,
     alignSelf: 'center',
     borderRadius: 10,
+  },
+  map: {
+    marginTop: 7,
+    backgroundColor: 'white',
+    height: 350,
+    width: width - 20,
+    alignSelf: 'center',
+    borderRadius: 10,
+  },
+  mapText: {
+    fontWeight: 'bold',
+    alignSelf: 'center',
+    paddingTop: 10,
   },
   input: {
     width: '90%',
