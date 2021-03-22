@@ -76,7 +76,7 @@ const styles = StyleSheet.create({
     marginBottom: -10,
   },
   accordionOpen: {
-    height: height / 2.2,
+    height: height / 2,
   },
   accordionClosed: {
     height: height / 8,

@@ -3,7 +3,6 @@ import React, { useState } from 'react';
 import {
   View,
   StyleSheet,
-  Image,
   Dimensions,
   Alert,
   Text,
@@ -103,7 +102,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     alignSelf: 'center',
     marginBottom: 7,
-    marginTop: 7,
+    marginTop: 15,
   },
   text: {
     fontWeight: 'bold',

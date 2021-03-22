@@ -27,7 +27,7 @@ export default function MainRootStack(): JSX.Element {
       {/* <RootStack.Screen name="News" component={News} /> */}
       {/* <RootStack.Screen name='Contacts' component={Contacts} /> */}
       {/* <RootStack.Screen name="ReportProblem" component={ReportProblem} /> */}
-      {/* <RootStack.Screen name="ProposeSolution" component={ProposeSolution} /> */}
+      <RootStack.Screen name="ProposeSolution" component={ProposeSolution} />
       {/* <RootStack.Screen name='CurrentProposals' component={CurrentProposals} /> */}
       {/* <RootStack.Screen name='Favourites' component={Favourites} /> */}
       {/* <RootStack.Screen name='Projects' component={Projects} /> */}
