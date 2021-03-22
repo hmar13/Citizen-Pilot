@@ -3,9 +3,11 @@ import { View, StyleSheet, Text, TouchableOpacity } from 'react-native';
 import ButtonComponent from '../components/WelcomeComponents/Button';
 import BannerComponent from '../components/BannerComponent';
 import LogoComponent from '../components/LogoComponent';
+import QRCodeModal from './QRCodeModal';
 import TextInputComponent from '../components/LoginSignupComponents/TextInputcomponent';
 
 export default function Register({ navigation }): JSX.Element {
+  const [isModalVisible, setIsModalVisible] = useState(true);
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
@@ -24,6 +26,10 @@ export default function Register({ navigation }): JSX.Element {
     <View style={styles.container}>
       <BannerComponent />
       <View style={styles.secondColumn}>
+        <QRCodeModal
+          isModalVisible={isModalVisible}
+          setIsModalVisible={setIsModalVisible}
+        />
         <LogoComponent />
         <Text style={styles.text}>Create an account</Text>
         <View style={styles.loginContainer}>
@@ -79,10 +85,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'flex-start',
     marginLeft: 36,
-    marginTop: -130,
+    marginTop: -2000,
   },
   loginContainer: {
-    marginBottom: 20,
+    marginBottom: 40,
   },
   textInput: {
     width: 200,
