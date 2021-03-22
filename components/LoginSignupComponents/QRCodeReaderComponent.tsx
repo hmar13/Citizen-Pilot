@@ -25,7 +25,10 @@ export default function QRCodeComponent({
     })();
   }, []);
 
-  const handleBarCodeScanned = ({ data }) => {
+  interface Data {
+    data: string;
+  }
+  const handleBarCodeScanned = ({ data }: Data) => {
     setScanned(true);
     const dataArray: string[] = data.split(' ');
     // refactor: first or last name could be longer
