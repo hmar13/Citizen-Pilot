@@ -8,6 +8,7 @@ import Register from './screens/Register';
 // import Projects from './screens/Projects';
 // import Favourites from './screens/Favourites';
 // import ReportProblem from './screens/ReportProblemScreen';
+import CurrentProposalScreen from './screens/CurrentProposals'
 import News from './screens/News';
 
 const RootStack = createStackNavigator();
@@ -27,7 +28,7 @@ export default function MainRootStack(): JSX.Element {
       {/* <RootStack.Screen name='Contacts' component={Contacts} /> */}
       {/* <RootStack.Screen name='ReportProblem' component={ReportProblem} /> */}
       {/* <RootStack.Screen name='ProposeSolution' component={ProposeSolution} /> */}
-      {/* <RootStack.Screen name='CurrentProposals' component={CurrentProposals} /> */}
+     <RootStack.Screen name='CurrentProposals' component={CurrentProposalScreen} /> 
       {/* <RootStack.Screen name='Favourites' component={Favourites} /> */}
       {/* <RootStack.Screen name='Projects' component={Projects} /> */}
     </RootStack.Navigator>
