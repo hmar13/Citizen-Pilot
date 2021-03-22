@@ -32,7 +32,7 @@ const Projects = () => {
           />
         )}
       />
-      <Text>Navigation Goes Here</Text>
+      <Text style={styles.footer__container}>Navigation Goes Here</Text>
     </View>
   );
 };
@@ -57,5 +57,8 @@ const styles = StyleSheet.create({
   },
   flatlist__container: {
     paddingHorizontal: 25,
+  },
+  footer__container: {
+    backgroundColor: 'white',
   },
 });
