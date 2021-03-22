@@ -31,7 +31,7 @@ export default function MainRootStack(): JSX.Element {
       <RootStack.Screen name="ProposeSolution" component={ProposeSolution} />
       {/* <RootStack.Screen name='CurrentProposals' component={CurrentProposals} /> */}
       {/* <RootStack.Screen name='Favourites' component={Favourites} /> */}
-      {/* <RootStack.Screen name='Projects' component={Projects} /> */}
+      <RootStack.Screen name='Projects' component={Projects} />
     </RootStack.Navigator>
   );
 }
