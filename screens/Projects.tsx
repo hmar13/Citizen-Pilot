@@ -4,6 +4,9 @@ import { Text, View, FlatList, StyleSheet } from 'react-native';
 import { useSelector } from 'react-redux';
 import { RootState } from '../store/reducer';
 import ProjectItems from '../components/ProjectComponents/ProjectItems';
+import HorizontalBannerComponent from '../components/HorizontalBannerComponent';
+import { FontAwesome5 } from '@expo/vector-icons';
+
 
 const Projects = () => {
   const allProjects = useSelector((state: RootState) => {
@@ -12,11 +15,10 @@ const Projects = () => {
 
   return (
     <View style={styles.container}>
+      <HorizontalBannerComponent />
       <View style={styles.header__container}>
-        <Text style={styles.header__text}>What we are working on</Text>
-        <Text style={styles.header__text}>
-          Here are all the current proposals
-        </Text>
+        <FontAwesome5 name="hammer" size={35} color="#3A4276" />
+        <Text style={styles.header__text}>Work in progress</Text>
       </View>
       <FlatList
         style={styles.flatlist__container}
@@ -44,16 +46,22 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   header__container: {
+    flexDirection: 'row',
     backgroundColor: 'white',
     marginRight: 25,
+    marginLeft: 25,
     marginBottom: 15,
     borderBottomRightRadius: 30,
+    borderBottomLeftRadius: 30,
     height: 70,
-    justifyContent: 'flex-end',
+    justifyContent: 'center',
+    alignItems: 'center',
     paddingBottom: 5,
   },
   header__text: {
     alignSelf: 'center',
+    marginLeft: 10,
+    fontSize: 20,
   },
   flatlist__container: {
     paddingHorizontal: 25,
