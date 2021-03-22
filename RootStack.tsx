@@ -8,6 +8,7 @@ import Dashboard from './screens/Dashboard';
 import Projects from './screens/Projects';
 import Favourites from './screens/Favourites';
 import ReportProblem from './screens/ReportProblemScreen';
+import News from './screens/News';
 
 const RootStack = createStackNavigator();
 
