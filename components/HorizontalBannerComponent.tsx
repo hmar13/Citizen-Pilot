@@ -14,6 +14,6 @@ const { width } = Dimensions.get('window');
 const styles = StyleSheet.create({
   image: {
     width,
-    height: '10%',
+    height: 80,
   }
 });
