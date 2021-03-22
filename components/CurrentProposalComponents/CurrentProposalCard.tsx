@@ -22,31 +22,34 @@ interface CurrentPropsalTypes {
           <CardItem>
             <Left>
               <Body>
-                <Text>{title}</Text>
+              <Text>IMG GOES HERE</Text>
               </Body>
             </Left>
-            <Right>
-              <Body>
-                <Text>{ location }</Text>
-              </Body>
-            </Right>
           </CardItem>
-          <CardItem>
+           <CardItem style={styles.lowerCardColor} >
             <Body>
-            <Left>
-              <Text>IMG GOES HERE</Text>
+            <Body>
+             <Left>
+                <Text>{title}</Text>
               </Left>
-              <Text>
-                  {description}
-              </Text>
+              <Right>
+                <Text>{ location }</Text>
+              </Right>
+            </Body>
+            <Body>
+              <Text>{description}</Text>
+            </Body>
             </Body>
           </CardItem>
-          <CardItem>
+          <CardItem style={styles.lowerCardColor}>
             <Left>
-              <Button transparent textStyle={{ color: '#87838B' }}>
-                <Text> Votes {vote}</Text>
+              <Button transparent >
+                <Text> Supporters {vote}</Text>
               </Button>
-            </Left>
+             </Left>
+             <Right>
+                <Text><Icon name="thumbs-up"  color="#FFEB3B"/></Text>
+             </Right>
           </CardItem>
         </Card>
       </Content>
@@ -63,5 +66,8 @@ const styles = StyleSheet.create({
   card: {
     padding: 0,
     margin:0
+  },
+  lowerCardColor: {
+    backgroundColor:'#EF476F'
   }
 })
