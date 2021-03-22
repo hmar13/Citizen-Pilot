@@ -43,7 +43,11 @@ export default function ReportProblem(): JSX.Element {
         categoryTitle={categoryTitle}
       />
       <View>
-        <CameraComponent imageUri={imageUri} setImageUri={setImageUri} />
+        <CameraComponent
+          imageUri={imageUri}
+          setImageUri={setImageUri}
+          headerText="Then take a picture"
+        />
         <View style={styles.descriptionBox}>
           <Text style={styles.text}>Write a brief description</Text>
           <TextInput
