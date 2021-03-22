@@ -67,7 +67,7 @@ const { width } = Dimensions.get('window');
 const styles = StyleSheet.create({
   category: {
     backgroundColor: 'white',
-    width: width - 20,
+    width: width - 30,
     alignSelf: 'center',
     borderRadius: 10,
     marginBottom: 7,

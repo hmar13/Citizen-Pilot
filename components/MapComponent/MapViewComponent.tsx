@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   map: {
-    width: width - 40,
+    width: width - 60,
     height: 300,
   },
 });
