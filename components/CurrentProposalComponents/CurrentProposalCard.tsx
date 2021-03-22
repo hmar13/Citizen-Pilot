@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { Image, ImageBackground } from 'react-native';
+import { Image, ImageBackground, StyleSheet } from 'react-native';
 import { Container, Header, Content, Card, CardItem, Thumbnail, Text, Button, Icon, Left, Body, Right } from 'native-base';
+import { teal100 } from 'react-native-paper/lib/typescript/styles/colors';
 
 interface CurrentPropsalTypes {
   title: string,
@@ -13,11 +14,11 @@ interface CurrentPropsalTypes {
 
 
  const CurrentProposalCard: React.FC<CurrentPropsalTypes> = ({ title, description, location, vote, img}) => {
-  return (
-    <Container>
+   return (
+     <Container style={styles.container}>
       <Header />
       <Content>
-        <Card style={{ flex: 0 }}>
+        <Card style={styles.card}>
           <CardItem>
             <Left>
               <Body>
@@ -53,3 +54,14 @@ interface CurrentPropsalTypes {
   );
 }
 export default CurrentProposalCard;
+
+const styles = StyleSheet.create({
+  container: {
+    height: 300,
+    backgroundColor:'#fffaf1'
+  },
+  card: {
+    padding: 0,
+    margin:0
+  }
+})
