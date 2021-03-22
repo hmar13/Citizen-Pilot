@@ -14,11 +14,13 @@ interface imageUri {
   imageUri: string;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   setImageUri: any;
+  headerText: string;
 }
 
 export default function Camera({
   imageUri,
   setImageUri,
+  headerText,
 }: imageUri): JSX.Element {
   const [isPictureTaken, setIsPictureTaken] = useState(false);
 
@@ -49,6 +51,32 @@ export default function Camera({
     setIsPictureTaken(false);
   };
 
+  const pickImage = async () => {
+    (async () => {
+      if (Platform.OS !== 'web') {
+        const {
+          status,
+        } = await ImagePicker.requestMediaLibraryPermissionsAsync();
+        if (status !== 'granted') {
+          Alert.alert(
+            'Sorry, we need camera roll permissions to make this work!',
+          );
+        }
+      }
+    })();
+    // TODO: NOT SURE IF THIS SHOULD GO THERE!!!
+    const result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      allowsEditing: true,
+      aspect: [4, 3],
+      quality: 0.5,
+    });
+    if (!result.cancelled) {
+      setImageUri(result.uri);
+      setIsPictureTaken(true);
+    }
+  };
+
   return (
     <View
       style={[
@@ -56,17 +84,29 @@ export default function Camera({
         isPictureTaken ? styles.PictureView : styles.noPicture,
       ]}
     >
-      <Text style={styles.text}>Then take a picture</Text>
-      {imageUri.length === 0 && (
-        <Button
-          icon="camera"
-          mode="contained"
-          onPress={takePicture}
-          style={styles.button}
-        >
-          Take a picture
-        </Button>
-      )}
+      <Text style={styles.text}>{headerText}</Text>
+      <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
+        {imageUri.length === 0 && (
+          <Button
+            icon="camera"
+            mode="contained"
+            onPress={takePicture}
+            style={styles.button}
+          >
+            Camera
+          </Button>
+        )}
+        {imageUri.length === 0 && (
+          <Button
+            icon="account-box-multiple"
+            mode="contained"
+            onPress={pickImage}
+            style={styles.button}
+          >
+            Upload
+          </Button>
+        )}
+      </View>
       {imageUri.length > 0 && (
         <Card style={styles.image}>
           <Card.Cover source={{ uri: imageUri }} />
@@ -86,7 +126,7 @@ const styles = StyleSheet.create({
     marginTop: 20,
     justifyContent: 'center',
     height: 60,
-    width: '50%',
+    width: '30%',
     borderRadius: 15,
     alignSelf: 'center',
   },
