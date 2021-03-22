@@ -1,5 +1,5 @@
 /* eslint-disable global-require */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   View,
   StyleSheet,
@@ -21,13 +21,22 @@ export default function ReportProblem(): JSX.Element {
   const [categoryTitle, setCategoryTitle] = useState('Choose a category');
   const [imageUri, setImageUri] = useState('');
   const [urgency, setUrgency] = useState(true);
+  const [latitude, setLatitude] = useState(0);
+  const [longitude, setLongitude] = useState(0);
+
+  useEffect(() => {
+    navigator.geolocation.getCurrentPosition(position => {
+      setLatitude(position.coords.latitude);
+      setLongitude(position.coords.longitude);
+    });
+  }, []);
 
   // handles API call to save new problem to database
   function handleButtonClick() {
     if (categoryTitle === 'Choose a category') {
       Alert.alert('Please add a category');
     }
-    console.log(urgency);
+    console.log(latitude, longitude);
     // dispatch(addNewReport());
     setText('');
   }
@@ -61,8 +70,13 @@ export default function ReportProblem(): JSX.Element {
         <UrgentButton setUrgency={setUrgency} />
       </View>
       <View style={styles.map}>
-        <Text style={styles.mapText}>Please choose location</Text>
-        <MapPinDrop />
+        <Text style={styles.mapText}>Drag the pin to where the problem is</Text>
+        <MapPinDrop
+          latitude={latitude}
+          setLatitude={setLatitude}
+          longitude={longitude}
+          setLongitude={setLongitude}
+        />
       </View>
       <View style={styles.bottom}>
         <Button

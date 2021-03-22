@@ -113,6 +113,6 @@ const styles = StyleSheet.create({
     height: height / 6,
   },
   PictureView: {
-    height: height / 2.4,
+    height: 315,
   },
 });

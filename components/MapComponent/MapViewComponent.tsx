@@ -1,38 +1,50 @@
-import React, { useEffect, useState } from 'react';
-import MapView, { Marker, Callout } from 'react-native-maps';
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import React from 'react';
+import MapView, { Marker } from 'react-native-maps';
 import { StyleSheet, View, Dimensions } from 'react-native';
 
-export default function MapPinDrop(): JSX.Element {
-  const [latitude, setLatitude] = useState(0);
-  const [longitude, setLongitude] = useState(0);
+interface Coordination {
+  latitude: number;
+  setLatitude: any;
+  longitude: number;
+  setLongitude: any;
+}
 
-  useEffect(() => {
-    navigator.geolocation.getCurrentPosition(position => {
-      setLatitude(position.coords.latitude);
-      setLongitude(position.coords.longitude);
-    });
-  }, []);
+export default function MapPinDrop({
+  latitude,
+  setLatitude,
+  longitude,
+  setLongitude,
+}: Coordination): JSX.Element {
+  const handleDragEnd = (e: any) => {
+    const newlatitude = e.nativeEvent.coordinate.latitude;
+    const newLongitude = e.nativeEvent.coordinate.longitude;
+    setLatitude(newlatitude);
+    setLongitude(newLongitude);
+  };
 
   return (
     <View style={styles.container}>
       <MapView
         toolbarEnabled
         style={styles.map}
-        // showsUserLocation
         region={{
           latitude,
           longitude,
-          latitudeDelta: 0.04,
-          longitudeDelta: 0.04,
+          latitudeDelta: 0.01,
+          longitudeDelta: 0.01,
         }}
       >
-        <Marker coordinate={{ latitude, longitude }} draggable></Marker>
+        <Marker
+          coordinate={{ latitude, longitude }}
+          draggable
+          onDragEnd={e => handleDragEnd(e)}
+        />
       </MapView>
     </View>
   );
 }
 
-const { height } = Dimensions.get('window');
 const { width } = Dimensions.get('window');
 const styles = StyleSheet.create({
   container: {
