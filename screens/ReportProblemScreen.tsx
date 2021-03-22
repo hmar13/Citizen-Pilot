@@ -101,7 +101,7 @@ const styles = StyleSheet.create({
   urgent: {
     marginTop: 7,
     backgroundColor: 'white',
-    height: height / 10,
+    height: height / 8,
     width: width - 20,
     alignSelf: 'center',
     borderRadius: 10,

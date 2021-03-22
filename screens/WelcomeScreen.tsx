@@ -43,7 +43,6 @@ const styles = StyleSheet.create({
     color: '#A9A9A9',
     fontSize: 15,
     textAlign: 'center',
-    fontStyle: 'italic',
   },
   buttonContainer: {
     marginTop: '120%',
