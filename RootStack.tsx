@@ -9,6 +9,7 @@ import Projects from './screens/Projects';
 import Favourites from './screens/Favourites';
 import ReportProblem from './screens/ReportProblemScreen';
 import News from './screens/News';
+import CurrentProposals from './screens/CurrentProposals';
 
 const RootStack = createStackNavigator();
 
@@ -28,7 +29,7 @@ export default function MainRootStack(): JSX.Element {
       {/* <RootStack.Screen name="ReportProblem" component={ReportProblem} /> */}
       {/* <RootStack.Screen name="ProposeSolution" component={ProposeSolution} /> */}
       {/* <RootStack.Screen name="CurrentProposals" component={CurrentProposals} /> */}
-      <RootStack.Screen name="Favourites" component={Favourites} />
+      {/* <RootStack.Screen name="Favourites" component={Favourites} /> */}
       {/* <RootStack.Screen name="Projects" component={Projects} /> */}
     </RootStack.Navigator>
   );
