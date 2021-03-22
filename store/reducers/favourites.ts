@@ -1,14 +1,19 @@
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
+
 import { PayloadAction } from '@reduxjs/toolkit';
-import { favourites } from '../mocks/favouriteMocks';
+import favourites from '../mocks/favouriteMocks';
 
 const initialState = {
-  favourites: favourites,
+  favourites,
 };
 
-export const myFavourites = (state = initialState, action: PayloadAction<string>) => {
+const myFavourites = (state = initialState, action: PayloadAction<string>) => {
   switch (action.type) {
     case 'favourites':
       return state;
+    default:
+      return state;
   }
-  return state;
 };
+
+export default myFavourites;

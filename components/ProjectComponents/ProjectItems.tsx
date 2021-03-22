@@ -1,15 +1,21 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { Text, View } from 'react-native';
 
 interface ProjectItemsInterface {
-  title: string,
-  description: string,
-  location: string,
-  projectedCompletion: string,
-  img: string,
+  title: string;
+  description: string;
+  location: string;
+  projectedCompletion: string;
+  img: string;
 }
 
-const ProjectItems:React.FC<ProjectItemsInterface> = ({ title, description, location, projectedCompletion, img}) => {
+const ProjectItems: React.FC<ProjectItemsInterface> = ({
+  title,
+  description,
+  location,
+  projectedCompletion,
+  img,
+}) => {
   return (
     <View>
       <Text>{title}</Text>
@@ -18,9 +24,7 @@ const ProjectItems:React.FC<ProjectItemsInterface> = ({ title, description, loca
       <Text>{projectedCompletion}</Text>
       <Text>{img}</Text>
     </View>
-  )
-}
-;
-export default ProjectItems;
+  );
+};
 
-const styles = StyleSheet.create({});
+export default ProjectItems;
