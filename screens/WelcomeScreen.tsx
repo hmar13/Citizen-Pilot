@@ -5,7 +5,12 @@ import ButtonComponent from '../components/WelcomeComponents/Button';
 import BannerComponent from '../components/BannerComponent';
 import LogoComponent from '../components/LogoComponent';
 
-export default function WelcomeScreen(): JSX.Element {
+export default function WelcomeScreen({ navigation }): JSX.Element {
+  // this probably won't be necessary if this becomes a loading screen to check if user is logged in or not.
+  const handleButtonPress = () => {
+    navigation.navigate('Login');
+  };
+
   return (
     <View style={styles.container}>
       <BannerComponent />
@@ -13,7 +18,10 @@ export default function WelcomeScreen(): JSX.Element {
         <LogoComponent />
         <Text style={styles.text}>Log in and make your {'\n'} voice heard</Text>
         <View style={styles.buttonContainer}>
-          <ButtonComponent buttonText="Sign in" />
+          <ButtonComponent
+            buttonText="Sign in"
+            handleButtonPress={handleButtonPress}
+          />
         </View>
       </View>
     </View>

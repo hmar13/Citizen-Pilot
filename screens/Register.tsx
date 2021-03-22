@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, StyleSheet, Text, TouchableOpacity } from 'react-native';
+import { View, StyleSheet, Text, TouchableOpacity, Alert } from 'react-native';
 import ButtonComponent from '../components/WelcomeComponents/Button';
 import BannerComponent from '../components/BannerComponent';
 import LogoComponent from '../components/LogoComponent';
@@ -24,6 +24,23 @@ export default function Register({ navigation }): JSX.Element {
   const handlePressCancel = () => {
     setIsDialogVisible(false);
     navigation.navigate('Welcome');
+  };
+
+  const handleButtonPress = () => {
+    // if (!firstName) {
+    //   Alert.alert('First name is required. Please scan your QR code');
+    // } else if (!email) {
+    //   Alert.alert('Email field is required.');
+    // } else if (!password) {
+    //   Alert.alert('Password field is required.');
+    // } else if (!confirmPassword) {
+    //   setPassword('');
+    //   Alert.alert('Confirm password field is required.');
+    // } else if (password !== confirmPassword) {
+    //   Alert.alert('Password does not match!');
+
+    // API call to save user with first, lastname, address, email, password
+    navigation.navigate('Login');
   };
 
   return (
@@ -81,7 +98,10 @@ export default function Register({ navigation }): JSX.Element {
             isDisabled={false}
           />
         </View>
-        <ButtonComponent buttonText="Register" />
+        <ButtonComponent
+          buttonText="Register"
+          handleButtonPress={handleButtonPress}
+        />
         <TouchableOpacity onPress={() => navigation.navigate('Login')}>
           <Text style={styles.createAccount}>
             Already have an account? {'\n'} Sign in

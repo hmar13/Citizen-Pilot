@@ -1,10 +1,10 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
-// import WelcomeScreen from './screens/WelcomeScreen';
+import WelcomeScreen from './screens/WelcomeScreen';
 import Login from './screens/Login';
 import Register from './screens/Register';
+import Dashboard from './screens/Dashboard';
 // import Contacts from './screens/Contacts';
-// import Dashboard from './screens/Dashboard';
 // import Projects from './screens/Projects';
 // import Favourites from './screens/Favourites';
 // import ReportProblem from './screens/ReportProblemScreen';
@@ -18,10 +18,10 @@ export default function MainRootStack(): JSX.Element {
         headerShown: false,
       }}
     >
-      {/* <RootStack.Screen name="Welcome" component={WelcomeScreen} /> */}
+      <RootStack.Screen name="Welcome" component={WelcomeScreen} />
       <RootStack.Screen name="Login" component={Login} />
       <RootStack.Screen name="Register" component={Register} />
-      {/* <RootStack.Screen name='Dashboard' component={Dashboard} /> */}
+      <RootStack.Screen name="Dashboard" component={Dashboard} />
       {/* <RootStack.Screen name='News' component={News} /> */}
       {/* <RootStack.Screen name='Contacts' component={Contacts} /> */}
       {/* <RootStack.Screen name='ReportProblem' component={ReportProblem} /> */}
