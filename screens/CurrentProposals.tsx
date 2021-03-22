@@ -14,9 +14,6 @@ const CurrentProposalScreen = () => {
 
   return (
 		<View>
-			<View>
-				<Text> title to go here</Text>
-			</View>
       <View>
         <FlatList
           data={currentProposal}
