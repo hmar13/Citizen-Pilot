@@ -5,4 +5,5 @@ export default interface problemInterface {
   description: string;
   longitude: number;
   latitude: number;
+  urgent: boolean;
 }
