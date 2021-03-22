@@ -32,5 +32,5 @@ export default function ScanPrompt({
         </Dialog.Actions>
       </Dialog>
     </Portal>
-  )
+  );
 }

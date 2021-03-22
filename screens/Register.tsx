@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { View, StyleSheet, Text, TouchableOpacity } from 'react-native';
-import { Button, Paragraph, Dialog, Portal } from 'react-native-paper';
 import ButtonComponent from '../components/WelcomeComponents/Button';
 import BannerComponent from '../components/BannerComponent';
 import LogoComponent from '../components/LogoComponent';
@@ -10,13 +9,12 @@ import ScanPrompt from '../components/LoginSignupComponents/ScanPromptComponent'
 
 export default function Register({ navigation }): JSX.Element {
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const [isDialogVisible, setIsDialogVisible] = useState(true);
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-
-  const [isDialogVisible, setIsDialogVisible] = useState(true);
 
   const handlePressScan = () => {
     setIsDialogVisible(false);
@@ -27,14 +25,6 @@ export default function Register({ navigation }): JSX.Element {
     setIsDialogVisible(false);
     navigation.navigate('Welcome');
   };
-
-  // const emptyState = () => {
-  //   setFirstName('');
-  //   setLastName('');
-  //   setEmail('');
-  //   setPassword('');
-  //   setConfirmPassword('');
-  // };
 
   return (
     <View style={styles.container}>
@@ -49,6 +39,8 @@ export default function Register({ navigation }): JSX.Element {
         <QRCodeModal
           isModalVisible={isModalVisible}
           setIsModalVisible={setIsModalVisible}
+          setFirstName={setFirstName}
+          setLastName={setLastName}
         />
         <LogoComponent />
         <Text style={styles.text}>Create an account</Text>
@@ -58,30 +50,35 @@ export default function Register({ navigation }): JSX.Element {
             label="First Name"
             value={firstName}
             setItem={setFirstName}
+            isDisabled
           />
           <TextInputComponent
             text="Last Name"
             label="Last Name"
             value={lastName}
             setItem={setLastName}
+            isDisabled
           />
           <TextInputComponent
             text="Enter your email address"
             label="Email"
             value={email}
             setItem={setEmail}
+            isDisabled={false}
           />
           <TextInputComponent
             text="Add your password"
             label="Password"
             value={password}
             setItem={setPassword}
+            isDisabled={false}
           />
           <TextInputComponent
             text="Confirm your password"
             label="Password"
             value={confirmPassword}
             setItem={setConfirmPassword}
+            isDisabled={false}
           />
         </View>
         <ButtonComponent buttonText="Register" />
@@ -106,6 +103,7 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     marginLeft: 36,
     marginTop: -200,
+    marginBottom: 20,
   },
   loginContainer: {
     marginBottom: 40,
@@ -123,7 +121,7 @@ const styles = StyleSheet.create({
   },
   createAccount: {
     color: 'grey',
-    marginTop: 20,
+    marginTop: 10,
     textAlign: 'center',
   },
 });

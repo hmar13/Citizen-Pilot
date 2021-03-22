@@ -1,8 +1,20 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useState, useEffect } from 'react';
-import { Text, View, StyleSheet, Button, Alert } from 'react-native';
+import { Text, View, StyleSheet } from 'react-native';
+import { ActivityIndicator, Colors } from 'react-native-paper';
 import { BarCodeScanner } from 'expo-barcode-scanner';
 
-export default function QRCodeComponent(): JSX.Element {
+interface QRComponent {
+  setFirstName: any;
+  setLastName: any;
+  setIsModalVisible: any;
+}
+
+export default function QRCodeComponent({
+  setFirstName,
+  setLastName,
+  setIsModalVisible,
+}: QRComponent): JSX.Element {
   const [hasPermission, setHasPermission] = useState(null);
   const [scanned, setScanned] = useState(false);
 
@@ -13,15 +25,27 @@ export default function QRCodeComponent(): JSX.Element {
     })();
   }, []);
 
-  const handleBarCodeScanned = ({ type, data }) => {
+  const handleBarCodeScanned = ({ data }) => {
     setScanned(true);
-    Alert.alert(
-      `Your details: ${data}`,
-    );
+    const dataArray: string[] = data.split(' ');
+    // refactor: first or last name could be longer
+    const firstName = dataArray[0];
+    const lastName = dataArray[1];
+    // probably with streetName, houseNumber, postcode for database/location
+
+    setFirstName(firstName);
+    setLastName(lastName);
+    setIsModalVisible(false);
   };
 
   if (hasPermission === null) {
-    return <Text>Requesting for camera permission</Text>;
+    return (
+      <ActivityIndicator
+        animating
+        color={Colors.yellow400}
+        style={styles.activity}
+      />
+    );
   }
   if (hasPermission === false) {
     return <Text>No access to camera</Text>;
@@ -33,9 +57,6 @@ export default function QRCodeComponent(): JSX.Element {
         onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
         style={StyleSheet.absoluteFillObject}
       />
-      {scanned && (
-        <Button title="Tap to Scan Again" onPress={() => setScanned(false)} />
-      )}
     </View>
   );
 }
@@ -46,9 +67,8 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'center',
   },
-  barCodeView: {
-    width: '100%',
-    height: '50%',
-    marginBottom: 40,
+  activity: {
+    justifyContent: 'center',
+    alignSelf: 'center',
   },
 });
