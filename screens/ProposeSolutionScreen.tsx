@@ -8,9 +8,11 @@ import {
   Text,
   ScrollView,
 } from 'react-native';
-import { TextInput, Button } from 'react-native-paper';
+import { TextInput, Button, Title } from 'react-native-paper';
 import CameraComponent from '../components/ReportProblem/CameraComponent';
 import ListAccordion from '../components/ProposeSolution/ListAccordion';
+import HorizontalBanner from '../components/HorizontalBannerComponent';
+
 
 export default function ProposeSolution(): JSX.Element {
   const [titleText, setTitleText] = useState('');
@@ -20,18 +22,19 @@ export default function ProposeSolution(): JSX.Element {
 
   function handleButtonClick() {
     if (categoryTitle === 'Choose a category') {
-      Alert.alert('Please add a category');
+      Alert.alert('Please choose a location');
     }
     console.log('clicked!');
-    // dispatch(addNewReport());
+
     setTitleText('');
     setDescriptionText('');
   }
 
   return (
     <ScrollView style={styles.container}>
+      <HorizontalBanner />
       <View style={styles.titleContainer}>
-        <Text style={styles.text}>Title</Text>
+        <Text style={styles.text}>Give your project a name</Text>
         <TextInput
           label="Title"
           value={titleText}
@@ -43,14 +46,14 @@ export default function ProposeSolution(): JSX.Element {
       <View style={styles.proposalContainer}>
         <Text style={styles.text}>What is your proposal about?</Text>
         <TextInput
-          label="Proposal"
+          label="Tell us a little bit about your idea..."
           multiline
           numberOfLines={10}
           value={descriptionText}
           mode="outlined"
           style={styles.proposalInput}
           onChangeText={input => setDescriptionText(input)}
-          placeholder="180 letters max"
+
         />
       </View>
 
@@ -62,6 +65,7 @@ export default function ProposeSolution(): JSX.Element {
         imageUri={imageUri}
         setImageUri={setImageUri}
         headerText="Your picture"
+        needImage={true}
       />
       <Button
         icon="email-send"
@@ -96,8 +100,8 @@ const styles = StyleSheet.create({
     fontSize: 30,
   },
   titleContainer: {
-    height: height / 6,
-    width: width - 20,
+    height: 120,
+    width: width - 30,
     backgroundColor: 'white',
     borderRadius: 10,
     alignSelf: 'center',
@@ -112,6 +116,7 @@ const styles = StyleSheet.create({
   },
   titleInput: {
     width: '90%',
+    height: 40,
     marginLeft: '5%',
     alignSelf: 'flex-start',
     marginTop: 20,
@@ -119,7 +124,7 @@ const styles = StyleSheet.create({
 
   proposalContainer: {
     height: 270,
-    width: width - 20,
+    width: width - 30,
     backgroundColor: 'white',
     borderRadius: 10,
     alignSelf: 'center',
@@ -134,7 +139,7 @@ const styles = StyleSheet.create({
   },
   locationContainer: {
     height: 150,
-    width: width - 20,
+    width: width - 30,
     backgroundColor: 'white',
     borderRadius: 10,
   },
@@ -144,5 +149,7 @@ const styles = StyleSheet.create({
     height: 60,
     width: '50%',
     borderRadius: 15,
+    marginBottom: 20,
+    marginTop: 10,
   },
 });
