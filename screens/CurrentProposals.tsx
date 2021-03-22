@@ -1,10 +1,8 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
-
 import React from 'react';
 import { Text, View, FlatList } from 'react-native';
 import { useSelector } from 'react-redux';
 import { RootState } from '../store/reducer';
-import CurrentProposalInput from '../components/CurrentProposalComponents/CurrentProposalItem';
 import CurrentProposalCard from '../components/CurrentProposalComponents/CurrentProposalCard';
 
 const CurrentProposalScreen = () => {
@@ -14,6 +12,9 @@ const CurrentProposalScreen = () => {
 
   return (
 		<View>
+			<View>
+				<Text> Current Proposals</Text>
+			</View>
       <View>
         <FlatList
           data={currentProposal}
@@ -31,5 +32,4 @@ const CurrentProposalScreen = () => {
     </View>
   );
 };
-
 export default CurrentProposalScreen;
