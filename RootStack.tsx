@@ -13,7 +13,11 @@ const RootStack = createStackNavigator();
 
 export default function MainRootStack(): JSX.Element {
   return (
-    <RootStack.Navigator>
+    <RootStack.Navigator
+      screenOptions={{
+        headerShown: false,
+      }}
+    >
       <RootStack.Screen name="Welcome" component={WelcomeScreen} />
       <RootStack.Screen name="Login" component={Login} />
       <RootStack.Screen name="Register" component={Register} />
