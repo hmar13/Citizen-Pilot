@@ -14,7 +14,9 @@ const Projects = () => {
     <View style={styles.container}>
       <View style={styles.header__container}>
         <Text style={styles.header__text}>What we are working on</Text>
-        <Text style={styles.header__text}>Here are all the current proposals</Text>
+        <Text style={styles.header__text}>
+          Here are all the current proposals
+        </Text>
       </View>
       <FlatList
         style={styles.flatlist__container}
@@ -50,10 +52,10 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
     paddingBottom: 5,
   },
-  flatlist__container: {
-    paddingHorizontal: 25,
-  },
   header__text: {
     alignSelf: 'center',
+  },
+  flatlist__container: {
+    paddingHorizontal: 25,
   },
 });

@@ -1,5 +1,6 @@
 import React from 'react';
-import { Text, View } from 'react-native';
+import { View, StyleSheet } from 'react-native';
+import { Card, Title, Paragraph } from 'react-native-paper';
 
 interface ContactItemsInterface {
   title: string;
@@ -12,16 +13,28 @@ const ContactItems: React.FC<ContactItemsInterface> = ({
   title,
   phoneNumber,
   email,
-  img,
+  // img,
 }) => {
   return (
     <View>
-      <Text>{title}</Text>
-      <Text>{phoneNumber}</Text>
-      <Text>{email}</Text>
-      <Text>{img}</Text>
+      <Card style={styles.container}>
+        <Card.Content>
+          <Title>{title}</Title>
+          <Paragraph>Phone: {phoneNumber}</Paragraph>
+          <Paragraph>Email: {email}</Paragraph>
+        </Card.Content>
+      </Card>
     </View>
   );
 };
 
 export default ContactItems;
+
+const styles = StyleSheet.create({
+  container: {
+    paddingHorizontal: 15,
+    backgroundColor: 'white',
+    borderRadius: 15,
+    marginBottom: 15,
+  },
+});
