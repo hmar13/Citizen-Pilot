@@ -1,18 +1,32 @@
 import React, { useState } from 'react';
 import { View, StyleSheet, Text, TouchableOpacity } from 'react-native';
+import { Button, Paragraph, Dialog, Portal } from 'react-native-paper';
 import ButtonComponent from '../components/WelcomeComponents/Button';
 import BannerComponent from '../components/BannerComponent';
 import LogoComponent from '../components/LogoComponent';
 import QRCodeModal from './QRCodeModal';
 import TextInputComponent from '../components/LoginSignupComponents/TextInputcomponent';
+import ScanPrompt from '../components/LoginSignupComponents/ScanPromptComponent';
 
 export default function Register({ navigation }): JSX.Element {
-  const [isModalVisible, setIsModalVisible] = useState(true);
+  const [isModalVisible, setIsModalVisible] = useState(false);
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+
+  const [isDialogVisible, setIsDialogVisible] = useState(true);
+
+  const handlePressScan = () => {
+    setIsDialogVisible(false);
+    setIsModalVisible(true);
+  };
+
+  const handlePressCancel = () => {
+    setIsDialogVisible(false);
+    navigation.navigate('Welcome');
+  };
 
   // const emptyState = () => {
   //   setFirstName('');
@@ -26,6 +40,12 @@ export default function Register({ navigation }): JSX.Element {
     <View style={styles.container}>
       <BannerComponent />
       <View style={styles.secondColumn}>
+        <ScanPrompt
+          isDialogVisible={isDialogVisible}
+          setIsDialogVisible={setIsDialogVisible}
+          handlePressCancel={handlePressCancel}
+          handlePressScan={handlePressScan}
+        />
         <QRCodeModal
           isModalVisible={isModalVisible}
           setIsModalVisible={setIsModalVisible}
@@ -85,7 +105,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'flex-start',
     marginLeft: 36,
-    marginTop: -2000,
+    marginTop: -200,
   },
   loginContainer: {
     marginBottom: 40,
@@ -103,7 +123,7 @@ const styles = StyleSheet.create({
   },
   createAccount: {
     color: 'grey',
-    marginTop: 16,
+    marginTop: 20,
     textAlign: 'center',
   },
 });
