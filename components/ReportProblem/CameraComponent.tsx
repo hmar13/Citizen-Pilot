@@ -137,6 +137,7 @@ const styles = StyleSheet.create({
     marginBottom: '10%',
   },
   container: {
+    flex: 1,
     backgroundColor: 'white',
     width: width - 20,
     alignSelf: 'center',
