@@ -7,10 +7,6 @@ import { RootState } from '../store/reducer';
 import ContactItems from '../components/ContactComponents/ContactItems';
 
 const Contacts = () => {
-  const allContacts = useSelector((state: RootState) => {
-    return state.cityContacts.contacts;
-  });
-
   return (
     <View>
       <View>
