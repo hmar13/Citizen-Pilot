@@ -1,7 +1,13 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 
 import React from 'react';
-import { Text, View, FlatList, StyleSheet } from 'react-native';
+import {
+  Text,
+  View,
+  FlatList,
+  StyleSheet,
+  ImageBackground,
+} from 'react-native';
 import { useSelector } from 'react-redux';
 import { RootState } from '../store/reducer';
 import FavouriteProposalItems from '../components/FavouriteComponents/FavouriteProposalItems';
@@ -14,9 +20,13 @@ const Favourites = () => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.header__container}>
+      <ImageBackground
+        style={styles.header__container}
+        // eslint-disable-next-line global-require
+        source={require('../assets/images/banner-horizontal.png')}
+      >
         <Text style={styles.header__text}>My Favourites</Text>
-      </View>
+      </ImageBackground>
       <Text style={styles.header__text}>Proposals</Text>
       <FlatList
         style={styles.flatlist__container}
@@ -62,7 +72,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   header__container: {
-    backgroundColor: 'white',
+    overflow: 'hidden',
     marginRight: 25,
     marginBottom: 15,
     borderBottomRightRadius: 30,
