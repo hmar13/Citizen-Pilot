@@ -1,29 +1,64 @@
 import React, { useState } from 'react';
-import { View, StyleSheet, Text, TouchableOpacity } from 'react-native';
+import { View, StyleSheet, Text, TouchableOpacity, Alert } from 'react-native';
 import ButtonComponent from '../components/WelcomeComponents/Button';
 import BannerComponent from '../components/BannerComponent';
 import LogoComponent from '../components/LogoComponent';
+import QRCodeModal from './QRCodeModal';
 import TextInputComponent from '../components/LoginSignupComponents/TextInputcomponent';
+import ScanPrompt from '../components/LoginSignupComponents/ScanPromptComponent';
 
 export default function Register({ navigation }): JSX.Element {
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [isDialogVisible, setIsDialogVisible] = useState(true);
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
 
-  // const emptyState = () => {
-  //   setFirstName('');
-  //   setLastName('');
-  //   setEmail('');
-  //   setPassword('');
-  //   setConfirmPassword('');
-  // };
+  const handlePressScan = () => {
+    setIsDialogVisible(false);
+    setIsModalVisible(true);
+  };
+
+  const handlePressCancel = () => {
+    setIsDialogVisible(false);
+    navigation.navigate('Welcome');
+  };
+
+  const handleButtonPress = () => {
+    // if (!firstName) {
+    //   Alert.alert('First name is required. Please scan your QR code');
+    // } else if (!email) {
+    //   Alert.alert('Email field is required.');
+    // } else if (!password) {
+    //   Alert.alert('Password field is required.');
+    // } else if (!confirmPassword) {
+    //   setPassword('');
+    //   Alert.alert('Confirm password field is required.');
+    // } else if (password !== confirmPassword) {
+    //   Alert.alert('Password does not match!');
+
+    // API call to save user with first, lastname, address, email, password
+    navigation.navigate('Login');
+  };
 
   return (
     <View style={styles.container}>
       <BannerComponent />
       <View style={styles.secondColumn}>
+        <ScanPrompt
+          isDialogVisible={isDialogVisible}
+          setIsDialogVisible={setIsDialogVisible}
+          handlePressCancel={handlePressCancel}
+          handlePressScan={handlePressScan}
+        />
+        <QRCodeModal
+          isModalVisible={isModalVisible}
+          setIsModalVisible={setIsModalVisible}
+          setFirstName={setFirstName}
+          setLastName={setLastName}
+        />
         <LogoComponent />
         <Text style={styles.text}>Create an account</Text>
         <View style={styles.loginContainer}>
@@ -32,33 +67,41 @@ export default function Register({ navigation }): JSX.Element {
             label="First Name"
             value={firstName}
             setItem={setFirstName}
+            isDisabled
           />
           <TextInputComponent
             text="Last Name"
             label="Last Name"
             value={lastName}
             setItem={setLastName}
+            isDisabled
           />
           <TextInputComponent
             text="Enter your email address"
             label="Email"
             value={email}
             setItem={setEmail}
+            isDisabled={false}
           />
           <TextInputComponent
             text="Add your password"
             label="Password"
             value={password}
             setItem={setPassword}
+            isDisabled={false}
           />
           <TextInputComponent
             text="Confirm your password"
             label="Password"
             value={confirmPassword}
             setItem={setConfirmPassword}
+            isDisabled={false}
           />
         </View>
-        <ButtonComponent buttonText="Register" />
+        <ButtonComponent
+          buttonText="Register"
+          handleButtonPress={handleButtonPress}
+        />
         <TouchableOpacity onPress={() => navigation.navigate('Login')}>
           <Text style={styles.createAccount}>
             Already have an account? {'\n'} Sign in
@@ -79,10 +122,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'flex-start',
     marginLeft: 36,
-    marginTop: -130,
+    marginTop: -200,
+    marginBottom: 20,
   },
   loginContainer: {
-    marginBottom: 20,
+    marginBottom: 40,
   },
   textInput: {
     width: 200,
@@ -97,7 +141,7 @@ const styles = StyleSheet.create({
   },
   createAccount: {
     color: 'grey',
-    marginTop: 16,
+    marginTop: 10,
     textAlign: 'center',
   },
 });

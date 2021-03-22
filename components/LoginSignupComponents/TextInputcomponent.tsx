@@ -8,6 +8,7 @@ interface Input {
   label: string;
   value: string;
   setItem: any;
+  isDisabled: boolean;
 }
 
 export default function TextInputComponent({
@@ -15,12 +16,14 @@ export default function TextInputComponent({
   label,
   value,
   setItem,
+  isDisabled,
 }: Input): JSX.Element {
   return (
     <View>
       <Text style={styles.text}>{text}</Text>
       <TextInput
         value={value}
+        disabled={isDisabled}
         placeholder={label}
         mode="outlined"
         style={styles.textInput}
@@ -36,7 +39,7 @@ const styles = StyleSheet.create({
     width: 200,
     height: 30,
     marginBottom: 25,
-    fontSize: 12,
+    fontSize: 13,
   },
   text: {
     fontWeight: 'bold',
