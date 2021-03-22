@@ -14,11 +14,13 @@ interface imageUri {
   imageUri: string;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   setImageUri: any;
+  headerText: string;
 }
 
 export default function Camera({
   imageUri,
   setImageUri,
+  headerText,
 }: imageUri): JSX.Element {
   const [isPictureTaken, setIsPictureTaken] = useState(false);
 
@@ -56,7 +58,7 @@ export default function Camera({
         isPictureTaken ? styles.PictureView : styles.noPicture,
       ]}
     >
-      <Text style={styles.text}>Then take a picture</Text>
+      <Text style={styles.text}>{headerText}</Text>
       {imageUri.length === 0 && (
         <Button
           icon="camera"
