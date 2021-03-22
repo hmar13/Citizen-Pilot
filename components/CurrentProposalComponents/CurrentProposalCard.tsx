@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { Image } from 'react-native';
-import { Container, Header, Content, Card, CardItem, Thumbnail, Text, Button, Icon, Left, Body } from 'native-base';
+import { Image, ImageBackground } from 'react-native';
+import { Container, Header, Content, Card, CardItem, Thumbnail, Text, Button, Icon, Left, Body, Right } from 'native-base';
 
 interface CurrentPropsalTypes {
   title: string,
@@ -24,10 +24,17 @@ interface CurrentPropsalTypes {
                 <Text>{title}</Text>
               </Body>
             </Left>
+            <Right>
+              <Body>
+                <Text>{ location }</Text>
+              </Body>
+            </Right>
           </CardItem>
           <CardItem>
             <Body>
-              <Image source={img} style={{ height: 200, width: 200, flex: 1 }} />
+            <Left>
+              <Text>IMG GOES HERE</Text>
+              </Left>
               <Text>
                   {description}
               </Text>
@@ -36,7 +43,7 @@ interface CurrentPropsalTypes {
           <CardItem>
             <Left>
               <Button transparent textStyle={{ color: '#87838B' }}>
-                <Text>{vote}</Text>
+                <Text> Votes {vote}</Text>
               </Button>
             </Left>
           </CardItem>
