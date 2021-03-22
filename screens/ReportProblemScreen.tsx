@@ -14,6 +14,7 @@ import CameraComponent from '../components/ReportProblem/CameraComponent';
 import UrgentButton from '../components/ReportProblem/UrgentButtonComponent';
 import ListAccordion from '../components/ReportProblem/ListAccordion';
 import MapPinDrop from '../components/MapComponent/MapViewComponent';
+import HorizontalBanner from '../components/HorizontalBannerComponent';
 // import addNewReport from '../store/actions/report';
 
 export default function ReportProblem(): JSX.Element {
@@ -43,10 +44,7 @@ export default function ReportProblem(): JSX.Element {
 
   return (
     <ScrollView style={styles.container}>
-      <Image
-        source={require('../assets/images/banner-horizontal.png')}
-        style={styles.image}
-      />
+      <HorizontalBanner />
       <ListAccordion
         setCategoryTitle={setCategoryTitle}
         categoryTitle={categoryTitle}
