@@ -9,6 +9,7 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import Modal from 'react-native-modal';
+import { Button, Divider, Card, Title, Paragraph } from 'react-native-paper';
 import { useSelector } from 'react-redux';
 import { RootState } from '../store/reducer';
 import CustomButton from '../components/CustomButton';
@@ -47,7 +48,7 @@ export default function Dashboard({ navigation }) {
           data={allNews}
           keyExtractor={item => item.id}
           renderItem={({ item }) =>
-            // TODO: go from here to news page. No extra modal required
+
             <TouchableOpacity
               onPress={() => {
                 setModalInfo(item);
@@ -72,7 +73,18 @@ export default function Dashboard({ navigation }) {
         }}
       >
         <View style={styles.modalView}>
-          <Text>{modalInfo.longDescription}</Text>
+          {/* how do I make Paragraph scrollable? if I don't set card height, content will spill over card. with height, the rest of the content won't show */}
+          <Card style={{ width: '110%', height: 490 }}>
+            <Card.Content>
+              <Card.Cover style={styles.cardCover} source={{ uri: modalInfo.img }} />
+              <Title style={{ marginTop: 7 }}>{modalInfo.title}</Title>
+              <Divider />
+              <Paragraph style={{ marginTop: 10 }}>{modalInfo.longDescription}</Paragraph>
+            </Card.Content>
+          </Card>
+          <Button style={styles.button} icon="newspaper-variant-outline" mode="contained" onPress={() => console.log('navigation.navigate')}>
+            More
+          </Button>
         </View>
       </Modal>
       {/* Add navigation to the bottom of the screen */}
@@ -87,7 +99,18 @@ const styles = StyleSheet.create({
     marginLeft: 30,
     borderRadius: 20,
   },
-
+  button: {
+    justifyContent: 'center',
+    alignSelf: 'center',
+    height: 45,
+    width: '40%',
+    borderRadius: 15,
+    marginTop: 20,
+  },
+  cardCover: {
+    borderRadius: 12,
+    height: 220,
+  },
   textConteiner: {
     position: 'absolute',
     top: 140,
@@ -101,7 +124,8 @@ const styles = StyleSheet.create({
   },
   newsText: {
     fontSize: 16,
-    marginLeft: 10,
+    textAlign: 'center',
+    width: 300,
     fontWeight: 'bold',
     top: 6,
     color: 'white',
@@ -114,7 +138,8 @@ const styles = StyleSheet.create({
     marginTop: '5%'
   },
   modalView: {
-    height: 420,
+    overflow: 'scroll',
+    height: 610,
     width: 350,
     margin: 20,
     backgroundColor: '#F0F5F9',

@@ -1,12 +1,6 @@
 import React, { useState } from 'react';
 
-import {
-  StyleSheet,
-  Text,
-  View,
-  FlatList,
-  TouchableOpacity,
-} from 'react-native';
+import { View } from 'react-native';
 import { IconButton, Colors, Menu } from 'react-native-paper';
 
 interface category {
