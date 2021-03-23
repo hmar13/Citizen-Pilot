@@ -1,26 +1,25 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
-
 import React, { useState } from 'react';
 import {
   StyleSheet,
   Text,
   View,
   FlatList,
-  Image,
   ScrollView,
   TouchableOpacity,
 } from 'react-native';
-
 import { useSelector } from 'react-redux';
 import Modal from 'react-native-modal';
 import { RootState } from '../store/reducer';
 import newsInterface from '../interfaces/newsInterface';
 import HorizontalBannerComponent from '../components/HorizontalBannerComponent';
+import IconComponent from '../components/NewsComponents/IconComponent';
 import { FontAwesome } from '@expo/vector-icons';
 
 const modalInitalState = {
   id: '1',
   title: 'News Title',
+  category: 'Category',
   shortDescription: 'Description',
   longDescription: 'Description',
   location: 'In the city',
@@ -35,6 +34,7 @@ const News = () => {
   const allNews = useSelector((state: RootState) => {
     return state.newsData.news;
   });
+
 
   return (
     <ScrollView >
@@ -57,19 +57,13 @@ const News = () => {
             setModalVisible(true);
           }}>
             <View style={styles.container}>
-              <View>
-                <Image
-                  style={styles.banner}
-                  source={require('../assets/images/banner.png')}
-                />
-              </View>
+              <IconComponent category={item.category} />
               <View style={styles.secondColumn}>
                 <View style={styles.textBox}>
                   <Text style={styles.title}>{item.title}</Text>
                 </View>
-                <View style={styles.progress__container} >
-                  <Text style={{ fontSize: 9 }}>image/icon</Text>
-
+                <View style={styles.textBox}>
+                  <Text style={styles.description}>{item.shortDescription}</Text>
                 </View>
               </View>
             </View>
@@ -135,8 +129,9 @@ const styles = StyleSheet.create({
     fontSize: 17,
     fontWeight: 'bold',
   },
-
-
+  description: {
+    fontSize: 12,
+  },
   newsContainer: {
     height: 55,
     width: 250,
