@@ -45,7 +45,7 @@ export default function Dashboard({ navigation }) {
           snapToInterval={350}
           showsHorizontalScrollIndicator={false}
           horizontal={true}
-          data={allNews}
+          data={allNews.slice(0, 3)}
           keyExtractor={item => item.id}
           renderItem={({ item }) =>
 

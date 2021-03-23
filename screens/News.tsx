@@ -16,6 +16,8 @@ import HorizontalBannerComponent from '../components/HorizontalBannerComponent';
 import IconComponent from '../components/NewsComponents/IconComponent';
 import { FontAwesome } from '@expo/vector-icons';
 import SortByCategory from '../components/NewsComponents/SortByCategory';
+import { Button, Divider, Card, Title, Paragraph } from 'react-native-paper';
+
 
 const modalInitalState = {
   id: '1',
@@ -89,7 +91,18 @@ const News = () => {
         }}
       >
         <View style={styles.modalView}>
-          <Text>{modalInfo.longDescription}</Text>
+          {/* how do I make Paragraph scrollable? if there is too much text, it will spill over card*/}
+          <Card style={{ width: '110%', height: 490 }}>
+            <Card.Content>
+              <Card.Cover style={styles.cardCover} source={{ uri: modalInfo.img }} />
+              <Title style={{ marginTop: 7 }}>{modalInfo.title}</Title>
+              <Divider />
+              <Paragraph style={{ marginTop: 10 }}>{modalInfo.longDescription}</Paragraph>
+            </Card.Content>
+          </Card>
+          <Button style={styles.button} icon="newspaper-variant-outline" mode="contained" onPress={() => console.log('navigation.navigate')}>
+            More
+          </Button>
         </View>
       </Modal>
     </Provider>
@@ -100,7 +113,6 @@ const News = () => {
 
 const styles = StyleSheet.create({
   container: {
-
     backgroundColor: 'white',
     flexDirection: 'row',
     height: 100,
@@ -119,6 +131,19 @@ const styles = StyleSheet.create({
     height: 100,
     width: 50,
   },
+  cardCover: {
+    borderRadius: 12,
+    height: 220,
+  },
+  button: {
+    justifyContent: 'center',
+    alignSelf: 'center',
+    height: 45,
+    width: '40%',
+    borderRadius: 15,
+    marginTop: 20,
+  },
+
   flatlist__container: {
     paddingHorizontal: 25,
   },
@@ -160,7 +185,7 @@ const styles = StyleSheet.create({
     marginLeft: 10,
   },
   modalView: {
-    height: 420,
+    height: 610,
     width: 350,
     margin: 20,
     backgroundColor: '#F0F5F9',
