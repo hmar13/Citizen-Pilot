@@ -6,10 +6,7 @@ import { RootState } from '../store/reducer';
 import CurrentProposalCard from '../components/CurrentProposalComponents/CurrentProposalCard';
 
 const CurrentProposalScreen = () => {
-  const currentProposal = useSelector((state: RootState) => {
-    return state.Proposals.currentProposal;
-  });
-
+  const currentProposal = useSelector<RootState, any>(state => state.Proposals);
   return (
 		<View>
 			<View>
@@ -20,11 +17,13 @@ const CurrentProposalScreen = () => {
           data={currentProposal}
           renderItem={({ item }) => (
             <CurrentProposalCard
+              key={String(item.id)}
+              id={item.id}
               title={item.title}
               description={item.description}
               location={item.location}
 							img={item.img}
-							vote={item.votes}
+							votes={item.votes}
             />
           )}
         />
