@@ -73,7 +73,7 @@ export default function Dashboard({ navigation }) {
         }}
       >
         <View style={styles.modalView}>
-          {/* how do I make Paragraph scrollable? if I don't set card height, content will spill over card. with height, the rest of the content won't show */}
+          {/* how do I make Paragraph scrollable? if there is too much text, it will spill over card*/}
           <Card style={{ width: '110%', height: 490 }}>
             <Card.Content>
               <Card.Cover style={styles.cardCover} source={{ uri: modalInfo.img }} />
