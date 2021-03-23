@@ -46,25 +46,35 @@ const News = () => {
 
 
       <FlatList
+        style={styles.flatlist__container}
         data={allNews}
         keyExtractor={item => item.id}
         renderItem={({ item }) => (
-          <TouchableOpacity
-            onPress={() => {
-              setModalInfo(item);
-              setModalVisible(true);
-            }}
-          >
-            <View style={styles.newsContainer}>
-              <Text style={styles.newsText}>{item.title}</Text>
+
+
+          <TouchableOpacity onPress={() => {
+            setModalInfo(item);
+            setModalVisible(true);
+          }}>
+            <View style={styles.container}>
+              <View>
+                <Image
+                  style={styles.banner}
+                  source={require('../assets/images/banner.png')}
+                />
+              </View>
+              <View style={styles.secondColumn}>
+                <View style={styles.textBox}>
+                  <Text style={styles.title}>{item.title}</Text>
+                </View>
+                <View style={styles.progress__container} >
+                  <Text style={{ fontSize: 9 }}>image/icon</Text>
+
+                </View>
+              </View>
             </View>
           </TouchableOpacity>
         )}
-        contentContainerStyle={{
-          justifyContent: 'center',
-          alignItems: 'flex-start',
-          marginTop: 50,
-        }}
       />
       <Modal
         isVisible={isModalVisible}
@@ -80,7 +90,51 @@ const News = () => {
   );
 };
 
+
+
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: 'white',
+    flexDirection: 'row',
+    height: 100,
+    paddingBottom: 12,
+    borderRadius: 15,
+    marginBottom: 12,
+    shadowColor: '#000',
+    shadowOffset: { width: 2, height: 2 },
+    shadowOpacity: 2,
+    shadowRadius: 1,
+    elevation: 3,
+  },
+  banner: {
+    borderBottomLeftRadius: 15,
+    borderTopLeftRadius: 15,
+    height: 100,
+    width: 50,
+  },
+  flatlist__container: {
+    paddingHorizontal: 25,
+  },
+  secondColumn: {
+    justifyContent: 'center',
+
+    marginTop: 10,
+    paddingRight: 4,
+    marginLeft: '8%',
+    width: '75%',
+    height: '90%',
+  },
+  progress__container: {
+    alignSelf: 'flex-end',
+    justifyContent: 'flex-end',
+  },
+  textBox: {
+  },
+  title: {
+    fontSize: 17,
+    fontWeight: 'bold',
+  },
 
 
   newsContainer: {
