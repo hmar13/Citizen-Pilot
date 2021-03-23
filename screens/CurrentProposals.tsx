@@ -8,10 +8,10 @@ import CurrentProposalCard from '../components/CurrentProposalComponents/Current
 const CurrentProposalScreen = () => {
   const currentProposal = useSelector<RootState, any>(state => state.Proposals);
   return (
-		<View>
-			<View>
-				<Text> Current Proposals</Text>
-			</View>
+    <View style={{ flex: 1 }}>
+      <View>
+        <Text> Current Proposals</Text>
+      </View>
       <View>
         <FlatList
           data={currentProposal}
@@ -22,8 +22,8 @@ const CurrentProposalScreen = () => {
               title={item.title}
               description={item.description}
               location={item.location}
-							img={item.img}
-							votes={item.votes}
+              img={item.img}
+              votes={item.votes}
             />
           )}
         />

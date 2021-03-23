@@ -20,6 +20,7 @@ export default function App(): JSX.Element {
       <PaperProvider>
         <SafeAreaView style={SafeViewAndroid.AndroidSafeArea}>
           <NavigationContainer>
+            {/* <MainRootStack /> */}
             <BottomNavigationBar />
           </NavigationContainer>
         </SafeAreaView>
