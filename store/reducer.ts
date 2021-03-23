@@ -5,7 +5,7 @@ import cityProjects from './reducers/projects';
 import myFavourites from './reducers/favourites';
 import reportProblem from './reducers/report';
 import newsData from './reducers/news';
-
+import Proposals from './reducers/currentProposal'
 // Combining both reducers
 export const reducers = combineReducers({
   user,
@@ -14,6 +14,7 @@ export const reducers = combineReducers({
   myFavourites,
   reportProblem,
   newsData,
+  Proposals
 });
 
 export type RootState = ReturnType<typeof reducers>;

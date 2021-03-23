@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
-
 import React, { useState } from 'react';
 import {
   StyleSheet,
@@ -7,13 +6,13 @@ import {
   View,
   FlatList,
   Image,
-  ScrollView,
   TouchableOpacity,
 } from 'react-native';
 import Modal from 'react-native-modal';
 import { useSelector } from 'react-redux';
 import { RootState } from '../store/reducer';
 import CustomButton from '../components/CustomButton';
+import HorizontalBanner from '../components/HorizontalBannerComponent';
 import newsInterface from '../interfaces/newsInterface';
 
 const modalInitalState = {
@@ -25,7 +24,8 @@ const modalInitalState = {
   img: 'img',
   date: 'date',
 };
-const Dashboard = () => {
+
+export default function Dashboard({ navigation }) {
   const [modalInfo, setModalInfo] = useState<newsInterface>(modalInitalState);
   const [isModalVisible, setModalVisible] = useState(false);
   const allNews = useSelector((state: RootState) => {
@@ -33,17 +33,19 @@ const Dashboard = () => {
   });
 
   return (
-    <View style={{ flex: 1 }}>
+    <View style={{ flex: 1, backgroundColor: '#E5E5E5' }}>
+      <HorizontalBanner />
       <View style={{ justifyContent: 'center' }}>
         <Text style={styles.newsCaption}>Latest News</Text>
-        <ScrollView
+        <FlatList
           style={{ marginRight: 20 }}
-          snapToInterval={350}
           decelerationRate="fast"
-          horizontal
+          snapToInterval={350}
           showsHorizontalScrollIndicator={false}
-        >
-          {allNews.map(item => (
+          horizontal
+          data={allNews}
+          keyExtractor={item => item.id}
+          renderItem={({ item }) => (
             <TouchableOpacity
               onPress={() => {
                 setModalInfo(item);
@@ -57,33 +59,10 @@ const Dashboard = () => {
                 </View>
               </View>
             </TouchableOpacity>
-          ))}
-        </ScrollView>
+          )}
+        />
       </View>
-      <FlatList
-        contentContainerStyle={{
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}
-        horizontal={false}
-        numColumns={2}
-        keyExtractor={item => item.text}
-        data={[
-          { text: 'Report a problem', backgroundColor: '#FF6B6B' },
-          { text: 'Propose a solution', backgroundColor: '#FFEA00' },
-          { text: 'What are we working on', backgroundColor: '#F7FFF7' },
-          { text: 'Current proposals', backgroundColor: '#FFD166' },
-        ]}
-        renderItem={({ item }) => (
-          <CustomButton
-            text={item.text}
-            backgroundColor={item.backgroundColor}
-            onPress={() => {
-              console.log(item);
-            }}
-          />
-        )}
-      />
+      <CustomButton navigation={navigation} />
       <Modal
         isVisible={isModalVisible}
         onBackdropPress={() => {
@@ -97,8 +76,8 @@ const Dashboard = () => {
       {/* Add navigation to the bottom of the screen */}
     </View>
   );
-};
-export default Dashboard;
+}
+
 const styles = StyleSheet.create({
   picture: {
     height: 200,
@@ -126,10 +105,11 @@ const styles = StyleSheet.create({
     color: 'white',
   },
   newsCaption: {
-    fontSize: 30,
+    fontSize: 25,
     fontWeight: 'bold',
     marginLeft: 42,
     marginBottom: 5,
+    marginTop: '5%',
   },
   modalView: {
     height: 420,

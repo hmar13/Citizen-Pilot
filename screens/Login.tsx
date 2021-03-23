@@ -9,19 +9,20 @@ export default function Login({ navigation }): JSX.Element {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  // Authorization to pass into button component
-  // const handlePress = async () => {
-  //   if (!email) {
-  //     setPassword('');
-  //     setEmail('');
-  //     return Alert.alert('Email field is required.');
-  //   }
-  //   if (!password) {
-  //     setPassword('');
-  //     setEmail('');
-  //     return Alert.alert('Password field is required.');
-  //   }
-  // };
+  // API logic goes here
+  const handleButtonPress = () => {
+    // if (!email) {
+    //   setPassword('');
+    //   setEmail('');
+    //   return Alert.alert('Email field is required.');
+    // }
+    // if (!password) {
+    //   setPassword('');
+    //   setEmail('');
+    //   return Alert.alert('Password field is required.');
+    // }
+    navigation.navigate('Dashboard');
+  };
 
   return (
     <View style={styles.container}>
@@ -35,15 +36,20 @@ export default function Login({ navigation }): JSX.Element {
             label="Email"
             value={email}
             setItem={setEmail}
+            isDisabled={false}
           />
           <TextInputComponent
             text="Add your password"
             label="Password"
             value={password}
             setItem={setPassword}
+            isDisabled={false}
           />
         </View>
-        <ButtonComponent buttonText="Sign in" />
+        <ButtonComponent
+          buttonText="Sign in"
+          handleButtonPress={handleButtonPress}
+        />
         <TouchableOpacity onPress={() => navigation.navigate('Register')}>
           <Text style={styles.createAccount}>Create an account</Text>
         </TouchableOpacity>
@@ -61,24 +67,20 @@ const styles = StyleSheet.create({
   secondColumn: {
     alignItems: 'center',
     justifyContent: 'flex-start',
-    marginLeft: 36,
+    marginLeft: '9%',
   },
   loginContainer: {
-    marginBottom: 120,
-  },
-  textInput: {
-    width: 200,
-    height: 30,
+    marginBottom: '55%',
   },
   text: {
     textAlign: 'center',
     fontSize: 16,
-    marginBottom: 30,
+    marginBottom: '15%',
     fontWeight: 'bold',
     color: '#FFDE59',
   },
   createAccount: {
     color: 'grey',
-    marginTop: 16,
+    marginTop: '9%',
   },
 });
