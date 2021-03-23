@@ -10,11 +10,11 @@ interface CategoryType {
 }
 
 export default function IconComponent({ category }: CategoryType): JSX.Element {
-  const roadCategory = <FontAwesome name="road" size={34} color="#3A4276" />
-  const reminderCategory = <FontAwesome name="info-circle" size={36} color="#3A4276" />
+  const roadCategory = <FontAwesome name="road" size={34} color="#ad0f5c" />
+  const reminderCategory = <FontAwesome name="info-circle" size={36} color="#5ba4fc" />
   const generalCategory = <Ionicons name="chatbubble-ellipses" size={34} color="#3A4276" />
-  const weatherCategory = <MaterialCommunityIcons name="weather-cloudy-alert" size={37} color="#3A4276" />
-  const transportCategory = <MaterialIcons name="emoji-transportation" size={36} color="#3A4276" />
+  const weatherCategory = <MaterialCommunityIcons name="weather-cloudy-alert" size={37} color="#ffde59" />
+  const transportCategory = <MaterialIcons name="emoji-transportation" size={36} color="#ee9a2f" />
 
   return (
     <View style={styles.container}>

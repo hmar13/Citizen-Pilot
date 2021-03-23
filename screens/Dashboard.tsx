@@ -18,6 +18,7 @@ import newsInterface from '../interfaces/newsInterface';
 const modalInitalState = {
   id: '1',
   title: 'News Title',
+  category: 'Category',
   shortDescription: 'Description',
   longDescription: 'Description',
   location: 'In the city',

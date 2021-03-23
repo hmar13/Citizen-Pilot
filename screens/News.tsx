@@ -5,9 +5,9 @@ import {
   Text,
   View,
   FlatList,
-  ScrollView,
   TouchableOpacity,
 } from 'react-native';
+import { Provider } from 'react-native-paper';
 import { useSelector } from 'react-redux';
 import Modal from 'react-native-modal';
 import { RootState } from '../store/reducer';
@@ -15,6 +15,7 @@ import newsInterface from '../interfaces/newsInterface';
 import HorizontalBannerComponent from '../components/HorizontalBannerComponent';
 import IconComponent from '../components/NewsComponents/IconComponent';
 import { FontAwesome } from '@expo/vector-icons';
+import SortByCategory from '../components/NewsComponents/SortByCategory';
 
 const modalInitalState = {
   id: '1',
@@ -30,24 +31,35 @@ const modalInitalState = {
 const News = () => {
   const [modalInfo, setModalInfo] = useState<newsInterface>(modalInitalState);
   const [isModalVisible, setModalVisible] = useState(false);
-
   const allNews = useSelector((state: RootState) => {
     return state.newsData.news;
   });
 
+  const [selectedNews, setSelectedNews] = useState(allNews);
+
+
+  const sortCategory = (categoryName: string) => {
+    if (categoryName === 'All') {
+      return setSelectedNews(allNews);
+    }
+    const chosenNews = allNews.filter(newsItem => newsItem.category.indexOf(categoryName) !== -1)
+    if (chosenNews.length === 0) return;
+    setSelectedNews(chosenNews);
+  }
 
   return (
-    <ScrollView >
+    <Provider >
       <HorizontalBannerComponent />
       <View style={styles.header__container}>
         <FontAwesome name="newspaper-o" size={35} color="#3A4276" />
         <Text style={styles.header__text}>News</Text>
       </View>
 
+      <SortByCategory sortCategory={sortCategory} />
 
       <FlatList
         style={styles.flatlist__container}
-        data={allNews}
+        data={selectedNews}
         keyExtractor={item => item.id}
         renderItem={({ item }) => (
 
@@ -80,7 +92,7 @@ const News = () => {
           <Text>{modalInfo.longDescription}</Text>
         </View>
       </Modal>
-    </ScrollView>
+    </Provider>
   );
 };
 
@@ -88,7 +100,7 @@ const News = () => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+
     backgroundColor: 'white',
     flexDirection: 'row',
     height: 100,

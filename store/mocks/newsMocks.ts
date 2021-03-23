@@ -62,6 +62,18 @@ const news: newsInterface[] = [
     img:
       'https://yaleclimateconnections.org/wp-content/uploads/2020/11/1120_iota-sat-nov16_974.jpg',
   },
+  {
+    id: '6',
+    title: 'Christmas Market',
+    category: 'General',
+    shortDescription: 'Christmas market scheduled for the 15/12',
+    longDescription:
+      'Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?',
+    location: 'city-wide',
+    date: '01/05/2021',
+    img:
+      'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/cologne-christmas-market-1603916555.jpg',
+  },
 ];
 
 export default news;
