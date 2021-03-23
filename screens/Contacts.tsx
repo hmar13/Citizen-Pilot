@@ -5,6 +5,8 @@ import { Text, View, FlatList, StyleSheet } from 'react-native';
 import { useSelector } from 'react-redux';
 import { RootState } from '../store/reducer';
 import ContactItems from '../components/ContactComponents/ContactItems';
+import HorizontalBanner from '../components/HorizontalBannerComponent';
+
 
 const Contacts = () => {
   const allContacts = useSelector((state: RootState) => {
@@ -12,6 +14,7 @@ const Contacts = () => {
   });
   return (
     <View style={styles.container}>
+      <HorizontalBanner />
       <View style={styles.header__container}>
         <Text style={styles.header__text}>City Contacts</Text>
       </View>
