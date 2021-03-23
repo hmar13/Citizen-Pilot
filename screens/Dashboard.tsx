@@ -46,6 +46,7 @@ export default function Dashboard({ navigation }) {
           data={allNews}
           keyExtractor={item => item.id}
           renderItem={({ item }) =>
+            // TODO: go from here to news page. No extra modal required
             <TouchableOpacity
               onPress={() => {
                 setModalInfo(item);

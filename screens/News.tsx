@@ -15,6 +15,8 @@ import { useSelector } from 'react-redux';
 import Modal from 'react-native-modal';
 import { RootState } from '../store/reducer';
 import newsInterface from '../interfaces/newsInterface';
+import HorizontalBannerComponent from '../components/HorizontalBannerComponent';
+import { FontAwesome } from '@expo/vector-icons';
 
 const modalInitalState = {
   id: '1',
@@ -35,10 +37,14 @@ const News = () => {
   });
 
   return (
-    <View style={{ flex: 1 }}>
-      <View style={styles.headerContainer}>
-        <Text style={styles.headerText}>News</Text>
+    <ScrollView >
+      <HorizontalBannerComponent />
+      <View style={styles.header__container}>
+        <FontAwesome name="newspaper-o" size={35} color="#3A4276" />
+        <Text style={styles.header__text}>News</Text>
       </View>
+
+
       <FlatList
         data={allNews}
         keyExtractor={item => item.id}
@@ -70,24 +76,12 @@ const News = () => {
           <Text>{modalInfo.longDescription}</Text>
         </View>
       </Modal>
-    </View>
+    </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
-  headerContainer: {
-    height: 85,
-    width: 311,
-    backgroundColor: 'yellow',
-    borderBottomRightRadius: 53.5,
-    justifyContent: 'center',
-    alignItems: 'flex-start',
-  },
-  headerText: {
-    marginLeft: 35,
-    fontWeight: 'bold',
-    fontSize: 30,
-  },
+
 
   newsContainer: {
     height: 55,
@@ -122,5 +116,24 @@ const styles = StyleSheet.create({
     shadowRadius: 4,
     elevation: 5,
   },
+  header__container: {
+    flexDirection: 'row',
+    backgroundColor: 'white',
+    marginRight: 25,
+    marginLeft: 25,
+    marginBottom: 15,
+    borderBottomRightRadius: 30,
+    borderBottomLeftRadius: 30,
+    height: 70,
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingBottom: 5,
+  },
+  header__text: {
+    alignSelf: 'center',
+    marginLeft: 10,
+    fontSize: 25,
+    fontWeight: 'bold',
+  }
 });
 export default News;
