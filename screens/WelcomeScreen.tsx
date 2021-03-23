@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
   secondColumn: {
     alignItems: 'center',
     justifyContent: 'center',
-    marginLeft: 36,
+    marginLeft: '10%',
   },
   text: {
     color: '#A9A9A9',

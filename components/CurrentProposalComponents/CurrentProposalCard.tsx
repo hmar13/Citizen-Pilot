@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import { Card, Title, Paragraph } from 'react-native-paper';
 import Modal from 'react-native-modal';
-import { useDispatch} from 'react-redux';
+import { useDispatch } from 'react-redux';
 import propAction from '../../store/actions/currentProposals'
 
 interface CurrentPropsalTypes {
