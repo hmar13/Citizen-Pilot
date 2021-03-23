@@ -27,7 +27,7 @@ export default function ReportProblem(): JSX.Element {
     if (categoryTitle === 'Choose a category') {
       Alert.alert('Please add a category');
     }
-    console.log(urgency);
+    //console.log(urgency);
     // dispatch(addNewReport());
     setText('');
   }

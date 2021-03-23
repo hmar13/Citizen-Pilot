@@ -1,19 +1,22 @@
 import Proposals from '../../interfaces/currentProposals'
-const currentProposal: Proposals[] = [
+
+const currentProposalMock: Proposals[] = [
   {
-    title: 'build more benchs',
-    description: 'benchs!! love to sit down, and its helpful for the older types, also maybe a bin next to the benchs?',
+    id: 1,
+    title: 'build more benches',
+    description: 'benches!! love to sit down, and its helpful for the older types, also maybe a bin next to the benches?',
     location: 'everywhere',
     img: 'https://source.unsplash.com/kOi3ZejUA4s/200x200',
-    votes: 60,
+    votes: 0,
   },
   {
-    title: 'build less benchs',
-    description: 'less benchs!! we hate seeing people sat down enjoying them selfs! remove the benchs',
+    id: 2,
+    title: 'build less benches',
+    description: 'less benches!! we hate seeing people sat down enjoying them selfs! remove the benches',
     location: 'less places',
     img: 'https://source.unsplash.com/kOi3ZejUA4s/200x200',
-    votes: 1,
+    votes: 0,
   },
 ];
 
-export default currentProposal;
+export default currentProposalMock;

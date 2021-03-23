@@ -9,25 +9,32 @@ import {
 } from 'react-native';
 import { Card, Title, Paragraph } from 'react-native-paper';
 import Modal from 'react-native-modal';
+import { useDispatch} from 'react-redux';
+import propAction from '../../store/actions/currentProposals'
 
 interface CurrentPropsalTypes {
+  id: number,
   title: string,
   description: string,
   location: string,
-  vote: number,
+  votes: number,
   img: string,
 }
 
 
-
-const CurrentProposalCard: React.FC<CurrentPropsalTypes> = ({ title, description, location, vote, img }) => {
+  const CurrentProposalCard: React.FC<CurrentPropsalTypes> = ({ id, title, description, location, votes, img }) => {
   const [isModalVisible, setModalVisible] = useState(false);
   const toggleModal = () => {
     setModalVisible(!isModalVisible);
   }
-  const support = () => {
-
+  
+  const dispatch = useDispatch()
+  const handleUpVote = (id: number) => {
+    console.log('dispatched?', {payload:id, type: 'Increment'})
+    dispatch(propAction(id))
   }
+
+
   return (
     <View>
       <TouchableOpacity onPress={toggleModal}>
@@ -45,8 +52,8 @@ const CurrentProposalCard: React.FC<CurrentPropsalTypes> = ({ title, description
             <Text>Location: {location}</Text>
             <Image style={styles.image} source={{ uri: img }} />
             <Text> {description}</Text>
-            <Button title='add support' onPress={support}></Button>
-            <Text> support {vote}</Text>
+            <Button title='add support' onPress={() => handleUpVote(id)}></Button>
+            <Text> support {votes}</Text>
           </View>
           <Button title="Close" onPress={toggleModal} />
         </View>

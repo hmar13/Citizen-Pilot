@@ -79,7 +79,7 @@ const Dashboard = () => {
             text={item.text}
             backgroundColor={item.backgroundColor}
             onPress={() => {
-              console.log(item);
+              // console.log(item);
             }}
           />
         )}

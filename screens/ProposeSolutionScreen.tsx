@@ -22,7 +22,7 @@ export default function ProposeSolution(): JSX.Element {
     if (categoryTitle === 'Choose a category') {
       Alert.alert('Please add a category');
     }
-    console.log('clicked!');
+    //console.log('clicked!');
     // dispatch(addNewReport());
     setTitleText('');
     setDescriptionText('');
