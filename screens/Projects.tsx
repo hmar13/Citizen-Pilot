@@ -61,7 +61,8 @@ const styles = StyleSheet.create({
   header__text: {
     alignSelf: 'center',
     marginLeft: 10,
-    fontSize: 20,
+    fontSize: 25,
+    fontWeight: 'bold',
   },
   flatlist__container: {
     paddingHorizontal: 25,
