@@ -1,17 +1,17 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
-
 import React from 'react';
 import {
   Text,
   View,
   FlatList,
   StyleSheet,
-  ImageBackground,
 } from 'react-native';
 import { useSelector } from 'react-redux';
 import { RootState } from '../store/reducer';
 import FavouriteProposalItems from '../components/FavouriteComponents/FavouriteProposalItems';
 import FavourteProjectItems from '../components/FavouriteComponents/FavouriteProjectItems';
+import HorizontalBannerComponent from '../components/HorizontalBannerComponent';
+import { MaterialIcons } from '@expo/vector-icons';
 
 const Favourites = () => {
   const myFavourites = useSelector((state: RootState) => {
@@ -20,15 +20,13 @@ const Favourites = () => {
 
   return (
     <View style={styles.container}>
-      <ImageBackground
-        style={styles.header__container}
-        // eslint-disable-next-line global-require
-        source={require('../assets/images/banner-horizontal.png')}
-      >
-        <Text style={styles.header__text}>My Favourites</Text>
-      </ImageBackground>
-      <Text style={styles.header__text}>Proposals</Text>
+      <HorizontalBannerComponent />
+      <View style={styles.headline__container}>
+        <MaterialIcons name="favorite" size={35} color="#ad0f5c" />
+        <Text style={styles.header__text}>Favourites</Text>
+      </View>
       <FlatList
+        // horizontal={true}
         style={styles.flatlist__container}
         data={myFavourites}
         keyExtractor={item => item.id}
@@ -60,7 +58,6 @@ const Favourites = () => {
           ) : null
         }
       />
-      <Text style={styles.footer__container}>Navigation Goes Here</Text>
     </View>
   );
 };
@@ -80,11 +77,28 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     paddingBottom: 5,
   },
+  headline__container: {
+    flexDirection: 'row',
+    backgroundColor: 'white',
+    marginRight: 25,
+    marginLeft: 25,
+    marginBottom: 15,
+    borderBottomRightRadius: 30,
+    borderBottomLeftRadius: 30,
+    height: 70,
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingBottom: 5,
+  },
   header__text: {
     alignSelf: 'center',
+    marginLeft: 10,
+    fontSize: 25,
+    fontWeight: 'bold',
   },
   flatlist__container: {
     paddingHorizontal: 25,
+
   },
   footer__container: {
     backgroundColor: 'white',

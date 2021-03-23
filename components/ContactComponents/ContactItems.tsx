@@ -1,6 +1,5 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
-import { Card, Title, Paragraph } from 'react-native-paper';
+import { View, StyleSheet, Image, Text } from 'react-native';
 
 interface ContactItemsInterface {
   title: string;
@@ -16,14 +15,22 @@ const ContactItems: React.FC<ContactItemsInterface> = ({
   // img,
 }) => {
   return (
-    <View>
-      <Card style={styles.container}>
-        <Card.Content>
-          <Title>{title}</Title>
-          <Paragraph>Phone: {phoneNumber}</Paragraph>
-          <Paragraph>Email: {email}</Paragraph>
-        </Card.Content>
-      </Card>
+    <View style={styles.container}>
+      <View>
+        <Image
+          style={styles.banner}
+          source={require('../../assets/images/banner.png')}
+        />
+      </View>
+      <View style={styles.secondColumn}>
+        <View style={{ marginBottom: 10 }}>
+          <Text style={styles.title}>{title}</Text>
+        </View>
+        <View>
+          <Text style={styles.phone}>Phone: {phoneNumber}</Text>
+          <Text style={styles.phone}>Email: {email}</Text>
+        </View>
+      </View>
     </View>
   );
 };
@@ -32,9 +39,39 @@ export default ContactItems;
 
 const styles = StyleSheet.create({
   container: {
-    paddingHorizontal: 15,
+    flex: 1,
     backgroundColor: 'white',
+    flexDirection: 'row',
+    height: 100,
+    paddingBottom: 12,
     borderRadius: 15,
-    marginBottom: 15,
+    marginBottom: 12,
+    shadowColor: '#000',
+    shadowOffset: { width: 2, height: 2 },
+    shadowOpacity: 2,
+    shadowRadius: 1,
+    elevation: 3,
+  },
+  banner: {
+    borderBottomLeftRadius: 15,
+    borderTopLeftRadius: 15,
+    height: 100,
+    width: 50,
+  },
+  secondColumn: {
+    justifyContent: 'space-around',
+    marginTop: 10,
+    paddingRight: 4,
+    marginLeft: '8%',
+    width: '75%',
+    height: '90%',
+  },
+  title: {
+    fontSize: 20,
+    fontWeight: 'bold',
+  },
+  phone: {
+    fontSize: 12,
+    fontStyle: 'italic',
   },
 });

@@ -7,9 +7,9 @@ import News from '../screens/News';
 
 
 const dashNavRoute = () => <Dashboard />
-const newsRoute = () => <News/>
-const favouritesRoute = () => <Favourites/>
-const contactsRoute = () => <Contacts/>
+const newsRoute = () => <News />
+const favouritesRoute = () => <Favourites />
+const contactsRoute = () => <Contacts />
 
 
 
@@ -21,14 +21,14 @@ const BottomNavigationBar = () => {
     { key: 'favourites', title: 'Favourites', icon: 'heart' },
     { key: 'contacts', title: 'Contacts', icon: 'contacts' },
 
-    
+
   ]);
 
-    const renderScene = BottomNavigation.SceneMap({
-        dashboard: dashNavRoute,
-        news: newsRoute,
-        contacts: contactsRoute,
-        favourites: favouritesRoute,
+  const renderScene = BottomNavigation.SceneMap({
+    dashboard: dashNavRoute,
+    news: newsRoute,
+    contacts: contactsRoute,
+    favourites: favouritesRoute,
   });
 
   return (

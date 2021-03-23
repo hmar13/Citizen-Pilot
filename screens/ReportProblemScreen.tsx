@@ -37,11 +37,8 @@ export default function ReportProblem(): JSX.Element {
     if (categoryTitle === 'Choose a category') {
       Alert.alert('Please add a category');
     }
-<<<<<<< HEAD
     //console.log(urgency);
-=======
     console.log(latitude, longitude);
->>>>>>> 9d02b6c2ba252aa0e47f779f9d1ae0d93362cf13
     // dispatch(addNewReport());
     setText('');
   }

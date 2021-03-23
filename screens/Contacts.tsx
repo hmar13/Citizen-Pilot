@@ -5,6 +5,9 @@ import { Text, View, FlatList, StyleSheet } from 'react-native';
 import { useSelector } from 'react-redux';
 import { RootState } from '../store/reducer';
 import ContactItems from '../components/ContactComponents/ContactItems';
+import HorizontalBanner from '../components/HorizontalBannerComponent';
+import { MaterialIcons } from '@expo/vector-icons';
+
 
 const Contacts = () => {
   const allContacts = useSelector((state: RootState) => {
@@ -12,7 +15,10 @@ const Contacts = () => {
   });
   return (
     <View style={styles.container}>
+      <HorizontalBanner />
       <View style={styles.header__container}>
+        <MaterialIcons name="contacts" size={35} color="#3A4276" />
+        {/* <FontAwesome5 name="hammer" size={35} color="#3A4276" /> */}
         <Text style={styles.header__text}>City Contacts</Text>
       </View>
       <FlatList
@@ -28,7 +34,6 @@ const Contacts = () => {
           />
         )}
       />
-      <Text style={styles.footer__container}>Navigation Goes Here</Text>
     </View>
   );
 };
@@ -41,19 +46,26 @@ const styles = StyleSheet.create({
     backgroundColor: '#90E0EF',
   },
   header__container: {
+    flexDirection: 'row',
     backgroundColor: 'white',
     marginRight: 25,
+    marginLeft: 25,
     marginBottom: 15,
     borderBottomRightRadius: 30,
+    borderBottomLeftRadius: 30,
     height: 70,
     justifyContent: 'center',
+    alignItems: 'center',
     paddingBottom: 5,
   },
   header__text: {
     alignSelf: 'center',
+    marginLeft: 10,
+    fontSize: 25,
+    fontWeight: 'bold',
   },
   flatlist__container: {
-    paddingHorizontal: 15,
+    paddingHorizontal: 25,
   },
   footer__container: {
     backgroundColor: 'white',
