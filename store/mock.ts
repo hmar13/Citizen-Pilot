@@ -102,17 +102,19 @@ const news: { title: string, description: string, location: string, date: string
   },
 ];
 
-const currentProposals: { title: string, description: string, location: string, img: string, votes: number }[] = [
+const currentProposals: { id: number, title: string, description: string, location: string, img: string, votes: number }[] = [
   {
-    title: 'build more benchs',
-    description: 'benchs',
+    id: 1,
+    title: 'build more benches',
+    description: 'benches',
     location: 'everywhere',
     img: '',
     votes: 60,
   },
   {
-    title: 'build less benchs',
-    description: 'less benchs',
+    id: 2,
+    title: 'build less benches',
+    description: 'less benches',
     location: 'less places',
     img: '',
     votes: 12421552,
