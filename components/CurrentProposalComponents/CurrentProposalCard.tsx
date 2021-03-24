@@ -33,12 +33,12 @@ const CurrentProposalCard: React.FC<CurrentPropsalTypes> = ({ id, title, descrip
   return (
     <View style={{ flex: 1 }}>
 
-      <Card style={styles.card__style}>
+      <Card style={styles.cardStyle}>
         <Card.Content>
           <Card.Cover style={styles.cardCover} source={{ uri: img }} />
           <Title style={{ marginTop: 7 }}>{title}</Title>
 
-          <View style={[styles.vote__container, { marginBottom: 10 }]}>
+          <View style={[styles.voteContainer, { marginBottom: 10 }]}>
             {/* grey color if user hasn't voted yet? */}
             <MaterialIcons name="favorite" size={15} color="#ad0f5c" />
             <Text style={styles.vote}>{votes}</Text>
@@ -52,27 +52,27 @@ const CurrentProposalCard: React.FC<CurrentPropsalTypes> = ({ id, title, descrip
       </Card>
 
       <Modal isVisible={isModalVisible}>
-        <ScrollView style={styles.modal__container}>
-          <View style={styles.modal__information__container}>
+        <ScrollView style={styles.modalContainer}>
+          <View style={styles.modalInformationContainer}>
             <Avatar.Image size={120} source={{ uri: img }} />
-            <Text style={styles.modal__title}>{title}</Text>
+            <Text style={styles.modalTitle}>{title}</Text>
           </View>
-          <View style={styles.modal__textcontainer}>
-            <Text style={styles.modal__headers}>How many supporters does this project have? </Text>
+          <View style={styles.modalTextContainer}>
+            <Text style={styles.modalHeaders}>How many supporters does this project have? </Text>
             <Text>Currently: {votes}</Text>
           </View>
 
-          <View style={styles.modal__textcontainer}>
-            <Text style={styles.modal__headers}>Where is the project located? </Text>
+          <View style={styles.modalTextContainer}>
+            <Text style={styles.modalHeaders}>Where is the project located? </Text>
             <Text>{location}</Text>
           </View>
 
-          <View style={styles.modal__textcontainer}>
-            <Text style={styles.modal__headers}>What is being planned? </Text>
+          <View style={styles.modalTextContainer}>
+            <Text style={styles.modalHeaders}>What is being planned? </Text>
             <Text>{description}</Text>
           </View>
 
-          <View style={styles.modal__vote}>
+          <View style={styles.modalVote}>
             <Text style={{ textAlign: 'center', fontWeight: 'bold' }}>Give this project your vote and make your community a better place</Text>
             <IconButton
               icon="thumb-up"
@@ -97,7 +97,7 @@ const styles = StyleSheet.create({
     width: 250,
     justifyContent: 'space-around',
   },
-  card__style: {
+  cardStyle: {
     alignSelf: 'center',
     width: '80%',
     marginBottom: 15,
@@ -108,7 +108,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     height: 220,
   },
-  vote__container: {
+  voteContainer: {
     alignSelf: 'flex-end',
     alignItems: 'center',
     flexDirection: 'row',
@@ -144,7 +144,7 @@ const styles = StyleSheet.create({
   progress: {
     textAlign: 'right',
   },
-  modal__container: {
+  modalContainer: {
 
     backgroundColor: 'white',
     paddingHorizontal: 20,
@@ -154,7 +154,7 @@ const styles = StyleSheet.create({
     height: 200,
     width: 200,
   },
-  modal__information__container: {
+  modalInformationContainer: {
     paddingTop: 20,
     flexDirection: 'row',
     alignItems: 'center',
@@ -163,23 +163,21 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap'
 
   },
-  modal__title: {
+  modalTitle: {
     fontWeight: 'bold',
     fontSize: 20,
-
   },
-  modal__textcontainer: {
+  modalTextContainer: {
     marginTop: 30,
-
   },
-  modal__headers: {
+  modalHeaders: {
     fontWeight: 'bold',
     fontSize: 16,
     marginBottom: 5,
   },
-  modal__vote: {
+  modalVote: {
     marginTop: '20%',
     alignItems: 'center'
-  }
+  },
 });
 

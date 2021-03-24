@@ -7,7 +7,6 @@ import {
   Button,
   Image,
 } from 'react-native';
-// import { Card, Title, Paragraph } from 'react-native-paper';
 import Modal from 'react-native-modal';
 
 interface FavouriteProjectItemsInterface {
@@ -37,8 +36,8 @@ const FavouriteProjectItems: React.FC<FavouriteProjectItemsInterface> = ({
         </View>
       </TouchableOpacity>
       <Modal isVisible={isModalVisible}>
-        <View style={styles.modal__container}>
-          <View style={styles.modal__information__container}>
+        <View style={styles.modalContainer}>
+          <View style={styles.modalInformationContainer}>
             <Text>{title}</Text>
             <Image style={styles.image} source={{ uri: img }} />
             <Text>Information: {description}</Text>
@@ -94,14 +93,14 @@ const styles = StyleSheet.create({
   progress: {
     textAlign: 'right',
   },
-  modal__container: {
+  modalContainer: {
     flex: 1,
     justifyContent: 'space-between',
     backgroundColor: 'white',
     paddingHorizontal: 20,
     borderRadius: 15,
   },
-  modal__information__container: {
+  modalInformationContainer: {
     alignItems: 'center',
   },
 });

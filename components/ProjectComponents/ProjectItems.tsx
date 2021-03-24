@@ -31,7 +31,7 @@ const ProjectItems: React.FC<ProjectItemsInterface> = ({
     setModalVisible(!isModalVisible);
   };
   // needed number without % for progress bar
-  let projectProgress = +projectedCompletion.slice(0, -1);
+  let projectProgress = parseFloat(projectedCompletion);
 
   return (
     <View>
@@ -51,7 +51,7 @@ const ProjectItems: React.FC<ProjectItemsInterface> = ({
               <Text style={styles.location}>Location: {location}</Text>
             </View>
             <AnimatedCircularProgress
-              style={styles.progress__container}
+              style={styles.progressContainer}
               size={40}
               width={10}
               fill={projectProgress}
@@ -71,24 +71,24 @@ const ProjectItems: React.FC<ProjectItemsInterface> = ({
 
 
       <Modal isVisible={isModalVisible}>
-        <ScrollView style={styles.modal__container}>
-          <View style={styles.modal__information__container}>
+        <ScrollView style={styles.modalContainer}>
+          <View style={styles.modalInformationContainer}>
             <Avatar.Image size={120} source={{ uri: img }} />
-            <Text style={styles.modal__title}>{title}</Text>
+            <Text style={styles.modalTitle}>{title}</Text>
           </View>
 
-          <View style={styles.modal__textcontainer}>
-            <Text style={styles.modal__headers}>Where is the project located? </Text>
+          <View style={styles.modalTextContainer}>
+            <Text style={styles.modalHeaders}>Where is the project located? </Text>
             <Text>{location}</Text>
           </View>
 
-          <View style={styles.modal__textcontainer}>
-            <Text style={styles.modal__headers}>What is being implemented? </Text>
+          <View style={styles.modalTextContainer}>
+            <Text style={styles.modalHeaders}>What is being implemented? </Text>
             <Text>{description}</Text>
           </View>
 
-          <View style={styles.modal__textcontainer}>
-            <Text style={styles.modal__headers}>For more information, visit: </Text>
+          <View style={styles.modalTextContainer}>
+            <Text style={styles.modalHeaders}>For more information, visit: </Text>
             <Text>www.somelink.com</Text>
           </View>
 
@@ -138,14 +138,14 @@ const styles = StyleSheet.create({
     fontSize: 12,
     fontStyle: 'italic',
   },
-  progress__container: {
+  progressContainer: {
     alignSelf: 'flex-end',
     justifyContent: 'flex-end',
   },
   progress: {
     marginTop: 5,
   },
-  modal__container: {
+  modalContainer: {
     backgroundColor: 'white',
     paddingHorizontal: 20,
     borderRadius: 15,
@@ -154,7 +154,7 @@ const styles = StyleSheet.create({
     height: 200,
     width: 200,
   },
-  modal__information__container: {
+  modalInformationContainer: {
     paddingTop: 20,
     flexDirection: 'row',
     alignItems: 'center',
@@ -162,20 +162,16 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     flexWrap: 'wrap',
   },
-  modal__title: {
+  modalTitle: {
     fontWeight: 'bold',
     fontSize: 20,
   },
-  modal__textcontainer: {
+  modalTextContainer: {
     marginTop: 30,
   },
-  modal__headers: {
+  modalHeaders: {
     fontWeight: 'bold',
     fontSize: 16,
     marginBottom: 5,
-  },
-  modal__vote: {
-    marginTop: '20%',
-    alignItems: 'center'
   },
 });

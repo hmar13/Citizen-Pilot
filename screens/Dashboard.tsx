@@ -15,8 +15,6 @@ import { RootState } from '../store/reducer';
 import CustomButton from '../components/CustomButton';
 import HorizontalBanner from '../components/HorizontalBannerComponent';
 import newsInterface from '../interfaces/newsInterface';
-import BottomNavigationBar from '../navigation/bottomNavBar';
-import BottomTabs from '../navigation/navBarBare';
 
 const modalInitalState = {
   id: '1',

@@ -13,9 +13,9 @@ export default function CurrentProposalScreen(): JSX.Element {
   return (
     <View style={styles.container}>
       <HorizontalBanner />
-      <View style={styles.header__container}>
+      <View style={styles.headerContainer}>
         <MaterialCommunityIcons name="vote" size={35} color="#3A4276" />
-        <Text style={styles.header__text}>Vote</Text>
+        <Text style={styles.headerText}>Vote</Text>
       </View>
       <FlatList
         data={currentProposal}
@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#E5E5E5',
   },
-  header__container: {
+  headerContainer: {
     flexDirection: 'row',
     backgroundColor: 'white',
     marginRight: 25,
@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingBottom: 5,
   },
-  header__text: {
+  headerText: {
     alignSelf: 'center',
     marginLeft: 10,
     fontSize: 25,

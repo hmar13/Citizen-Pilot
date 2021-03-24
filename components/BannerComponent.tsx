@@ -13,8 +13,7 @@ export default function BannerComponent(): JSX.Element {
   );
 }
 
-const { height } = Dimensions.get('window');
-const { width } = Dimensions.get('window');
+const { height, width } = Dimensions.get('window');
 const styles = StyleSheet.create({
   banner: {
     height,

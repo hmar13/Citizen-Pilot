@@ -44,7 +44,7 @@ const News = () => {
     if (categoryName === 'All') {
       return setSelectedNews(allNews);
     }
-    const chosenNews = allNews.filter(newsItem => newsItem.category.indexOf(categoryName) !== -1)
+    const chosenNews = allNews.filter(newsItem => newsItem.category.includes(categoryName))
     if (chosenNews.length === 0) return;
     setSelectedNews(chosenNews);
   }
@@ -52,15 +52,15 @@ const News = () => {
   return (
     <Provider >
       <HorizontalBannerComponent />
-      <View style={styles.header__container}>
+      <View style={styles.headerContainer}>
         <FontAwesome name="newspaper-o" size={35} color="#3A4276" />
-        <Text style={styles.header__text}>News</Text>
+        <Text style={styles.headerText}>News</Text>
       </View>
 
       <SortByCategory sortCategory={sortCategory} />
 
       <FlatList
-        style={styles.flatlist__container}
+        style={styles.flatlistContainer}
         data={selectedNews}
         keyExtractor={item => item.id}
         renderItem={({ item }) => (
@@ -145,7 +145,7 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
 
-  flatlist__container: {
+  flatlistContainer: {
     paddingHorizontal: 25,
   },
   secondColumn: {
@@ -156,10 +156,6 @@ const styles = StyleSheet.create({
     marginLeft: '8%',
     width: '75%',
     height: '90%',
-  },
-  progress__container: {
-    alignSelf: 'flex-end',
-    justifyContent: 'flex-end',
   },
   textBox: {
   },
@@ -203,7 +199,7 @@ const styles = StyleSheet.create({
     shadowRadius: 4,
     elevation: 5,
   },
-  header__container: {
+  headerContainer: {
     flexDirection: 'row',
     backgroundColor: 'white',
     marginRight: 25,
@@ -216,7 +212,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingBottom: 5,
   },
-  header__text: {
+  headerText: {
     alignSelf: 'center',
     marginLeft: 10,
     fontSize: 25,

@@ -21,12 +21,12 @@ const Favourites = () => {
   return (
     <View style={styles.container}>
       <HorizontalBannerComponent />
-      <View style={styles.headline__container}>
+      <View style={styles.headlineContainer}>
         <MaterialIcons name="favorite" size={35} color="#ad0f5c" />
-        <Text style={styles.header__text}>Favourites</Text>
+        <Text style={styles.headerText}>Favourites</Text>
       </View>
       <FlatList
-        style={styles.flatlist__container}
+        style={styles.flatlistContainer}
         data={myFavourites}
         keyExtractor={item => item.id}
         renderItem={({ item }) =>
@@ -50,16 +50,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#E5E5E5',
   },
-  header__container: {
-    overflow: 'hidden',
-    marginRight: 25,
-    marginBottom: 15,
-    borderBottomRightRadius: 30,
-    height: 70,
-    justifyContent: 'center',
-    paddingBottom: 5,
-  },
-  headline__container: {
+  headlineContainer: {
     flexDirection: 'row',
     backgroundColor: 'white',
     marginRight: 25,
@@ -72,17 +63,13 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingBottom: 5,
   },
-  header__text: {
+  headerText: {
     alignSelf: 'center',
     marginLeft: 10,
     fontSize: 25,
     fontWeight: 'bold',
   },
-  flatlist__container: {
+  flatlistContainer: {
     paddingHorizontal: 25,
-
-  },
-  footer__container: {
-    backgroundColor: 'white',
   },
 });

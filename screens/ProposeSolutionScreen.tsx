@@ -36,9 +36,9 @@ export default function ProposeSolution(): JSX.Element {
     <View style={styles.container}>
       <HorizontalBannerComponent />
 
-      <View style={styles.header__container}>
+      <View style={styles.headerContainer}>
         <FontAwesome5 name="lightbulb" size={35} color="#3A4276" />
-        <Text style={styles.header__text}>Propose a solution</Text>
+        <Text style={styles.headerText}>Propose a solution</Text>
       </View>
 
       <ScrollView >
@@ -88,14 +88,13 @@ export default function ProposeSolution(): JSX.Element {
     </View>
   );
 }
-const { height } = Dimensions.get('window');
-const { width } = Dimensions.get('window');
+const { height, width } = Dimensions.get('window');
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#E5E5E5',
   },
-  header__container: {
+  headerContainer: {
     flexDirection: 'row',
     backgroundColor: 'white',
     marginRight: 25,
@@ -108,7 +107,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingBottom: 5,
   },
-  header__text: {
+  headerText: {
     alignSelf: 'center',
     marginLeft: 10,
     fontSize: 25,
