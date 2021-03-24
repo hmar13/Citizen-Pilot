@@ -92,7 +92,7 @@ const styles = StyleSheet.create({
   location: {
   },
   votes: {
-    alignSelf: 'flex-start',
+    alignSelf: 'flex-end',
     marginRight: 10,
   },
   progress: {

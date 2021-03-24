@@ -55,14 +55,27 @@ export default FavouriteProjectItems;
 
 const styles = StyleSheet.create({
   container: {
-    height: 100,
+    height: 120,
     width: 350,
-    borderRadius: 10,
+    borderRadius: 12,
     backgroundColor: 'white',
     marginTop: 10,
     alignSelf: 'center',
     flexDirection: 'row',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 3,
 
+  },
+  image: {
+    height: 120,
+    width: 105,
+    borderRadius: 12,
   },
   textContainer: {
     width: 250,
@@ -87,12 +100,6 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     paddingHorizontal: 20,
     borderRadius: 15,
-  },
-  image: {
-    height: 100,
-    width: 100,
-    borderTopLeftRadius: 10,
-    borderBottomLeftRadius: 10,
   },
   modal__information__container: {
     alignItems: 'center',

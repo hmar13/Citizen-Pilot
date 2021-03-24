@@ -7,14 +7,16 @@ import {
   Button,
   Image,
 } from 'react-native';
-import { Card, Title, Paragraph } from 'react-native-paper';
 import Modal from 'react-native-modal';
+import { Ionicons } from '@expo/vector-icons';
+import { FontAwesome5 } from '@expo/vector-icons';
+
 
 interface FavouriteProposalItemsInterface {
   title: string;
   description: string;
   location: string;
-  vote: number;
+  vote?: number;
   img: string;
 }
 
@@ -31,14 +33,26 @@ const FavouriteProposalItems: React.FC<FavouriteProposalItemsInterface> = ({
   };
   return (
     <View>
-      <TouchableOpacity onPress={toggleModal}>
-        <Card style={styles.container}>
-          <Card.Content>
-            <Title style={styles.title}>{title}</Title>
-            <Paragraph style={styles.location}>Location: {location}</Paragraph>
-            <Paragraph style={styles.vote}>Votes: {vote}</Paragraph>
-          </Card.Content>
-        </Card>
+      <TouchableOpacity onPress={toggleModal} style={styles.container}>
+        <Image source={{ uri: img }} style={styles.image} />
+        <View style={styles.textContainer}>
+          <Text style={styles.title}>{title}</Text>
+          <Text style={styles.location}>Location: {location}</Text>
+          {
+            vote !== undefined ?
+              <View style={styles.vote__container}>
+                <Ionicons name="ios-thumbs-up-sharp" size={15} color="#3A4276" />
+                <Text style={styles.vote}>{vote}</Text>
+
+              </View> :
+              <View style={styles.vote__container}>
+                <FontAwesome5 name="hammer" size={20} color="#3A4276" />
+                <Text style={[styles.vote, { fontSize: 12 }]}>In progress</Text>
+
+              </View>
+
+          }
+        </View>
       </TouchableOpacity>
       <Modal isVisible={isModalVisible}>
         <View style={styles.modal__container}>
@@ -60,19 +74,47 @@ export default FavouriteProposalItems;
 
 const styles = StyleSheet.create({
   container: {
-    paddingHorizontal: 15,
+    height: 120,
+    width: 350,
+    borderRadius: 13,
     backgroundColor: 'white',
-    borderRadius: 15,
-    marginBottom: 15,
+    marginTop: 10,
+    alignSelf: 'center',
+    flexDirection: 'row',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 3,
   },
-  title: {
-    textAlign: 'left',
+  image: {
+    height: 120,
+    width: 105,
+    borderRadius: 13,
   },
-  location: {
-    textAlign: 'left',
+  vote__container: {
+    alignSelf: 'flex-end',
+    alignItems: 'center',
+    flexDirection: 'row',
+    marginRight: 20
   },
   vote: {
-    textAlign: 'right',
+    fontWeight: 'bold',
+    paddingLeft: 8,
+
+    // alignSelf: 'flex-end',
+  },
+  title: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    paddingLeft: 6,
+  },
+  location: {
+    paddingLeft: 6,
+    fontStyle: 'italic',
   },
   modal__container: {
     flex: 1,
@@ -81,9 +123,9 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     borderRadius: 15,
   },
-  image: {
-    height: 200,
-    width: 200,
+  textContainer: {
+    width: 250,
+    justifyContent: 'space-evenly',
   },
   modal__information__container: {
     alignItems: 'center',
