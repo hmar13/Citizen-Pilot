@@ -8,7 +8,7 @@ import {
   Text,
   ScrollView,
 } from 'react-native';
-import { TextInput, Button, Title } from 'react-native-paper';
+import { TextInput, Button } from 'react-native-paper';
 import CameraComponent from '../components/ReportProblem/CameraComponent';
 import ListAccordion from '../components/ProposeSolution/ListAccordion';
 import HorizontalBannerComponent from '../components/HorizontalBannerComponent';
@@ -38,7 +38,7 @@ export default function ProposeSolution(): JSX.Element {
 
       <View style={styles.headerContainer}>
         <FontAwesome5 name="lightbulb" size={35} color="#3A4276" />
-        <Text style={styles.headerText}>Propose a solution</Text>
+        <Text style={styles.headline}>Propose a solution</Text>
       </View>
 
       <ScrollView >
@@ -107,7 +107,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingBottom: 5,
   },
-  headerText: {
+  headline: {
     alignSelf: 'center',
     marginLeft: 10,
     fontSize: 25,
