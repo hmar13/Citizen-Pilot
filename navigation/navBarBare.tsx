@@ -6,6 +6,11 @@ import Dashboard from '../screens/Dashboard';
 import News from '../screens/News';
 import Contacts from '../screens/Contacts';
 import Favourites from '../screens/Favourites';
+import CurrentProposals from '../screens/CurrentProposals';
+import Projects from '../screens/Projects';
+import ReportProblem from '../screens/ReportProblemScreen';
+import ProposeSolution from '../screens/ProposeSolutionScreen';
+
 import { createStackNavigator } from '@react-navigation/stack';
 
 
@@ -14,30 +19,25 @@ const MainDashStack = createStackNavigator()
 
 const MainStack = () => {
 	return (
-		<MainDashStack.Navigator>
-	<MainDashStack.Screen name='Dashboard' component={Dashboard} />
-	<MainDashStack.Screen name='News' component={News} />
+		<MainDashStack.Navigator screenOptions={{
+      headerShown: false,
+    }}>
+			<MainDashStack.Screen name='Dashboard' component={Dashboard} />
+      <MainDashStack.Screen name="CurrentProposals" component={CurrentProposals} />
+      <MainDashStack.Screen name="ReportProblem" component={ReportProblem} />
+      <MainDashStack.Screen name="ProposeSolution" component={ProposeSolution} />
+      <MainDashStack.Screen name="Projects" component={Projects} />
 		</MainDashStack.Navigator>
 	)
 }
-// const bottomTabNavigator = createBottomTabNavigator(
-//   {
-    // dashboard: dashboard,
-    // news: news,
-    // contacts: contacts,
-    // favourites: favourites,
-//   {
-    //   initialRouteName: 'Home',
-//   }
-// );
 
 const BottomTabs = () => {
     return(
-     <NavigationContainer>
-   <Tab.Navigator
-     initialRouteName="Feed"
-     tabBarOptions={{
-     activeTintColor: 'black',
+    
+			<Tab.Navigator
+				initialRouteName="Feed"
+				tabBarOptions={{
+				activeTintColor: 'black',
      }}
    >
 					<Tab.Screen
@@ -68,7 +68,7 @@ const BottomTabs = () => {
 					name="favourites"
 					component={Favourites}
 					options={{
-					tabBarLabel: 'favourites',
+					tabBarLabel: 'Favourites',
 					tabBarIcon: ({ color, size }) => (
 					<MaterialCommunityIcons name="heart" color={color} size={size} />),
 			}} />
@@ -79,7 +79,7 @@ const BottomTabs = () => {
  />
 					
    </Tab.Navigator>
- </NavigationContainer>
+
     );
 };
 

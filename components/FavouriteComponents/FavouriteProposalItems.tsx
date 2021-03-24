@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import { Card, Title, Paragraph } from 'react-native-paper';
 import Modal from 'react-native-modal';
-import BottomTabs from '../../navigation/navBarBare';
+
 
 interface FavouriteProposalItemsInterface {
   title: string;
@@ -53,7 +53,6 @@ const FavouriteProposalItems: React.FC<FavouriteProposalItemsInterface> = ({
           <Button title="Hide" onPress={toggleModal} />
         </View>
       </Modal>
-      <BottomTabs/> 
     </View>
   );
 };
