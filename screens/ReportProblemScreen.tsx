@@ -46,65 +46,67 @@ export default function ReportProblem(): JSX.Element {
   }
 
   return (
-    <ScrollView style={styles.container}>
+    <View style={styles.container}>
       <HorizontalBanner />
       <View style={styles.header__container}>
         <Foundation name="alert" size={35} color="#3A4276" />
         <Text style={styles.header__text}>Report a problem</Text>
       </View>
 
-      <ListAccordion
-        setCategoryTitle={setCategoryTitle}
-        categoryTitle={categoryTitle}
-      />
-
-      <View>
-        <CameraComponent
-          imageUri={imageUri}
-          setImageUri={setImageUri}
-          headerText="Then take a picture"
-          needImage={false}
+      <ScrollView >
+        <ListAccordion
+          setCategoryTitle={setCategoryTitle}
+          categoryTitle={categoryTitle}
         />
 
-        <View style={styles.descriptionBox}>
-          <Text style={styles.text}>Write a brief description</Text>
-          <TextInput
-            label="Description"
-            multiline
-            value={text}
-            mode="outlined"
-            style={styles.input}
-            onChangeText={input => setText(input)}
+        <View>
+          <CameraComponent
+            imageUri={imageUri}
+            setImageUri={setImageUri}
+            headerText="Then take a picture"
+            needImage={false}
+          />
+
+          <View style={styles.descriptionBox}>
+            <Text style={styles.text}>Write a brief description</Text>
+            <TextInput
+              label="Description"
+              multiline
+              value={text}
+              mode="outlined"
+              style={styles.input}
+              onChangeText={input => setText(input)}
+            />
+          </View>
+        </View>
+
+        <View style={styles.urgent}>
+          <Text style={styles.text}>How urgent is your problem?</Text>
+          <UrgentButton setUrgency={setUrgency} />
+        </View>
+
+        <View style={styles.map}>
+          <Text style={styles.mapText}>Drag the pin to where the problem is</Text>
+          <MapPinDrop
+            latitude={latitude}
+            setLatitude={setLatitude}
+            longitude={longitude}
+            setLongitude={setLongitude}
           />
         </View>
-      </View>
 
-      <View style={styles.urgent}>
-        <Text style={styles.text}>How urgent is your problem?</Text>
-        <UrgentButton setUrgency={setUrgency} />
-      </View>
-
-      <View style={styles.map}>
-        <Text style={styles.mapText}>Drag the pin to where the problem is</Text>
-        <MapPinDrop
-          latitude={latitude}
-          setLatitude={setLatitude}
-          longitude={longitude}
-          setLongitude={setLongitude}
-        />
-      </View>
-
-      <View style={styles.bottom}>
-        <Button
-          icon="email-send"
-          mode="contained"
-          style={styles.button}
-          onPress={handleButtonClick}
-        >
-          Submit
+        <View style={styles.bottom}>
+          <Button
+            icon="email-send"
+            mode="contained"
+            style={styles.button}
+            onPress={handleButtonClick}
+          >
+            Submit
         </Button>
-      </View>
-    </ScrollView>
+        </View>
+      </ScrollView>
+    </View>
   );
 }
 
