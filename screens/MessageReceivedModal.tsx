@@ -23,22 +23,25 @@ export default function MessageReceivedModal({ isModalVisible, setModalVisible }
         <Text style={styles.message}> We have received your message</Text>
         <Text>You will hear back from us as soon as possible</Text>
       </View>
-
     </Modal >
-
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    margin: 25,
+    marginBottom: 130,
+    marginTop: 130,
     justifyContent: 'flex-start',
     backgroundColor: 'white',
-    height: 400,
+    paddingHorizontal: 20,
+    borderRadius: 15,
+
   },
   headerContainer: {
     alignItems: 'center',
-    marginTop: '25%',
+    marginTop: '30%',
   },
   headerText: {
     fontSize: 25,

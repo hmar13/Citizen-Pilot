@@ -10,23 +10,28 @@ import {
 } from 'react-native';
 import { TextInput, Button } from 'react-native-paper';
 import CameraComponent from '../components/ReportProblem/CameraComponent';
+import MessageReceivedModal from './MessageReceivedModal';
 import ListAccordion from '../components/ProposeSolution/ListAccordion';
 import HorizontalBannerComponent from '../components/HorizontalBannerComponent';
 import { FontAwesome5 } from '@expo/vector-icons';
 
 
-export default function ProposeSolution(): JSX.Element {
+export default function ProposeSolution({ navigation }): JSX.Element {
+  const [isModalVisible, setModalVisible] = useState(false);
   const [titleText, setTitleText] = useState('');
   const [descriptionText, setDescriptionText] = useState('');
   const [categoryTitle, setCategoryTitle] = useState('Choose a Location');
   const [imageUri, setImageUri] = useState('');
 
   function handleButtonClick() {
-    if (categoryTitle === 'Choose a category') {
-      Alert.alert('Please choose a location');
-    }
-
-    console.log('clicked!');
+    // if (categoryTitle === 'Choose a category') {
+    //   Alert.alert('Please choose a location');
+    // }
+    setModalVisible(true);
+    setTimeout(() => {
+      setModalVisible(false);
+      navigation.navigate('Dashboard');
+    }, 2000);
 
     setTitleText('');
     setDescriptionText('');
@@ -76,6 +81,7 @@ export default function ProposeSolution(): JSX.Element {
           headerText="Your picture"
           needImage={true}
         />
+        <MessageReceivedModal isModalVisible={isModalVisible} setModalVisible={setModalVisible} />
         <Button
           icon="email-send"
           mode="contained"

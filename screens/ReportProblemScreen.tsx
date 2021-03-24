@@ -43,10 +43,10 @@ export default function ReportProblem({ navigation }): JSX.Element {
     // }
     // dispatch(addNewReport());
     setModalVisible(true);
-    // setTimeout(() => {
-    //   setModalVisible(false);
-    //   navigation.navigate('Dashboard');
-    // }, 2000);
+    setTimeout(() => {
+      setModalVisible(false);
+      navigation.navigate('Dashboard');
+    }, 2000);
   }
 
   return (
