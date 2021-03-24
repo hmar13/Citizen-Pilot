@@ -100,8 +100,8 @@ const News = () => {
               <Paragraph style={{ marginTop: 10 }}>{modalInfo.longDescription}</Paragraph>
             </Card.Content>
           </Card>
-          <Button style={styles.button} icon="newspaper-variant-outline" mode="contained" onPress={() => console.log('navigation.navigate')}>
-            More
+          <Button style={styles.button} icon="newspaper-variant-outline" mode="contained" onPress={() => setModalVisible(false)}>
+            Back
           </Button>
         </View>
       </Modal>

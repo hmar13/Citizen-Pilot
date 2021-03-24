@@ -9,7 +9,6 @@ import {
 import { useSelector } from 'react-redux';
 import { RootState } from '../store/reducer';
 import FavouriteProposalItems from '../components/FavouriteComponents/FavouriteProposalItems';
-import FavourteProjectItems from '../components/FavouriteComponents/FavouriteProjectItems';
 import HorizontalBannerComponent from '../components/HorizontalBannerComponent';
 import { MaterialIcons } from '@expo/vector-icons';
 

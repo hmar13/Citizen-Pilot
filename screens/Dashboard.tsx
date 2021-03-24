@@ -9,12 +9,14 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import Modal from 'react-native-modal';
-import { Button, Divider, Card, Title, Paragraph } from 'react-native-paper';
+import { Button, Divider, Card, Title, Paragraph, IconButton, Portal, Dialog } from 'react-native-paper';
 import { useSelector } from 'react-redux';
 import { RootState } from '../store/reducer';
 import CustomButton from '../components/CustomButton';
 import HorizontalBanner from '../components/HorizontalBannerComponent';
 import newsInterface from '../interfaces/newsInterface';
+import AskForHelp from '../components/DashboardComponents/AskForHelpComponent';
+
 
 const modalInitalState = {
   id: '1',
@@ -27,18 +29,36 @@ const modalInitalState = {
   date: 'date',
 };
 
-export default function Dashboard({ navigation }) {
+export default function Dashboard({ navigation }): JSX.Element {
   const [modalInfo, setModalInfo] = useState<newsInterface>(modalInitalState);
   const [isModalVisible, setModalVisible] = useState(false);
+  const [isDialogVisible, setIsDialogVisible] = useState(false);
   const allNews = useSelector((state: RootState) => {
     return state.newsData.news;
   });
+
+  const showDialog = () => setIsDialogVisible(true);
+
 
   return (
     <View style={{ flex: 1, backgroundColor: '#E5E5E5' }}>
       <HorizontalBanner />
       <View style={{ justifyContent: 'center' }}>
+
+        <AskForHelp
+          isDialogVisible={isDialogVisible}
+          setIsDialogVisible={setIsDialogVisible}
+        />
+        <IconButton
+          style={{ alignSelf: 'flex-end' }}
+          icon="help-circle"
+          color={'#ee9a2f'}
+          size={20}
+          onPress={showDialog}
+        />
+
         <Text style={styles.newsCaption}>Latest News</Text>
+
         <FlatList
           decelerationRate="fast"
           snapToInterval={350}
@@ -82,7 +102,10 @@ export default function Dashboard({ navigation }) {
               <Paragraph style={{ marginTop: 10 }}>{modalInfo.longDescription}</Paragraph>
             </Card.Content>
           </Card>
-          <Button style={styles.button} icon="newspaper-variant-outline" mode="contained" onPress={() => console.log('navigation.navigate')}>
+          <Button style={styles.button} icon="newspaper-variant-outline" mode="contained" onPress={() => {
+            setModalVisible(false);
+            navigation.navigate('news');
+          }}>
             More
           </Button>
         </View>
@@ -137,7 +160,8 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginLeft: 42,
     marginBottom: 5,
-    marginTop: '5%'
+    marginTop: -10
+
   },
   modalView: {
     overflow: 'scroll',
