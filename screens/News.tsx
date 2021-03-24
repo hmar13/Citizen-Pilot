@@ -1,24 +1,26 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
-
 import React, { useState } from 'react';
 import {
   StyleSheet,
   Text,
   View,
   FlatList,
-  Image,
-  ScrollView,
   TouchableOpacity,
 } from 'react-native';
-
+import { Provider } from 'react-native-paper';
 import { useSelector } from 'react-redux';
 import Modal from 'react-native-modal';
 import { RootState } from '../store/reducer';
 import newsInterface from '../interfaces/newsInterface';
+import HorizontalBannerComponent from '../components/HorizontalBannerComponent';
+import IconComponent from '../components/NewsComponents/IconComponent';
+import { FontAwesome } from '@expo/vector-icons';
+import SortByCategory from '../components/NewsComponents/SortByCategory';
 
 const modalInitalState = {
   id: '1',
   title: 'News Title',
+  category: 'Category',
   shortDescription: 'Description',
   longDescription: 'Description',
   location: 'In the city',
@@ -29,36 +31,56 @@ const modalInitalState = {
 const News = () => {
   const [modalInfo, setModalInfo] = useState<newsInterface>(modalInitalState);
   const [isModalVisible, setModalVisible] = useState(false);
-
   const allNews = useSelector((state: RootState) => {
     return state.newsData.news;
   });
 
+  const [selectedNews, setSelectedNews] = useState(allNews);
+
+
+  const sortCategory = (categoryName: string) => {
+    if (categoryName === 'All') {
+      return setSelectedNews(allNews);
+    }
+    const chosenNews = allNews.filter(newsItem => newsItem.category.indexOf(categoryName) !== -1)
+    if (chosenNews.length === 0) return;
+    setSelectedNews(chosenNews);
+  }
+
   return (
-    <View style={{ flex: 1 }}>
-      <View style={styles.headerContainer}>
-        <Text style={styles.headerText}>News</Text>
+    <Provider >
+      <HorizontalBannerComponent />
+      <View style={styles.header__container}>
+        <FontAwesome name="newspaper-o" size={35} color="#3A4276" />
+        <Text style={styles.header__text}>News</Text>
       </View>
+
+      <SortByCategory sortCategory={sortCategory} />
+
       <FlatList
-        data={allNews}
+        style={styles.flatlist__container}
+        data={selectedNews}
         keyExtractor={item => item.id}
         renderItem={({ item }) => (
-          <TouchableOpacity
-            onPress={() => {
-              setModalInfo(item);
-              setModalVisible(true);
-            }}
-          >
-            <View style={styles.newsContainer}>
-              <Text style={styles.newsText}>{item.title}</Text>
+
+
+          <TouchableOpacity onPress={() => {
+            setModalInfo(item);
+            setModalVisible(true);
+          }}>
+            <View style={styles.container}>
+              <IconComponent category={item.category} />
+              <View style={styles.secondColumn}>
+                <View style={styles.textBox}>
+                  <Text style={styles.title}>{item.title}</Text>
+                </View>
+                <View style={styles.textBox}>
+                  <Text style={styles.description}>{item.shortDescription}</Text>
+                </View>
+              </View>
             </View>
           </TouchableOpacity>
         )}
-        contentContainerStyle={{
-          justifyContent: 'center',
-          alignItems: 'flex-start',
-          marginTop: 50,
-        }}
       />
       <Modal
         isVisible={isModalVisible}
@@ -70,25 +92,58 @@ const News = () => {
           <Text>{modalInfo.longDescription}</Text>
         </View>
       </Modal>
-    </View>
+    </Provider>
   );
 };
 
-const styles = StyleSheet.create({
-  headerContainer: {
-    height: 85,
-    width: 311,
-    backgroundColor: 'yellow',
-    borderBottomRightRadius: 53.5,
-    justifyContent: 'center',
-    alignItems: 'flex-start',
-  },
-  headerText: {
-    marginLeft: 35,
-    fontWeight: 'bold',
-    fontSize: 30,
-  },
 
+
+const styles = StyleSheet.create({
+  container: {
+
+    backgroundColor: 'white',
+    flexDirection: 'row',
+    height: 100,
+    paddingBottom: 12,
+    borderRadius: 15,
+    marginBottom: 12,
+    shadowColor: '#000',
+    shadowOffset: { width: 2, height: 2 },
+    shadowOpacity: 2,
+    shadowRadius: 1,
+    elevation: 3,
+  },
+  banner: {
+    borderBottomLeftRadius: 15,
+    borderTopLeftRadius: 15,
+    height: 100,
+    width: 50,
+  },
+  flatlist__container: {
+    paddingHorizontal: 25,
+  },
+  secondColumn: {
+    justifyContent: 'center',
+
+    marginTop: 10,
+    paddingRight: 4,
+    marginLeft: '8%',
+    width: '75%',
+    height: '90%',
+  },
+  progress__container: {
+    alignSelf: 'flex-end',
+    justifyContent: 'flex-end',
+  },
+  textBox: {
+  },
+  title: {
+    fontSize: 17,
+    fontWeight: 'bold',
+  },
+  description: {
+    fontSize: 12,
+  },
   newsContainer: {
     height: 55,
     width: 250,
@@ -122,5 +177,24 @@ const styles = StyleSheet.create({
     shadowRadius: 4,
     elevation: 5,
   },
+  header__container: {
+    flexDirection: 'row',
+    backgroundColor: 'white',
+    marginRight: 25,
+    marginLeft: 25,
+    marginBottom: 15,
+    borderBottomRightRadius: 30,
+    borderBottomLeftRadius: 30,
+    height: 70,
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingBottom: 5,
+  },
+  header__text: {
+    alignSelf: 'center',
+    marginLeft: 10,
+    fontSize: 25,
+    fontWeight: 'bold',
+  }
 });
 export default News;
