@@ -11,7 +11,8 @@ import {
 import { TextInput, Button, Title } from 'react-native-paper';
 import CameraComponent from '../components/ReportProblem/CameraComponent';
 import ListAccordion from '../components/ProposeSolution/ListAccordion';
-import HorizontalBanner from '../components/HorizontalBannerComponent';
+import HorizontalBannerComponent from '../components/HorizontalBannerComponent';
+import { FontAwesome5 } from '@expo/vector-icons';
 
 
 export default function ProposeSolution(): JSX.Element {
@@ -32,51 +33,59 @@ export default function ProposeSolution(): JSX.Element {
   }
 
   return (
-    <ScrollView style={styles.container}>
-      <HorizontalBanner />
-      <View style={styles.titleContainer}>
-        <Text style={styles.text}>Give your project a name</Text>
-        <TextInput
-          label="Title"
-          value={titleText}
-          mode="outlined"
-          style={styles.titleInput}
-          onChangeText={input => setTitleText(input)}
-        />
-      </View>
-      <View style={styles.proposalContainer}>
-        <Text style={styles.text}>What is your proposal about?</Text>
-        <TextInput
-          label="Tell us a little bit about your idea..."
-          multiline
-          numberOfLines={10}
-          value={descriptionText}
-          mode="outlined"
-          style={styles.proposalInput}
-          onChangeText={input => setDescriptionText(input)}
+    <View style={styles.container}>
+      <HorizontalBannerComponent />
 
-        />
+      <View style={styles.header__container}>
+        <FontAwesome5 name="lightbulb" size={35} color="#3A4276" />
+        <Text style={styles.header__text}>Propose a solution</Text>
       </View>
 
-      <ListAccordion
-        setCategoryTitle={setCategoryTitle}
-        categoryTitle={categoryTitle}
-      />
-      <CameraComponent
-        imageUri={imageUri}
-        setImageUri={setImageUri}
-        headerText="Your picture"
-        needImage={true}
-      />
-      <Button
-        icon="email-send"
-        mode="contained"
-        style={styles.button}
-        onPress={handleButtonClick}
-      >
-        Submit
+      <ScrollView >
+        <View style={styles.titleContainer}>
+          <Text style={styles.text}>Give your project a name</Text>
+          <TextInput
+            label="Title"
+            value={titleText}
+            mode="outlined"
+            style={styles.titleInput}
+            onChangeText={input => setTitleText(input)}
+          />
+        </View>
+        <View style={styles.proposalContainer}>
+          <Text style={styles.text}>What is your proposal about?</Text>
+          <TextInput
+            label="Tell us a little bit about your idea..."
+            multiline
+            numberOfLines={10}
+            value={descriptionText}
+            mode="outlined"
+            style={styles.proposalInput}
+            onChangeText={input => setDescriptionText(input)}
+
+          />
+        </View>
+
+        <ListAccordion
+          setCategoryTitle={setCategoryTitle}
+          categoryTitle={categoryTitle}
+        />
+        <CameraComponent
+          imageUri={imageUri}
+          setImageUri={setImageUri}
+          headerText="Your picture"
+          needImage={true}
+        />
+        <Button
+          icon="email-send"
+          mode="contained"
+          style={styles.button}
+          onPress={handleButtonClick}
+        >
+          Submit
       </Button>
-    </ScrollView>
+      </ScrollView>
+    </View>
   );
 }
 const { height } = Dimensions.get('window');
@@ -86,14 +95,24 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#E5E5E5',
   },
-  headerContainer: {
-    height: 85,
-    width: 311,
-    backgroundColor: 'yellow',
-    borderBottomRightRadius: 53.5,
+  header__container: {
+    flexDirection: 'row',
+    backgroundColor: 'white',
+    marginRight: 25,
+    marginLeft: 25,
+    marginBottom: 15,
+    borderBottomRightRadius: 30,
+    borderBottomLeftRadius: 30,
+    height: 70,
     justifyContent: 'center',
-    alignItems: 'flex-start',
-    alignSelf: 'flex-start',
+    alignItems: 'center',
+    paddingBottom: 5,
+  },
+  header__text: {
+    alignSelf: 'center',
+    marginLeft: 10,
+    fontSize: 25,
+    fontWeight: 'bold',
   },
   headerText: {
     marginLeft: 35,
