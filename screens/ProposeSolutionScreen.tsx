@@ -24,13 +24,8 @@ export default function ProposeSolution(): JSX.Element {
     if (categoryTitle === 'Choose a category') {
       Alert.alert('Please choose a location');
     }
-<<<<<<< HEAD
-    //console.log('clicked!');
-    // dispatch(addNewReport());
-=======
     console.log('clicked!');
 
->>>>>>> 9d02b6c2ba252aa0e47f779f9d1ae0d93362cf13
     setTitleText('');
     setDescriptionText('');
   }

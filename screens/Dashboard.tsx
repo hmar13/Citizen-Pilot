@@ -14,6 +14,8 @@ import { RootState } from '../store/reducer';
 import CustomButton from '../components/CustomButton';
 import HorizontalBanner from '../components/HorizontalBannerComponent';
 import newsInterface from '../interfaces/newsInterface';
+import BottomNavigationBar from '../navigation/bottomNavBar';
+import BottomTabs from '../navigation/navBarBare';
 
 const modalInitalState = {
   id: '1',
@@ -73,7 +75,6 @@ export default function Dashboard({ navigation }) {
           <Text>{modalInfo.longDescription}</Text>
         </View>
       </Modal>
-      {/* Add navigation to the bottom of the screen */}
     </View>
   );
 };

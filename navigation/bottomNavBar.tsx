@@ -6,7 +6,7 @@ import Favourites from '../screens/Favourites';
 import News from '../screens/News';
 
 
-const dashNavRoute = () => <Dashboard />
+const dashNavRoute = () => <Dashboard/>
 const newsRoute = () => <News/>
 const favouritesRoute = () => <Favourites/>
 const contactsRoute = () => <Contacts/>
