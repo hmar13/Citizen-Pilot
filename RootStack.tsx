@@ -1,4 +1,3 @@
-import 'react-native-gesture-handler';
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import WelcomeScreen from './screens/WelcomeScreen';
@@ -12,8 +11,7 @@ import ProposeSolution from './screens/ProposeSolutionScreen';
 import ReportProblem from './screens/ReportProblemScreen';
 import News from './screens/News';
 import CurrentProposals from './screens/CurrentProposals';
-import { NavigationContainer } from '@react-navigation/native';
-import BottomTabs from './navigation/navBarBare';
+
 
 const RootStack = createStackNavigator();
 
