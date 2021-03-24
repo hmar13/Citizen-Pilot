@@ -4,9 +4,10 @@ import {
   TouchableOpacity,
   View,
   Text,
-  Button,
   Image,
+  ScrollView,
 } from 'react-native';
+import { Button, Avatar } from 'react-native-paper';
 import Modal from 'react-native-modal';
 import { AnimatedCircularProgress } from 'react-native-circular-progress';
 
@@ -67,17 +68,32 @@ const ProjectItems: React.FC<ProjectItemsInterface> = ({
           </View>
         </View>
       </TouchableOpacity>
+
+
       <Modal isVisible={isModalVisible}>
-        <View style={styles.modal__container}>
+        <ScrollView style={styles.modal__container}>
           <View style={styles.modal__information__container}>
-            <Text>{title}</Text>
-            <Image style={styles.image} source={{ uri: img }} />
-            <Text>Information: {description}</Text>
-            <Text>Location: {location}</Text>
-            <Text>Progress: </Text>
+            <Avatar.Image size={120} source={{ uri: img }} />
+            <Text style={styles.modal__title}>{title}</Text>
           </View>
-          <Button title="Hide" onPress={toggleModal} />
-        </View>
+
+          <View style={styles.modal__textcontainer}>
+            <Text style={styles.modal__headers}>Where is the project located? </Text>
+            <Text>{location}</Text>
+          </View>
+
+          <View style={styles.modal__textcontainer}>
+            <Text style={styles.modal__headers}>What is being implemented? </Text>
+            <Text>{description}</Text>
+          </View>
+
+          <View style={styles.modal__textcontainer}>
+            <Text style={styles.modal__headers}>For more information, visit: </Text>
+            <Text>www.somelink.com</Text>
+          </View>
+
+          <Button style={{ alignSelf: 'flex-end', marginTop: '40%' }} onPress={toggleModal}>close</Button>
+        </ScrollView>
       </Modal>
     </View>
   );
@@ -130,8 +146,6 @@ const styles = StyleSheet.create({
     marginTop: 5,
   },
   modal__container: {
-    flex: 1,
-    justifyContent: 'space-between',
     backgroundColor: 'white',
     paddingHorizontal: 20,
     borderRadius: 15,
@@ -141,6 +155,27 @@ const styles = StyleSheet.create({
     width: 200,
   },
   modal__information__container: {
+    paddingTop: 20,
+    flexDirection: 'row',
     alignItems: 'center',
+    justifyContent: 'space-evenly',
+    marginBottom: 10,
+    flexWrap: 'wrap',
+  },
+  modal__title: {
+    fontWeight: 'bold',
+    fontSize: 20,
+  },
+  modal__textcontainer: {
+    marginTop: 30,
+  },
+  modal__headers: {
+    fontWeight: 'bold',
+    fontSize: 16,
+    marginBottom: 5,
+  },
+  modal__vote: {
+    marginTop: '20%',
+    alignItems: 'center'
   },
 });
