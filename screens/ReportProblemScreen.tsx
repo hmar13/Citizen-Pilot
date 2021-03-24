@@ -14,12 +14,14 @@ import UrgentButton from '../components/ReportProblem/UrgentButtonComponent';
 import ListAccordion from '../components/ReportProblem/ListAccordion';
 import MapPinDrop from '../components/MapComponent/MapViewComponent';
 import HorizontalBanner from '../components/HorizontalBannerComponent';
+import MessageReceivedModal from './MessageReceivedModal';
 import { Foundation } from '@expo/vector-icons';
 
 
 // import addNewReport from '../store/actions/report';
 
-export default function ReportProblem(): JSX.Element {
+export default function ReportProblem({ navigation }): JSX.Element {
+  const [isModalVisible, setModalVisible] = useState(false);
   const [text, setText] = useState('');
   const [categoryTitle, setCategoryTitle] = useState('Choose a category');
   const [imageUri, setImageUri] = useState('');
@@ -36,13 +38,15 @@ export default function ReportProblem(): JSX.Element {
 
   // handles API call to save new problem to database
   function handleButtonClick() {
-    if (categoryTitle === 'Choose a category') {
-      Alert.alert('Please add a category');
-    }
-
-    console.log(latitude, longitude);
+    // if (categoryTitle === 'Choose a category') {
+    //   return Alert.alert('Please add a category');
+    // }
     // dispatch(addNewReport());
-    setText('');
+    setModalVisible(true);
+    // setTimeout(() => {
+    //   setModalVisible(false);
+    //   navigation.navigate('Dashboard');
+    // }, 2000);
   }
 
   return (
@@ -96,6 +100,7 @@ export default function ReportProblem(): JSX.Element {
         </View>
 
         <View style={styles.bottom}>
+          <MessageReceivedModal isModalVisible={isModalVisible} setModalVisible={setModalVisible} />
           <Button
             icon="email-send"
             mode="contained"
