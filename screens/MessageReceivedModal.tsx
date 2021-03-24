@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { StyleSheet, View, Text, ScrollView } from 'react-native';
+import React from 'react';
+import { StyleSheet, View, Text } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import Modal from 'react-native-modal';
 
@@ -17,6 +17,7 @@ export default function MessageReceivedModal({ isModalVisible, setModalVisible }
     }} >
       <View style={styles.headerContainer}>
         <Text style={styles.headerText}>Thanks</Text>
+        {/* Đorđe's awesome animation  goes here */}
         <Ionicons name="checkmark-circle" size={100} color="black" />
       </View>
       <View style={styles.messageContainer}>
