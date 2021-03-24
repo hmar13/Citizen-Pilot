@@ -3,7 +3,6 @@ import React, { useState, useEffect } from 'react';
 import {
   View,
   StyleSheet,
-  Image,
   Dimensions,
   Alert,
   Text,
@@ -15,6 +14,9 @@ import UrgentButton from '../components/ReportProblem/UrgentButtonComponent';
 import ListAccordion from '../components/ReportProblem/ListAccordion';
 import MapPinDrop from '../components/MapComponent/MapViewComponent';
 import HorizontalBanner from '../components/HorizontalBannerComponent';
+import { Foundation } from '@expo/vector-icons';
+
+
 // import addNewReport from '../store/actions/report';
 
 export default function ReportProblem(): JSX.Element {
@@ -46,16 +48,24 @@ export default function ReportProblem(): JSX.Element {
   return (
     <ScrollView style={styles.container}>
       <HorizontalBanner />
+      <View style={styles.header__container}>
+        <Foundation name="alert" size={35} color="#3A4276" />
+        <Text style={styles.header__text}>Report a problem</Text>
+      </View>
+
       <ListAccordion
         setCategoryTitle={setCategoryTitle}
         categoryTitle={categoryTitle}
       />
+
       <View>
         <CameraComponent
           imageUri={imageUri}
           setImageUri={setImageUri}
           headerText="Then take a picture"
+          needImage={false}
         />
+
         <View style={styles.descriptionBox}>
           <Text style={styles.text}>Write a brief description</Text>
           <TextInput
@@ -68,10 +78,12 @@ export default function ReportProblem(): JSX.Element {
           />
         </View>
       </View>
+
       <View style={styles.urgent}>
         <Text style={styles.text}>How urgent is your problem?</Text>
         <UrgentButton setUrgency={setUrgency} />
       </View>
+
       <View style={styles.map}>
         <Text style={styles.mapText}>Drag the pin to where the problem is</Text>
         <MapPinDrop
@@ -81,6 +93,7 @@ export default function ReportProblem(): JSX.Element {
           setLongitude={setLongitude}
         />
       </View>
+
       <View style={styles.bottom}>
         <Button
           icon="email-send"
@@ -95,12 +108,30 @@ export default function ReportProblem(): JSX.Element {
   );
 }
 
-const { height } = Dimensions.get('window');
 const { width } = Dimensions.get('window');
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#E5E5E5',
+  },
+  header__container: {
+    flexDirection: 'row',
+    backgroundColor: 'white',
+    marginRight: 25,
+    marginLeft: 25,
+    marginBottom: 15,
+    borderBottomRightRadius: 30,
+    borderBottomLeftRadius: 30,
+    height: 70,
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingBottom: 5,
+  },
+  header__text: {
+    alignSelf: 'center',
+    marginLeft: 10,
+    fontSize: 25,
+    fontWeight: 'bold',
   },
   button: {
     justifyContent: 'center',
@@ -110,13 +141,12 @@ const styles = StyleSheet.create({
     borderRadius: 15,
   },
   bottom: {
-    marginTop: '5%',
-    marginBottom: 20,
-    paddingBottom: 100,
+    marginTop: '7%',
+    paddingBottom: 50,
   },
   descriptionBox: {
     backgroundColor: 'white',
-    height: height / 6,
+    height: 138,
     width: width - 30,
     alignSelf: 'center',
     borderRadius: 10,
@@ -124,7 +154,7 @@ const styles = StyleSheet.create({
   urgent: {
     marginTop: 7,
     backgroundColor: 'white',
-    height: height / 9,
+    height: 90,
     width: width - 30,
     alignSelf: 'center',
     borderRadius: 10,

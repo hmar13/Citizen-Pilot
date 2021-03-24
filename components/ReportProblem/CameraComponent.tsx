@@ -125,7 +125,7 @@ const styles = StyleSheet.create({
   button: {
     marginTop: 20,
     justifyContent: 'center',
-    height: 60,
+    height: 50,
     borderRadius: 15,
     alignSelf: 'center',
   },
@@ -150,7 +150,7 @@ const styles = StyleSheet.create({
     marginBottom: -10,
   },
   noPicture: {
-    height: 120,
+    height: 112,
   },
   PictureView: {
     height: 315,
