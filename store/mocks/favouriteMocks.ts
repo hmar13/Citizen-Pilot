@@ -21,7 +21,7 @@ const favourites: favouriteInterface[] = [
     location: 'less places',
     img:
       'https://images.unsplash.com/photo-1607317485651-da69ca25ea72?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=668&q=80',
-    votes: 12421552,
+    votes: 12,
   },
   {
     id: '3',
