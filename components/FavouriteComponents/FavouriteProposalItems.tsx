@@ -12,6 +12,7 @@ import { FontAwesome5 } from '@expo/vector-icons';
 import { MaterialIcons } from '@expo/vector-icons';
 import { Button, Divider, Card, Title, Paragraph } from 'react-native-paper';
 
+
 interface FavouriteProposalItemsInterface {
   title: string;
   description: string;

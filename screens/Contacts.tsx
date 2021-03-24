@@ -5,9 +5,8 @@ import { Text, View, FlatList, StyleSheet } from 'react-native';
 import { useSelector } from 'react-redux';
 import { RootState } from '../store/reducer';
 import ContactItems from '../components/ContactComponents/ContactItems';
-import HorizontalBanner from '../components/HorizontalBannerComponent';
-import { MaterialIcons } from '@expo/vector-icons';
-
+import { BottomTabBar } from '@react-navigation/bottom-tabs';
+import BottomTabs from '../navigation/navBarBare';
 
 const Contacts = () => {
   const allContacts = useSelector((state: RootState) => {
