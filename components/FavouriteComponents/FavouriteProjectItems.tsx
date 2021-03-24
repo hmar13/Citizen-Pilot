@@ -7,7 +7,7 @@ import {
   Button,
   Image,
 } from 'react-native';
-import { Card, Title, Paragraph } from 'react-native-paper';
+// import { Card, Title, Paragraph } from 'react-native-paper';
 import Modal from 'react-native-modal';
 
 interface FavouriteProjectItemsInterface {
@@ -29,13 +29,12 @@ const FavouriteProjectItems: React.FC<FavouriteProjectItemsInterface> = ({
   };
   return (
     <View>
-      <TouchableOpacity onPress={toggleModal}>
-        <Card style={styles.container}>
-          <Card.Content>
-            <Title style={styles.title}>{title}</Title>
-            <Paragraph style={styles.location}>Location: {location}</Paragraph>
-          </Card.Content>
-        </Card>
+      <TouchableOpacity onPress={toggleModal} style={styles.container}>
+        <Image source={{ uri: img }} style={styles.image} />
+        <View style={styles.textContainer}>
+          <Text style={styles.title}>{title}</Text>
+          <Text style={styles.location}>{location} location</Text>
+        </View>
       </TouchableOpacity>
       <Modal isVisible={isModalVisible}>
         <View style={styles.modal__container}>
@@ -56,16 +55,41 @@ export default FavouriteProjectItems;
 
 const styles = StyleSheet.create({
   container: {
-    paddingHorizontal: 15,
+    height: 120,
+    width: 350,
+    borderRadius: 12,
     backgroundColor: 'white',
-    borderRadius: 15,
-    marginBottom: 15,
+    marginTop: 10,
+    alignSelf: 'center',
+    flexDirection: 'row',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 3,
+
+  },
+  image: {
+    height: 120,
+    width: 105,
+    borderRadius: 12,
+  },
+  textContainer: {
+    width: 250,
+    justifyContent: 'space-evenly',
   },
   title: {
-    textAlign: 'left',
+    fontSize: 18,
+    fontWeight: 'bold',
+    alignSelf: 'center',
+    paddingLeft: 6,
   },
   location: {
-    textAlign: 'left',
+    paddingLeft: 6,
+    fontStyle: 'italic',
   },
   progress: {
     textAlign: 'right',
@@ -76,10 +100,6 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     paddingHorizontal: 20,
     borderRadius: 15,
-  },
-  image: {
-    height: 200,
-    width: 200,
   },
   modal__information__container: {
     alignItems: 'center',

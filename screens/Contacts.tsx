@@ -43,7 +43,7 @@ export default Contacts;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#90E0EF',
+    backgroundColor: '#E5E5E5',
   },
   header__container: {
     flexDirection: 'row',

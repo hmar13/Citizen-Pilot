@@ -40,7 +40,6 @@ export default function Dashboard({ navigation }) {
       <View style={{ justifyContent: 'center' }}>
         <Text style={styles.newsCaption}>Latest News</Text>
         <FlatList
-          style={{ marginRight: 20 }}
           decelerationRate="fast"
           snapToInterval={350}
           showsHorizontalScrollIndicator={false}
@@ -50,12 +49,13 @@ export default function Dashboard({ navigation }) {
           renderItem={({ item }) =>
 
             <TouchableOpacity
+              style={styles.imageContainer}
               onPress={() => {
                 setModalInfo(item);
                 setModalVisible(true);
               }}
             >
-              <View key={item.id} style={{ position: 'relative' }}>
+              <View key={item.id} >
                 <Image style={styles.picture} source={{ uri: item.img }} />
                 <View style={styles.textConteiner}>
                   <Text style={styles.newsText}>{item.shortDescription}</Text>
@@ -95,9 +95,23 @@ export default function Dashboard({ navigation }) {
 const styles = StyleSheet.create({
   picture: {
     height: 200,
-    width: 320,
+    width: 325,
     marginLeft: 30,
     borderRadius: 20,
+  },
+  imageContainer: {
+    marginLeft: 5,
+  },
+  textConteiner: {
+    position: 'absolute',
+    top: 140,
+    left: 30,
+    width: 325,
+    height: '30%',
+    backgroundColor: 'grey',
+    opacity: 0.9,
+    borderBottomLeftRadius: 20,
+    borderBottomRightRadius: 20,
   },
   button: {
     justifyContent: 'center',
@@ -110,17 +124,6 @@ const styles = StyleSheet.create({
   cardCover: {
     borderRadius: 12,
     height: 220,
-  },
-  textConteiner: {
-    position: 'absolute',
-    top: 140,
-    left: 30,
-    width: 320,
-    height: '30%',
-    backgroundColor: 'grey',
-    opacity: 0.9,
-    borderBottomLeftRadius: 20,
-    borderBottomRightRadius: 20,
   },
   newsText: {
     fontSize: 16,

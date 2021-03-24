@@ -105,6 +105,7 @@ const News = () => {
           </Button>
         </View>
       </Modal>
+
     </Provider>
   );
 };
