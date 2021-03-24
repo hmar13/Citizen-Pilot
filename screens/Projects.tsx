@@ -6,6 +6,9 @@ import { RootState } from '../store/reducer';
 import ProjectItems from '../components/ProjectComponents/ProjectItems';
 import HorizontalBannerComponent from '../components/HorizontalBannerComponent';
 import { FontAwesome5 } from '@expo/vector-icons';
+import { NavigationContainer } from '@react-navigation/native';
+import BottomNavigationBar from '../navigation/bottomNavBar'
+import BottomTabs from '../navigation/navBarBare';
 
 
 const Projects = () => {
@@ -34,7 +37,9 @@ const Projects = () => {
           />
         )}
       />
-      <Text style={styles.footer__container}>Navigation Goes Here</Text>
+    
+        
+     
     </View>
   );
 };

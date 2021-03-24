@@ -10,6 +10,7 @@ import {
 import { Card, Title, Paragraph } from 'react-native-paper';
 import Modal from 'react-native-modal';
 
+
 interface FavouriteProposalItemsInterface {
   title: string;
   description: string;
