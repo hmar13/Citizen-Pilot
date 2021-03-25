@@ -17,7 +17,7 @@ const news: newsInterface[] = [
   {
     id: '2',
     title: 'Road block',
-    category: 'Road closures',
+    category: 'Road-closures',
     shortDescription: 'Road works for the upcoming 5 days',
     longDescription:
       'Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet',
@@ -29,10 +29,10 @@ const news: newsInterface[] = [
   {
     id: '3',
     title: 'Storm warning',
-    category: 'Weather warnings',
+    category: 'Weather-warnings',
     shortDescription: 'Storm coming. Please evacuate',
     longDescription:
-      'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.',
+      'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi',
     location: 'The whole town',
     date: '1st of April',
     img:
@@ -41,7 +41,7 @@ const news: newsInterface[] = [
   {
     id: '4',
     title: 'South bound trains delayed',
-    category: 'Transport delays',
+    category: 'Transport-delays',
     shortDescription: 'Train service interrupted',
     longDescription:
       'Due to leaves on the line the train service will be interrupted for the next 2 hours',

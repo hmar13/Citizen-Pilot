@@ -4,18 +4,20 @@ import {
   TouchableOpacity,
   View,
   Text,
-  Button,
   Image,
 } from 'react-native';
-import { Card, Title, Paragraph } from 'react-native-paper';
 import Modal from 'react-native-modal';
+import { Ionicons } from '@expo/vector-icons';
+import { FontAwesome5 } from '@expo/vector-icons';
+import { MaterialIcons } from '@expo/vector-icons';
+import { Button, Divider, Card, Title, Paragraph } from 'react-native-paper';
 
 
 interface FavouriteProposalItemsInterface {
   title: string;
   description: string;
   location: string;
-  vote: number;
+  vote?: number;
   img: string;
 }
 
@@ -32,25 +34,55 @@ const FavouriteProposalItems: React.FC<FavouriteProposalItemsInterface> = ({
   };
   return (
     <View>
-      <TouchableOpacity onPress={toggleModal}>
-        <Card style={styles.container}>
-          <Card.Content>
-            <Title style={styles.title}>{title}</Title>
-            <Paragraph style={styles.location}>Location: {location}</Paragraph>
-            <Paragraph style={styles.vote}>Votes: {vote}</Paragraph>
-          </Card.Content>
-        </Card>
+      <TouchableOpacity onPress={toggleModal} style={styles.container}>
+        <Image source={{ uri: img }} style={styles.image} />
+        <View style={styles.textContainer}>
+          <Text style={styles.title}>{title}</Text>
+          <Text style={styles.location}>Location: {location}</Text>
+          {
+            vote !== undefined ?
+              <View style={styles.voteContainer}>
+                <Ionicons name="ios-thumbs-up-sharp" size={15} color="#3A4276" />
+                <Text style={styles.vote}>{vote}</Text>
+
+              </View> :
+              <View style={styles.voteContainer}>
+                <FontAwesome5 name="hammer" size={20} color="#3A4276" />
+                <Text style={[styles.vote, { fontSize: 12 }]}>In progress</Text>
+              </View>
+          }
+        </View>
       </TouchableOpacity>
-      <Modal isVisible={isModalVisible}>
-        <View style={styles.modal__container}>
-          <View style={styles.modal__information__container}>
-            <Text>{title}</Text>
-            <Image style={styles.image} source={{ uri: img }} />
-            <Text>Information: {description}</Text>
-            <Text>Location: {location}</Text>
-            <Text>Votes: {vote}</Text>
-          </View>
-          <Button title="Hide" onPress={toggleModal} />
+
+      {/* TODO: modal should go into a new folder */}
+      <Modal
+        isVisible={isModalVisible}
+        onBackdropPress={() => {
+          setModalVisible(false);
+        }}
+      >
+        <View style={styles.modalView}>
+          <Card style={{ width: '110%', height: 490 }}>
+            <Card.Content>
+              <Card.Cover style={styles.cardCover} source={{ uri: img }} />
+              <Title style={{ marginTop: 7 }}>{title}</Title>
+              {
+                vote !== undefined ?
+                  <View style={[styles.voteContainer, { marginBottom: 10 }]}>
+                    <MaterialIcons name="favorite" size={15} color="#ad0f5c" />
+                    <Text style={styles.vote}>{vote}</Text>
+                  </View> :
+                  <View style={styles.voteContainer}>
+                    <Text style={[styles.vote, { fontSize: 12, marginBottom: 10 }]}>In progress</Text>
+                  </View>
+              }
+              <Divider />
+              <Paragraph style={{ marginTop: 10 }}>{description}</Paragraph>
+            </Card.Content>
+            <Card.Actions>
+              <Button style={styles.button} >More</Button>
+            </Card.Actions>
+          </Card>
         </View>
       </Modal>
     </View>
@@ -61,32 +93,74 @@ export default FavouriteProposalItems;
 
 const styles = StyleSheet.create({
   container: {
-    paddingHorizontal: 15,
+    height: 120,
+    width: 350,
+    borderRadius: 13,
     backgroundColor: 'white',
-    borderRadius: 15,
-    marginBottom: 15,
-  },
-  title: {
-    textAlign: 'left',
-  },
-  location: {
-    textAlign: 'left',
-  },
-  vote: {
-    textAlign: 'right',
-  },
-  modal__container: {
-    flex: 1,
-    justifyContent: 'space-between',
-    backgroundColor: 'white',
-    paddingHorizontal: 20,
-    borderRadius: 15,
+    marginTop: 10,
+    alignSelf: 'center',
+    flexDirection: 'row',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 3,
   },
   image: {
-    height: 200,
-    width: 200,
+    height: 120,
+    width: 105,
+    borderRadius: 13,
   },
-  modal__information__container: {
+  voteContainer: {
+    alignSelf: 'flex-end',
     alignItems: 'center',
+    flexDirection: 'row',
+    marginRight: 20
+  },
+  vote: {
+    fontWeight: 'bold',
+    paddingLeft: 8,
+  },
+  title: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    paddingLeft: 6,
+  },
+  location: {
+    paddingLeft: 6,
+    fontStyle: 'italic',
+  },
+  textContainer: {
+    width: 250,
+    justifyContent: 'space-evenly',
+  },
+  modalView: {
+    overflow: 'scroll',
+    height: 600,
+    width: 350,
+    margin: 20,
+    backgroundColor: '#F0F5F9',
+    borderRadius: 20,
+    padding: 30,
+    alignSelf: 'center',
+    alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
+  },
+  cardCover: {
+    borderRadius: 12,
+    height: 220,
+  },
+  button: {
+    marginTop: 15,
   },
 });
