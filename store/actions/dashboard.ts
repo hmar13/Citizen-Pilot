@@ -1,5 +1,4 @@
 import {
-  SAVE_FAVOURITES,
   SAVE_NEWS,
   SAVE_CONTACTS,
   SAVE_PROJECTS,
@@ -11,14 +10,6 @@ import {
 // import { getUserFavourites } from '../services/Apiclient';
 
 
-// export function fetchFavourites (userID: number) {
-//   return function (dispatch) {
-//     getUserFavourites(userID)
-//       .then((favourites: []) => {
-//         dispatch(setFavourites(favourites));
-//       })
-//   };
-// }
 
 // export function fetchNews () {
 //   return function (dispatch) {
@@ -57,13 +48,6 @@ import {
 // }
 
 
-
-
-export const setFavourites = (favourites: []) => ({
-  type: SAVE_FAVOURITES,
-  payload: favourites,
-
-});
 
 export const setNews = (news: []) => ({
   type: SAVE_NEWS,

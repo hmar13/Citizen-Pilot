@@ -11,7 +11,6 @@ import {
 import Modal from 'react-native-modal';
 import { useSelector, useDispatch } from 'react-redux';
 // import {
-//   fetchFavourites,
 //   fetchNews,
 //   fetchContacts,
 //   fetchProjects,
@@ -53,13 +52,10 @@ export default function Dashboard({ navigation }): JSX.Element {
   //   return state.user.id;
   // });
 
-  // To get favourites, news, contacts, projects
+  // To get news, contacts, projects, proposals
   // NOTE: This doesn't feel right. Can I make this shorter?
 
   // useEffect(() => {
-  //   const data = fetchData(userID);
-  // do i have to await dispatch?
-  //   dispatch(data);
   //   const news = fetchNews();
   //   dispatch(news);
   //   const contacts = fetchContacts();

@@ -28,14 +28,16 @@ export default function Login({ navigation }): JSX.Element {
     // redux/fetch logic
     // const action = fetchUser(email, password);
     // dispatch(action)
-    // if dispatch was a success
+
+    // if (dispatch was a success) {
     // setPassword('');
     // setEmail('');
     // return navigation.navigate('Dashboard');
-    // else
+    // } else {
     // setPassword('');
     // setEmail('');
     // return Alert.alert('Something went wrong. Please try again');
+    // }
   };
 
   return (
