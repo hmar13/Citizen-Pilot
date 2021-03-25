@@ -1,15 +1,21 @@
 
+
 // Login
-// export const fetchUserData = (email: string, password: string) =>
-//   fetch(`${baseUrl}/`)
+// export const fetchUserData = (username: string, password: string) =>
+//   fetch(`${baseUrl}/auth/login`, {
+//     method: 'POST',
+//     headers: { 'Content-Type': 'application/json' },
+//     body: JSON.stringify({ username, password })
+//   })
 //     .then(res => res.status <= 400 ? res : Promise.reject())
 //     .then(res => res.status === 204 ? res : res.json())
-//     .catch(err => console.log('error is:', err));
+//     .catch(err => console.log(err));
+
 
 
 // Register
 // export const postNewUser = (firstName: string, lastName: string, email: string, password: string) =>
-//   fetch(`${baseUrl}/`, {
+//   fetch(`${baseUrl}/auth/signup`, {
 //     method: 'POST',
 //     headers: { 'Content-Type': 'application/json' },
 //     body: JSON.stringify({ firstName, lastName, email })

@@ -29,6 +29,7 @@ export default function Login({ navigation }): JSX.Element {
     // const action = fetchUser(email, password);
     // dispatch(action)
 
+
     // if (dispatch was a success) {
     // setPassword('');
     // setEmail('');
