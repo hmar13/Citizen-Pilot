@@ -3,7 +3,6 @@ import user from './reducers/user';
 import cityContacts from './reducers/contacts';
 import cityProjects from './reducers/projects';
 import myFavourites from './reducers/favourites';
-import reportProblem from './reducers/report';
 import newsData from './reducers/news';
 import Proposals from './reducers/currentProposal'
 // Combining both reducers
@@ -13,7 +12,7 @@ export const reducers = combineReducers({
   newsData,
   cityContacts,
   cityProjects,
-  reportProblem,
+
   Proposals
 });
 
