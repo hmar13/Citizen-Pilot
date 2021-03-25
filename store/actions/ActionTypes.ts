@@ -1,15 +1,7 @@
 /* eslint-disable import/prefer-default-export */
-//import { useDispatch } from "react-redux";
 
-//const dispatch = useDispatch()
-
-
-// function increment() {
-    // dispatch({
-        // type: "Increment"
-    // });
-//};
-
-
-
+// user
 export const SAVE_REPORT = 'SAVE_REPORT';
+export const USER_LOGIN = 'USER_LOGIN';
+export const USER_REGISTER = 'USER_REGISTER';
+
