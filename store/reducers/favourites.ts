@@ -2,6 +2,8 @@
 
 import { PayloadAction } from '@reduxjs/toolkit';
 import favourites from '../mocks/favouriteMocks';
+import { SAVE_FAVOURITES } from '../actions/ActionTypes';
+
 
 const initialState = {
   favourites,
@@ -9,7 +11,7 @@ const initialState = {
 
 const myFavourites = (state = initialState, action: PayloadAction<string>) => {
   switch (action.type) {
-    case 'favourites':
+    case SAVE_FAVOURITES:
       return state;
     default:
       return state;
