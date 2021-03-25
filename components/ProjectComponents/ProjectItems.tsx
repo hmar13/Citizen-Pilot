@@ -91,7 +91,6 @@ const ProjectItems: React.FC<ProjectItemsInterface> = ({
             <Text style={styles.modalHeaders}>For more information, visit: </Text>
             <Text>www.somelink.com</Text>
           </View>
-
           <Button style={{ alignSelf: 'flex-end', marginTop: '40%' }} onPress={toggleModal}>close</Button>
         </ScrollView>
       </Modal>

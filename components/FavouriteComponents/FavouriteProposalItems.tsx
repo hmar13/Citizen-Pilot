@@ -79,10 +79,8 @@ const FavouriteProposalItems: React.FC<FavouriteProposalItemsInterface> = ({
               <Divider />
               <Paragraph style={{ marginTop: 10 }}>{description}</Paragraph>
             </Card.Content>
-            <Card.Actions>
-              <Button style={styles.button} >More</Button>
-            </Card.Actions>
           </Card>
+          <Button style={styles.button} onPress={toggleModal}>close</Button>
         </View>
       </Modal>
     </View>
@@ -161,6 +159,9 @@ const styles = StyleSheet.create({
     height: 220,
   },
   button: {
+    marginRight: -25,
     marginTop: 15,
+    alignSelf: 'flex-end'
+
   },
 });

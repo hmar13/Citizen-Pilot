@@ -7,9 +7,10 @@ import {
   FlatList,
   Image,
   TouchableOpacity,
+  ScrollView,
 } from 'react-native';
 import Modal from 'react-native-modal';
-import { Button, Divider, Card, Title, Paragraph, IconButton, Portal, Dialog } from 'react-native-paper';
+import { Button, Divider, Card, Title, Paragraph, IconButton } from 'react-native-paper';
 import { useSelector } from 'react-redux';
 import { RootState } from '../store/reducer';
 import CustomButton from '../components/CustomButton';
@@ -85,7 +86,10 @@ export default function Dashboard({ navigation }): JSX.Element {
           }>
         </FlatList>
       </View>
+
       <CustomButton navigation={navigation} />
+
+
       <Modal
         isVisible={isModalVisible}
         onBackdropPress={() => {
