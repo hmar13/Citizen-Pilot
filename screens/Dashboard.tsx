@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   StyleSheet,
   Text,
@@ -7,11 +7,18 @@ import {
   FlatList,
   Image,
   TouchableOpacity,
-  ScrollView,
 } from 'react-native';
 import Modal from 'react-native-modal';
+import { useSelector, useDispatch } from 'react-redux';
+// import {
+//   fetchFavourites,
+//   fetchNews,
+//   fetchContacts,
+//   fetchProjects
+// }
+//   from '../store/actions/user';
+
 import { Button, Divider, Card, Title, Paragraph, IconButton } from 'react-native-paper';
-import { useSelector } from 'react-redux';
 import { RootState } from '../store/reducer';
 import CustomButton from '../components/CustomButton';
 import HorizontalBanner from '../components/HorizontalBannerComponent';
@@ -31,14 +38,38 @@ const modalInitalState = {
 };
 
 export default function Dashboard({ navigation }): JSX.Element {
+  const dispatch = useDispatch();
   const [modalInfo, setModalInfo] = useState<newsInterface>(modalInitalState);
   const [isModalVisible, setModalVisible] = useState(false);
   const [isDialogVisible, setIsDialogVisible] = useState(false);
+  // DELETE ONCE API implemented
   const allNews = useSelector((state: RootState) => {
     return state.newsData.news;
   });
 
+  // FOR API CALL
+  // const userID = useSelector((state: RootState) => {
+  //   return state.user.id;
+  // });
+
+  // To get favourites, news, contacts, projects
+  // NOTE: This doesn't feel right. Can I make this shorter?
+
+  // useEffect(() => {
+  //   const data = fetchData(userID);
+  // do i have to await dispatch?
+  //   dispatch(data);
+  //   const news = fetchNews();
+  //   dispatch(news);
+  //   const contacts = fetchContacts();
+  //   dispatch(contacts);
+  //   const projects = fetchProjects();
+  //   dispatch(projects);
+  // }, [dispatch]);
+
+
   const showDialog = () => setIsDialogVisible(true);
+
 
 
   return (

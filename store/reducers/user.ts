@@ -1,10 +1,9 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
+import { PayloadAction } from '@reduxjs/toolkit';
 import { SAVE_REPORT } from '../actions/ActionTypes';
 import { USER_LOGIN } from '../actions/ActionTypes';
-
-
-import { PayloadAction } from '@reduxjs/toolkit';
 import { userData } from '../mock';
+
 
 const initialState = {
   userData,
