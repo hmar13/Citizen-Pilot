@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import { SAVE_REPORT } from '../actions/ActionTypes';
 import { USER_LOGIN } from '../actions/ActionTypes';
-import { USER_REGISTER } from '../actions/ActionTypes';
+
 
 import { PayloadAction } from '@reduxjs/toolkit';
 import { userData } from '../mock';
@@ -16,8 +16,6 @@ const user = (state = initialState, action: PayloadAction<string>) => {
     case 'userData':
       return state;
     case USER_LOGIN:
-      return state;
-    case USER_REGISTER:
       return state;
     case SAVE_REPORT:
       return state;

@@ -25,15 +25,6 @@ export const userLogin = (user: string) => ({
   },
 });
 
-export const userRegister = (firstName: string, lastName: string, email: string, password: string) => ({
-  type: USER_REGISTER,
-  payload: {
-    firstName,
-    lastName,
-    email,
-    password
-  },
-});
 
 export const addNewReport = (savedReport: problemInterface[]) => ({
   type: SAVE_REPORT,

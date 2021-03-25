@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { View, StyleSheet, Text, TouchableOpacity, Alert } from 'react-native';
 import { useDispatch } from "react-redux";
-import { userLogin } from '../store/actions/user';
+import { fetchUserData } from '../store/actions/user';
 import ButtonComponent from '../components/WelcomeComponents/Button';
 import BannerComponent from '../components/BannerComponent';
 import LogoComponent from '../components/LogoComponent';
@@ -35,7 +35,7 @@ export default function Login({ navigation }): JSX.Element {
     // else
     // setPassword('');
     // setEmail('');
-    // return Alert.alert('Something went wrong. Please try again')
+    // return Alert.alert('Something went wrong. Please try again');
   };
 
   return (

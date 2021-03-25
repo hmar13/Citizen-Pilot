@@ -6,6 +6,8 @@ import LogoComponent from '../components/LogoComponent';
 import QRCodeModal from './QRCodeModal';
 import TextInputComponent from '../components/LoginSignupComponents/TextInputcomponent';
 import ScanPrompt from '../components/LoginSignupComponents/ScanPromptComponent';
+// import { postNewUser } from "../apiService";
+
 
 export default function Register({ navigation }): JSX.Element {
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -26,6 +28,14 @@ export default function Register({ navigation }): JSX.Element {
     navigation.navigate('Welcome');
   };
 
+  const emptyState = () => {
+    setFirstName('');
+    setLastName('');
+    setEmail('');
+    setPassword('');
+    setConfirmPassword('');
+  };
+
   const handleButtonPress = () => {
     // if (!firstName) {
     //   Alert.alert('First name is required. Please scan your QR code');
@@ -39,7 +49,19 @@ export default function Register({ navigation }): JSX.Element {
     // } else if (password !== confirmPassword) {
     //   Alert.alert('Password does not match!');
 
-    // API call to save user with first, lastname, address, email, password
+    // APICLIENTSERVICE to save new user
+    // I guess we won't need redux --> only want to save new user to db
+    // const action =  await postNewUser(firstName, lastName, email, password);
+
+
+    // if POST REQ was a success
+    // emptyState()
+    // return navigation.navigate('Login');
+    // else
+    // emptyState()
+    // Alert.alert('Something went wrong. Please try again');
+    // return navigation.navigate('Dashboard');
+
     navigation.navigate('Login');
   };
 
