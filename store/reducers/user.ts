@@ -5,6 +5,20 @@ import { USER_LOGIN } from '../actions/ActionTypes';
 import { userData } from '../mock';
 
 
+// const initialState = {
+//   user: null,
+// };
+
+// const user = (state = initialState, action: PayloadAction<string>) => {
+//   switch (action.type) {
+//     case USER_LOGIN:
+//       return { ...state, user: action.payload };
+//     default:
+//       return state;
+//   }
+// };
+
+
 const initialState = {
   userData,
 };
@@ -15,8 +29,6 @@ const user = (state = initialState, action: PayloadAction<string>) => {
     case 'userData':
       return state;
     case USER_LOGIN:
-      return state;
-    case SAVE_REPORT:
       return state;
     default:
       return state;

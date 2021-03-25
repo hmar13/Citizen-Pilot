@@ -3,7 +3,7 @@ import { StyleSheet, View, Text, ScrollView } from 'react-native';
 import { Button, Divider, Card, Title, Paragraph, Avatar, IconButton, Colors } from 'react-native-paper';
 import Modal from 'react-native-modal';
 import { useDispatch } from 'react-redux';
-import propAction from '../../store/actions/currentProposals'
+// import { addVote } from '../../store/actions/currentProposals'
 import { MaterialIcons } from '@expo/vector-icons';
 
 
@@ -24,9 +24,12 @@ const CurrentProposalCard: React.FC<CurrentPropsalTypes> = ({ id, title, descrip
   }
 
   const dispatch = useDispatch()
+
   const handleUpVote = (id: number) => {
-    console.log('dispatched?', { payload: id, type: 'Increment' })
-    dispatch(propAction(id))
+    // redux logic
+    // const action = addVote(id);
+    // dispatch(action);
+    toggleModal();
   }
 
 
@@ -79,11 +82,11 @@ const CurrentProposalCard: React.FC<CurrentPropsalTypes> = ({ id, title, descrip
               color={Colors.blue500}
               size={25}
               animated
-              onPress={() => console.log('Pressed')}
+              onPress={() => handleUpVote(id)}
             />
           </View>
 
-          {/* <Button title='add support' onPress={() => handleUpVote(id)}></Button> */}
+
           <Button style={{ alignSelf: 'flex-end' }} onPress={toggleModal}>close</Button>
         </ScrollView>
       </Modal>

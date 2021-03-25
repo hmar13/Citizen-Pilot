@@ -5,6 +5,7 @@ import contacts from '../mocks/contactMocks';
 import { SAVE_CONTACTS } from '../actions/ActionTypes';
 
 
+
 const initialState = {
   contacts,
 };
@@ -17,5 +18,21 @@ const cityContacts = (state = initialState, action: PayloadAction<string>) => {
       return state;
   }
 };
+
+
+// const initialState = {
+//   contacts: null
+// };
+
+// const cityContacts = (state = initialState, action: PayloadAction<[]>) => {
+//   switch (action.type) {
+//     case SAVE_CONTACTS:
+//       return { ...state, contacts: action.payload };
+
+//     default:
+//       return state;
+//   }
+// };
+
 
 export default cityContacts;

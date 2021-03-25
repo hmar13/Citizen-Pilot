@@ -2,12 +2,13 @@ import {
   SAVE_FAVOURITES,
   SAVE_NEWS,
   SAVE_CONTACTS,
-  SAVE_PROJECTS
+  SAVE_PROJECTS,
+  SAVE_PROPOSALS
 }
   from './ActionTypes';
 
 
-// import { getUserFavourites } from "../apiService";
+// import { getUserFavourites } from '../services/Apiclient';
 
 
 // export function fetchFavourites (userID: number) {
@@ -46,35 +47,44 @@ import {
 //   };
 // }
 
+// export function fetchProposals () {
+//   return function (dispatch) {
+//     getProposals()
+//       .then((proposals: []) => {
+//         dispatch(setProposals(proposals));
+//       })
+//   };
+// }
+
+
 
 
 export const setFavourites = (favourites: []) => ({
   type: SAVE_FAVOURITES,
-  payload: {
-    favourites
-  },
+  payload: favourites,
+
 });
 
 export const setNews = (news: []) => ({
   type: SAVE_NEWS,
-  payload: {
-    news
-  },
+  payload: news,
 });
 
 
 export const setContacts = (contacts: []) => ({
   type: SAVE_CONTACTS,
-  payload: {
-    contacts,
-  },
+  payload: contacts
 });
 
 
 export const setProjects = (projects: []) => ({
   type: SAVE_PROJECTS,
-  payload: {
-    projects,
-  },
+  payload: projects,
+});
+
+export const setProposals = (proposals: []) => ({
+  type: SAVE_PROPOSALS,
+  payload: proposals
+
 });
 

@@ -5,6 +5,21 @@ import favourites from '../mocks/favouriteMocks';
 import { SAVE_FAVOURITES } from '../actions/ActionTypes';
 
 
+
+// const initialState = {
+//   favourites: null
+// };
+
+// const myFavourites = (state = initialState, action: PayloadAction<string>) => {
+//   switch (action.type) {
+//     case SAVE_FAVOURITES:
+//       return { ...state, favourites: action.payload };
+//     default:
+//       return state;
+//   }
+// };
+
+
 const initialState = {
   favourites,
 };

@@ -14,7 +14,8 @@ import { useSelector, useDispatch } from 'react-redux';
 //   fetchFavourites,
 //   fetchNews,
 //   fetchContacts,
-//   fetchProjects
+//   fetchProjects,
+//   fetchProposals
 // }
 //   from '../store/actions/user';
 
@@ -65,6 +66,8 @@ export default function Dashboard({ navigation }): JSX.Element {
   //   dispatch(contacts);
   //   const projects = fetchProjects();
   //   dispatch(projects);
+  //   const proposals = fetchProposals();
+  //   dispatch(proposals);
   // }, [dispatch]);
 
 

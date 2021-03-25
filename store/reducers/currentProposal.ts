@@ -1,5 +1,27 @@
 import { PayloadAction } from '@reduxjs/toolkit';
-import currentProposalMock from '../mocks/currentPropsalMocks';
+import { SAVE_PROPOSALS, UPVOTE_PROPOSAL } from '../actions/ActionTypes';
+
+// const initialState = {
+//   proposals: null,
+//   id: null,
+//   votes: null,
+// };
+
+
+// const Proposals = (state = initialState, action: PayloadAction<any>) => {
+//   switch (action.type) {
+//     case SAVE_PROPOSALS:
+//       return { ...state, proposals: action.payload };
+
+//     case UPVOTE_PROPOSAL:
+//       return { ...state, proposals: action.payload };
+
+
+//     default:
+//       return state
+//   }
+// };
+
 
 
 const initialState = [{
@@ -22,16 +44,15 @@ const initialState = [{
 
 
 
-
 const Proposals = (state = initialState, action: PayloadAction<any>) => {
   switch (action.type) {
-    case 'currentProposal':
+    case SAVE_PROPOSALS:
       return state;
-    case 'Increment':
+    case UPVOTE_PROPOSAL:
       const newState = [...state]
       newState.forEach(proposal => {
         if (proposal.id === action.payload.id) {
-          proposal.votes + 1;
+          votes: action.payload.votes;
         }
       })
       return (newState);

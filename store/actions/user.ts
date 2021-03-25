@@ -3,7 +3,7 @@ import { USER_LOGIN } from '../actions/ActionTypes';
 import problemInterface from '../../interfaces/problemInterface';
 
 // MOES EXAMPLE
-// import { fetchUserData } from "../apiService";
+// import { fetchUserData } from '../../services/Apiclient';
 
 // export function fetchUser (email: string, password: string) {
 //   return function (dispatch) {
@@ -20,15 +20,7 @@ import problemInterface from '../../interfaces/problemInterface';
 
 export const userLogin = (user: string) => ({
   type: USER_LOGIN,
-  payload: {
-    user
-  },
+  payload: user
 });
 
 
-export const addNewReport = (savedReport: problemInterface[]) => ({
-  type: SAVE_REPORT,
-  payload: {
-    savedReport,
-  },
-});

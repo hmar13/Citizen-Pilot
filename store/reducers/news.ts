@@ -4,6 +4,20 @@ import news from '../mocks/newsMocks';
 import { SAVE_NEWS } from '../actions/ActionTypes';
 
 
+// const initialState = {
+//   news: null,
+// };
+
+// const newsData = (state = initialState, action: PayloadAction<string>) => {
+//   switch (action.type) {
+//     case SAVE_NEWS:
+//       return { ...state, news: action.payload };
+//     default:
+//       return state;
+//   }
+// };
+
+
 const initialState = {
   news,
 };

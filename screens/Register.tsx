@@ -6,7 +6,7 @@ import LogoComponent from '../components/LogoComponent';
 import QRCodeModal from './QRCodeModal';
 import TextInputComponent from '../components/LoginSignupComponents/TextInputcomponent';
 import ScanPrompt from '../components/LoginSignupComponents/ScanPromptComponent';
-// import { postNewUser } from "../apiService";
+// import { postNewUser } from '../services/Apiclient';
 
 
 export default function Register({ navigation }): JSX.Element {
