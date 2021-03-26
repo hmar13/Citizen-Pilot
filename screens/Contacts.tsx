@@ -14,14 +14,25 @@ const Contacts = () => {
   const allContacts = useSelector((state: RootState) => {
     return state.cityContacts.contacts;
   });
+  // const allContacts = useSelector((state: RootState) => {
+  //   return state.realContacts.state;
+  // });
+
+
   return (
     <View style={styles.container}>
       <HorizontalBanner />
       <View style={styles.headerContainer}>
         <MaterialIcons name="contacts" size={35} color="#3A4276" />
-        {/* <FontAwesome5 name="hammer" size={35} color="#3A4276" /> */}
         <Text style={styles.headerText}>City Contacts</Text>
       </View>
+      {
+        allContacts.length === 0 &&
+        <View style={{ marginLeft: 20, marginTop: '5%' }}>
+          <Text style={styles.newsText}>Sorry, we haven't published any contacts yet!</Text>
+        </View>
+
+      }
       <FlatList
         style={styles.flatlistContainer}
         data={allContacts}
@@ -58,6 +69,14 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     paddingBottom: 5,
+  },
+  newsText: {
+    paddingLeft: 15,
+    fontSize: 16,
+    width: 300,
+    fontWeight: 'bold',
+    top: 6,
+    color: 'black',
   },
   headerText: {
     alignSelf: 'center',

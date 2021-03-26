@@ -38,8 +38,19 @@ export const getAllNews = () =>
     .then(res => res.status === 204 ? res : res.json())
     .catch(err => console.log('error is:', err));
 
-// getContacts()
-// getProjects()
+// city contacts
+export const getContacts = () =>
+  fetch(`${baseUrl}/contacts`)
+    .then(res => res.status <= 401 ? res : Promise.reject())
+    .then(res => res.status === 204 ? res : res.json())
+    .catch(err => console.log('error is:', err));
+
+// projects
+export const getProjects = () =>
+  fetch(`${baseUrl}/projects`)
+    .then(res => res.status <= 401 ? res : Promise.reject())
+    .then(res => res.status === 204 ? res : res.json())
+    .catch(err => console.log('error is:', err));
 
 
 // Report a problem

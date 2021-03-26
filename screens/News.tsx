@@ -37,6 +37,11 @@ const News = () => {
     return state.newsData.news;
   });
 
+  // const allNews = useSelector((state: RootState) => {
+  //   return state.realNews.state;
+  // });
+
+
   const [selectedNews, setSelectedNews] = useState(allNews);
 
 

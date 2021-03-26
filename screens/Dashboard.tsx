@@ -47,25 +47,27 @@ export default function Dashboard({ navigation }): JSX.Element {
     return state.newsData.news;
   })
 
-  const realNews = useSelector((state: RootState) => {
-    return state.realNews;
-  });
+  // const allNews = useSelector((state: RootState) => {
+  //   return state.realNews.state;
+  // });
 
-  console.log(realNews);
+
+
+
 
 
   useEffect(() => {
-    const news = fetchNews();
-    dispatch(news);
+    // const news = fetchNews();
+    // dispatch(news);
+    const contacts = fetchContacts();
+    dispatch(contacts);
+    const projects = fetchProjects();
+    dispatch(projects);
   }, [])
 
 
-  // To get news, contacts, projects, proposals
-  // NOTE: This doesn't feel right. Can I make this shorter?
 
   // useEffect(() => {
-  //   const news = fetchNews();
-  //   dispatch(news);
   //   const contacts = fetchContacts();
   //   dispatch(contacts);
   //   const projects = fetchProjects();
@@ -98,13 +100,24 @@ export default function Dashboard({ navigation }): JSX.Element {
             onPress={showDialog}
           />
         </View>
+        {
+          allNews.length === 0 &&
+          <View>
+            <Image
+              style={styles.picture}
+              source={require('../assets/images/stockimages/Reminders.jpg')}
+            />
+            <View style={styles.textConteiner}>
+              <Text style={styles.newsText}>There is nothing to report at the moment</Text>
+            </View>
+          </View>
+
+        }
         <FlatList
-          decelerationRate="fast"
-          snapToInterval={350}
           showsHorizontalScrollIndicator={false}
           horizontal={true}
-          data={allNews.slice(0, 3)}
-          keyExtractor={item => item.id}
+          data={allNews}
+          keyExtractor={item => item.id.toString()}
           renderItem={({ item }) =>
 
             <TouchableOpacity
@@ -114,7 +127,7 @@ export default function Dashboard({ navigation }): JSX.Element {
                 setModalVisible(true);
               }}
             >
-              <View key={item.id} >
+              <View >
                 <Image style={styles.picture} source={{ uri: item.img }} />
                 <View style={styles.textConteiner}>
                   <Text style={styles.newsText}>{item.shortDescription}</Text>
@@ -190,6 +203,7 @@ const styles = StyleSheet.create({
     height: 220,
   },
   newsText: {
+    paddingLeft: 15,
     fontSize: 16,
     textAlign: 'center',
     width: 300,

@@ -9,9 +9,16 @@ import { FontAwesome5 } from '@expo/vector-icons';
 
 
 const Projects = () => {
+  // const allProjects = useSelector((state: RootState) => {
+  //   return state.cityProjects.projects;
+  // });
+
   const allProjects = useSelector((state: RootState) => {
-    return state.cityProjects.projects;
+    return state.realProjects.state;
   });
+
+  console.log(allProjects);
+
 
   return (
     <View style={styles.container}>
@@ -20,7 +27,7 @@ const Projects = () => {
         <FontAwesome5 name="hammer" size={35} color="#3A4276" />
         <Text style={styles.headerText}>Work in progress</Text>
       </View>
-      <FlatList
+      {/* <FlatList
         style={styles.flatlistContainer}
         data={allProjects}
         keyExtractor={item => item.id}
@@ -33,7 +40,7 @@ const Projects = () => {
             img={item.img}
           />
         )}
-      />
+      /> */}
     </View>
   );
 };

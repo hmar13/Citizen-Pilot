@@ -23,23 +23,33 @@ export const setNews = (news: []) => ({
   payload: news,
 });
 
-// export function fetchContacts () {
-//   return function (dispatch) {
-//     getContacts()
-//       .then((contacts: []) => {
-//         dispatch(setContacts(contacts));
-//       })
-//   };
-// }
+export function fetchContacts() {
+  return function (dispatch: Dispatch) {
+    getContacts()
+      .then((contacts: []) => {
+        dispatch(setContacts(contacts));
+      })
+  };
+}
 
-// export function fetchProjects () {
-//   return function (dispatch) {
-//     getProjects()
-//       .then((projects: []) => {
-//         dispatch(setProjects(projects));
-//       })
-//   };
-// }
+export const setContacts = (contacts: []) => ({
+  type: SAVE_CONTACTS,
+  payload: contacts
+});
+
+export function fetchProjects() {
+  return function (dispatch: Dispatch) {
+    getProjects()
+      .then((projects: []) => {
+        dispatch(setProjects(projects));
+      })
+  };
+}
+
+export const setProjects = (projects: []) => ({
+  type: SAVE_PROJECTS,
+  payload: projects,
+});
 
 // export function fetchProposals () {
 //   return function (dispatch) {
@@ -54,16 +64,8 @@ export const setNews = (news: []) => ({
 
 
 
-export const setContacts = (contacts: []) => ({
-  type: SAVE_CONTACTS,
-  payload: contacts
-});
 
 
-export const setProjects = (projects: []) => ({
-  type: SAVE_PROJECTS,
-  payload: projects,
-});
 
 export const setProposals = (proposals: []) => ({
   type: SAVE_PROPOSALS,

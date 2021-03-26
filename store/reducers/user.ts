@@ -2,8 +2,6 @@
 import { PayloadAction } from '@reduxjs/toolkit';
 // import { SAVE_REPORT } from '../actions/ActionTypes';
 import { USER_LOGIN, SET_LOADING } from '../actions/ActionTypes';
-import { userData } from '../mock';
-import userInterface from '../../interfaces/userInterface';
 
 
 const initialState = {
