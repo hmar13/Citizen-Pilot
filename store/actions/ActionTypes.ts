@@ -1,5 +1,7 @@
 /* eslint-disable import/prefer-default-export */
 
+export const SET_LOADING = 'SET_LOADING';
+
 // user
 export const SAVE_REPORT = 'SAVE_REPORT';
 export const USER_LOGIN = 'USER_LOGIN';

@@ -9,12 +9,11 @@ import Proposals from './reducers/currentProposal'
 // Combining both reducers
 export const reducers = combineReducers({
   user,
-  myFavourites,
-  newsData,
-  cityContacts,
-  cityProjects,
-
-  Proposals
+  // myFavourites,
+  // newsData,
+  // cityContacts,
+  // cityProjects,
+  // Proposals
 });
 
 export type RootState = ReturnType<typeof reducers>;

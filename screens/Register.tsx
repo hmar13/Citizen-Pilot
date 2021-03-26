@@ -90,6 +90,7 @@ export default function Register({ navigation }): JSX.Element {
             value={firstName}
             setItem={setFirstName}
             isDisabled
+            secureText={false}
           />
           <TextInputComponent
             text="Last Name"
@@ -97,6 +98,7 @@ export default function Register({ navigation }): JSX.Element {
             value={lastName}
             setItem={setLastName}
             isDisabled
+            secureText={false}
           />
           <TextInputComponent
             text="Enter your email address"
@@ -104,6 +106,7 @@ export default function Register({ navigation }): JSX.Element {
             value={email}
             setItem={setEmail}
             isDisabled={false}
+            secureText={false}
           />
           <TextInputComponent
             text="Add your password"
@@ -111,6 +114,7 @@ export default function Register({ navigation }): JSX.Element {
             value={password}
             setItem={setPassword}
             isDisabled={false}
+            secureText={true}
           />
           <TextInputComponent
             text="Confirm your password"
@@ -118,6 +122,7 @@ export default function Register({ navigation }): JSX.Element {
             value={confirmPassword}
             setItem={setConfirmPassword}
             isDisabled={false}
+            secureText={true}
           />
         </View>
         <ButtonComponent

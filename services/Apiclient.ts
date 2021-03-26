@@ -1,15 +1,15 @@
 
 
 // Login
-// export const fetchUserData = (username: string, password: string) =>
-//   fetch(`${baseUrl}/auth/login`, {
-//     method: 'POST',
-//     headers: { 'Content-Type': 'application/json' },
-//     body: JSON.stringify({ username, password })
-//   })
-//     .then(res => res.status <= 400 ? res : Promise.reject())
-//     .then(res => res.status === 204 ? res : res.json())
-//     .catch(err => console.log(err));
+export const fetchUserData = (username: string, password: string) =>
+  fetch(`${baseUrl}/auth/login`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ username, password })
+  })
+    .then(res => res.status <= 400 ? res : Promise.reject())
+    .then(res => res.status === 204 ? res : res.json())
+    .catch(err => console.log(err));
 
 
 

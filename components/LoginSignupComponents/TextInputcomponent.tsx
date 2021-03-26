@@ -9,6 +9,7 @@ interface Input {
   value: string;
   setItem: any;
   isDisabled: boolean;
+  secureText: boolean
 }
 
 export default function TextInputComponent({
@@ -17,6 +18,7 @@ export default function TextInputComponent({
   value,
   setItem,
   isDisabled,
+  secureText,
 }: Input): JSX.Element {
   return (
     <View>
@@ -27,6 +29,7 @@ export default function TextInputComponent({
         placeholder={label}
         mode="outlined"
         style={styles.textInput}
+        secureTextEntry={secureText}
         onChangeText={input => setItem(input)}
       />
     </View>
