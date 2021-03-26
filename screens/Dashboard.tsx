@@ -47,10 +47,7 @@ export default function Dashboard({ navigation }): JSX.Element {
     return state.newsData.news;
   });
 
-  // FOR API CALL
-  // const userID = useSelector((state: RootState) => {
-  //   return state.user.id;
-  // });
+
 
   // To get news, contacts, projects, proposals
   // NOTE: This doesn't feel right. Can I make this shorter?

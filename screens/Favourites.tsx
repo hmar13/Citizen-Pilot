@@ -16,6 +16,9 @@ const Favourites = () => {
   const myFavourites = useSelector((state: RootState) => {
     return state.myFavourites.favourites;
   });
+  // const myFavourites = useSelector((state: RootState) => {
+  //   return state.user.userData.user.favourites;
+  // });
 
   return (
     <View style={styles.container}>
@@ -27,6 +30,11 @@ const Favourites = () => {
       <FlatList
         style={styles.flatlistContainer}
         data={myFavourites}
+        ListEmptyComponent={
+          <Text style={styles.text}>You haven't saved any favourites yet{'\n'}
+          </Text>
+
+        }
         keyExtractor={item => item.id}
         renderItem={({ item }) =>
           <FavouriteProposalItems
@@ -61,6 +69,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     paddingBottom: 5,
+  },
+  text: {
+    marginTop: '50%',
+    color: 'black',
+    fontFamily: 'monospace',
+    textAlign: 'center'
   },
   headerText: {
     alignSelf: 'center',

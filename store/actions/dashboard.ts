@@ -1,3 +1,4 @@
+import { Dispatch } from 'redux';
 import {
   SAVE_NEWS,
   SAVE_CONTACTS,
@@ -5,20 +6,22 @@ import {
   SAVE_PROPOSALS
 }
   from './ActionTypes';
-
-
-// import { getUserFavourites } from '../services/Apiclient';
+import { getAllNews, getContacts, getProjects } from '../../services/Apiclient';
 
 
 
-// export function fetchNews () {
-//   return function (dispatch) {
-//     getAllNews()
-//       .then((news: []) => {
-//         dispatch(setNews(news));
-//       })
-//   };
-// }
+export function fetchNews() {
+  return function (dispatch: Dispatch) {
+    getAllNews()
+      .then((news: []) => {
+        dispatch(setNews(news));
+      })
+  };
+}
+export const setNews = (news: []) => ({
+  type: SAVE_NEWS,
+  payload: news,
+});
 
 // export function fetchContacts () {
 //   return function (dispatch) {
@@ -49,10 +52,6 @@ import {
 
 
 
-export const setNews = (news: []) => ({
-  type: SAVE_NEWS,
-  payload: news,
-});
 
 
 export const setContacts = (contacts: []) => ({

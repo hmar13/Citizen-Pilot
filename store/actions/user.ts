@@ -32,9 +32,9 @@ export function fetchUser(username: string, password: string) {
 // }
 
 
-export const userLogin = (user: any) => ({
+export const userLogin = (userData: any) => ({
   type: USER_LOGIN,
-  payload: user
+  payload: userData,
 });
 
 export function setLogin(isLoggedIn: boolean) {
