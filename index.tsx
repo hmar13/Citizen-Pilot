@@ -5,7 +5,7 @@ import BottomTabs from './navigation/navBarBare';
 
 
 export default function Index(): JSX.Element {
-  const localState = true;
+  const localState = false;
   const content = localState ? <MainRootStack /> : <BottomTabs />
   return content;
 }

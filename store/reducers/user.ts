@@ -5,9 +5,7 @@ import { USER_LOGIN, SET_LOADING } from '../actions/ActionTypes';
 import { userData } from '../mock';
 
 
-const initialState = {
-
-};
+const initialState = {};
 
 const user = (state = initialState, action: PayloadAction<string>) => {
   switch (action.type) {

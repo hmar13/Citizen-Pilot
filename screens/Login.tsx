@@ -26,9 +26,9 @@ export default function Login({ navigation }): JSX.Element {
     }
 
     // redux/fetch logic
-    const action = fetchUser(email, password);
-    const res = await dispatch(action)
-    console.log(res);
+    const action = await fetchUser(email, password);
+    await dispatch(action)
+
 
 
 

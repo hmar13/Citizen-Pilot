@@ -23,9 +23,8 @@ export function fetchUser(username: string, password: string) {
       .then((user: Req) => {
         dispatch(userLogin(user));
       })
-      .finally(() => {
-        console.log('success');
-        ;
+      .catch((err) => {
+        console.log('test');
       });
   };
 }
