@@ -100,8 +100,9 @@ const News = () => {
               <Paragraph style={{ marginTop: 10 }}>{modalInfo.longDescription}</Paragraph>
             </Card.Content>
           </Card>
-          <Button style={styles.button} icon="newspaper-variant-outline" mode="contained" onPress={() => setModalVisible(false)}>
-            Back
+
+          <Button style={styles.button} onPress={() => setModalVisible(false)}>
+            close
           </Button>
         </View>
       </Modal>
@@ -138,11 +139,11 @@ const styles = StyleSheet.create({
   },
   button: {
     justifyContent: 'center',
-    alignSelf: 'center',
+    alignSelf: 'flex-end',
     height: 45,
     width: '40%',
-    borderRadius: 15,
     marginTop: 20,
+    marginRight: -40,
   },
 
   flatlistContainer: {

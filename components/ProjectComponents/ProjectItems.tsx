@@ -7,9 +7,10 @@ import {
   Image,
   ScrollView,
 } from 'react-native';
-import { Button, Avatar } from 'react-native-paper';
+import { Button, Avatar, IconButton } from 'react-native-paper';
 import Modal from 'react-native-modal';
 import { AnimatedCircularProgress } from 'react-native-circular-progress';
+// import {saveToFavourites} from '../../store/actions/?';
 
 interface ProjectItemsInterface {
   title: string;
@@ -30,8 +31,15 @@ const ProjectItems: React.FC<ProjectItemsInterface> = ({
   const toggleModal = () => {
     setModalVisible(!isModalVisible);
   };
-  // needed number without % for progress bar
+
   let projectProgress = parseFloat(projectedCompletion);
+
+  const [heartColour, setHeartColour] = useState('grey')
+  const handleAddtoFavouritesPress = () => {
+    setHeartColour('#ad0f5c');
+    //   const action = saveToFavourites();
+    //   dispatch(action);
+  }
 
   return (
     <View>
@@ -75,6 +83,15 @@ const ProjectItems: React.FC<ProjectItemsInterface> = ({
           <View style={styles.modalInformationContainer}>
             <Avatar.Image size={120} source={{ uri: img }} />
             <Text style={styles.modalTitle}>{title}</Text>
+
+            {/* check if already added to favourites, show color accordingly */}
+            <IconButton
+              animated
+              icon="heart"
+              color={heartColour}
+              size={20}
+              onPress={handleAddtoFavouritesPress}
+            />
           </View>
 
           <View style={styles.modalTextContainer}>
@@ -91,7 +108,6 @@ const ProjectItems: React.FC<ProjectItemsInterface> = ({
             <Text style={styles.modalHeaders}>For more information, visit: </Text>
             <Text>www.somelink.com</Text>
           </View>
-
           <Button style={{ alignSelf: 'flex-end', marginTop: '40%' }} onPress={toggleModal}>close</Button>
         </ScrollView>
       </Modal>
@@ -156,15 +172,16 @@ const styles = StyleSheet.create({
   },
   modalInformationContainer: {
     paddingTop: 20,
+    marginBottom: -20,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-evenly',
-    marginBottom: 10,
     flexWrap: 'wrap',
   },
   modalTitle: {
     fontWeight: 'bold',
     fontSize: 20,
+    paddingLeft: 5,
   },
   modalTextContainer: {
     marginTop: 30,

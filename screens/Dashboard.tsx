@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   StyleSheet,
   Text,
@@ -9,8 +9,16 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import Modal from 'react-native-modal';
-import { Button, Divider, Card, Title, Paragraph, IconButton, Portal, Dialog } from 'react-native-paper';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+// import {
+//   fetchNews,
+//   fetchContacts,
+//   fetchProjects,
+//   fetchProposals
+// }
+//   from '../store/actions/user';
+
+import { Button, Divider, Card, Title, Paragraph, IconButton } from 'react-native-paper';
 import { RootState } from '../store/reducer';
 import CustomButton from '../components/CustomButton';
 import HorizontalBanner from '../components/HorizontalBannerComponent';
@@ -30,35 +38,58 @@ const modalInitalState = {
 };
 
 export default function Dashboard({ navigation }): JSX.Element {
+  const dispatch = useDispatch();
   const [modalInfo, setModalInfo] = useState<newsInterface>(modalInitalState);
   const [isModalVisible, setModalVisible] = useState(false);
   const [isDialogVisible, setIsDialogVisible] = useState(false);
+  // DELETE ONCE API implemented
   const allNews = useSelector((state: RootState) => {
     return state.newsData.news;
   });
 
+  // FOR API CALL
+  // const userID = useSelector((state: RootState) => {
+  //   return state.user.id;
+  // });
+
+  // To get news, contacts, projects, proposals
+  // NOTE: This doesn't feel right. Can I make this shorter?
+
+  // useEffect(() => {
+  //   const news = fetchNews();
+  //   dispatch(news);
+  //   const contacts = fetchContacts();
+  //   dispatch(contacts);
+  //   const projects = fetchProjects();
+  //   dispatch(projects);
+  //   const proposals = fetchProposals();
+  //   dispatch(proposals);
+  // }, [dispatch]);
+
+
   const showDialog = () => setIsDialogVisible(true);
+
 
 
   return (
     <View style={{ flex: 1, backgroundColor: '#E5E5E5' }}>
       <HorizontalBanner />
       <View style={{ justifyContent: 'center' }}>
+        <View style={styles.headerContainer}>
 
-        <AskForHelp
-          isDialogVisible={isDialogVisible}
-          setIsDialogVisible={setIsDialogVisible}
-        />
-        <IconButton
-          style={{ alignSelf: 'flex-end' }}
-          icon="help-circle"
-          color={'#ee9a2f'}
-          size={20}
-          onPress={showDialog}
-        />
-
-        <Text style={styles.newsCaption}>Latest News</Text>
-
+          <Text style={styles.newsCaption}>Latest News</Text>
+          <AskForHelp
+            isDialogVisible={isDialogVisible}
+            setIsDialogVisible={setIsDialogVisible}
+          />
+          <IconButton
+            style={{ paddingTop: 5 }}
+            icon="help-circle"
+            color={'#ee9a2f'}
+            size={22}
+            onPress={showDialog}
+          />
+        </View>
         <FlatList
           decelerationRate="fast"
           snapToInterval={350}
@@ -85,7 +116,10 @@ export default function Dashboard({ navigation }): JSX.Element {
           }>
         </FlatList>
       </View>
+
       <CustomButton navigation={navigation} />
+
+
       <Modal
         isVisible={isModalVisible}
         onBackdropPress={() => {
@@ -155,12 +189,22 @@ const styles = StyleSheet.create({
     top: 6,
     color: 'white',
   },
+  headerContainer: {
+    justifyContent: 'space-between',
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginTop: 15,
+    marginLeft: 40,
+    marginRight: 10,
+    marginBottom: 10,
+
+  },
   newsCaption: {
     fontSize: 25,
     fontWeight: 'bold',
-    marginLeft: 42,
-    marginBottom: 5,
-    marginTop: -10
+    // paddingLeft: 25,
+
+    // marginTop: -10
 
   },
   modalView: {

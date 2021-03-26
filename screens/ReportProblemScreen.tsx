@@ -9,6 +9,7 @@ import {
   ScrollView,
 } from 'react-native';
 import { TextInput, Button } from 'react-native-paper';
+// import { postProblem } from '../services/Apiclient';
 import CameraComponent from '../components/ReportProblem/CameraComponent';
 import UrgentButton from '../components/ReportProblem/UrgentButtonComponent';
 import ListAccordion from '../components/ReportProblem/ListAccordion';
@@ -17,8 +18,6 @@ import HorizontalBanner from '../components/HorizontalBannerComponent';
 import MessageReceivedModal from './MessageReceivedModal';
 import { Foundation } from '@expo/vector-icons';
 
-
-// import addNewReport from '../store/actions/report';
 
 export default function ReportProblem({ navigation }): JSX.Element {
   const [isModalVisible, setModalVisible] = useState(false);
@@ -37,11 +36,12 @@ export default function ReportProblem({ navigation }): JSX.Element {
   }, []);
 
   // handles API call to save new problem to database
-  function handleButtonClick() {
+  async function handleButtonClick() {
     // if (categoryTitle === 'Choose a category') {
     //   return Alert.alert('Please add a category');
     // }
-    // dispatch(addNewReport());
+    // const imageUrl = await firebasecall(imageUri);
+    // await postProblem(categoryTitle, imageUrl, urgency, text, latitude, longitude );
     setModalVisible(true);
     setTimeout(() => {
       setModalVisible(false);

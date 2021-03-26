@@ -2,6 +2,21 @@
 
 import { PayloadAction } from '@reduxjs/toolkit';
 import projects from '../mocks/projectMocks';
+import { SAVE_PROJECTS } from '../actions/ActionTypes';
+
+
+// const initialState = {
+//   projects: null
+// };
+
+// const cityProjects = (state = initialState, action: PayloadAction<string>) => {
+//   switch (action.type) {
+//     case SAVE_PROJECTS:
+//       return { ...state, projects: action.payload };
+//     default:
+//       return state;
+//   }
+// };
 
 const initialState = {
   projects,
@@ -9,7 +24,7 @@ const initialState = {
 
 const cityProjects = (state = initialState, action: PayloadAction<string>) => {
   switch (action.type) {
-    case 'projects':
+    case SAVE_PROJECTS:
       return state;
     default:
       return state;

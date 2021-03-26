@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-evenly',
     alignItems: 'center',
     flexDirection: 'row',
-    marginBottom: '-15%'
+    marginBottom: -50
   },
   button: {
     justifyContent: 'center',

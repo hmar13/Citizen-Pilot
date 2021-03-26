@@ -1,27 +1,44 @@
 import React, { useState } from 'react';
-import { View, StyleSheet, Text, TouchableOpacity } from 'react-native';
+import { View, StyleSheet, Text, TouchableOpacity, Alert } from 'react-native';
+import { useDispatch } from "react-redux";
+import { fetchUser } from '../store/actions/user';
 import ButtonComponent from '../components/WelcomeComponents/Button';
 import BannerComponent from '../components/BannerComponent';
 import LogoComponent from '../components/LogoComponent';
 import TextInputComponent from '../components/LoginSignupComponents/TextInputcomponent';
 
 export default function Login({ navigation }): JSX.Element {
+  const dispatch = useDispatch();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   // API logic goes here
   const handleButtonPress = () => {
-    // if (!email) {
-    //   setPassword('');
-    //   setEmail('');
-    //   return Alert.alert('Email field is required.');
+    if (!email) {
+      setPassword('');
+      setEmail('');
+      return Alert.alert('Email field is required.');
+    }
+    if (!password) {
+      setPassword('');
+      setEmail('');
+      return Alert.alert('Password field is required.');
+    }
+
+    // redux/fetch logic
+    // const action = fetchUser(email, password);
+    // dispatch(action)
+
+
+    // if (dispatch was a success) {
+    // setPassword('');
+    // setEmail('');
+    // return navigation.navigate('Dashboard');
+    // } else {
+    // setPassword('');
+    // setEmail('');
+    // return Alert.alert('Something went wrong. Please try again');
     // }
-    // if (!password) {
-    //   setPassword('');
-    //   setEmail('');
-    //   return Alert.alert('Password field is required.');
-    // }
-    navigation.navigate('Dashboard');
   };
 
   return (
