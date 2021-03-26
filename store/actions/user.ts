@@ -1,31 +1,24 @@
 import { Dispatch } from 'redux';
-import { SAVE_REPORT, SET_LOADING } from '../actions/ActionTypes';
-import { USER_LOGIN, SAVE_FAVOURITES, } from '../actions/ActionTypes';
-import problemInterface from '../../interfaces/problemInterface';
-
-interface Req {
-  user: {
-    id: number;
-    fname: string;
-    lname: string;
-    email: string;
-    createdAt: string;
-    updatedAt: string;
-  },
-  token: string;
-}
-
+import { USER_LOGIN, SAVE_FAVOURITES, SET_LOADING } from '../actions/ActionTypes';
 import { fetchUserData } from '../../services/Apiclient';
+import { Alert } from 'react-native';
+
 
 export function fetchUser(username: string, password: string) {
   return function (dispatch: Dispatch) {
     fetchUserData(username, password)
-      .then((user: Req) => {
-        dispatch(userLogin(user));
+      .then((user) => {
+        if (!user.error) {
+          dispatch(userLogin(user));
+          dispatch(setLogin(true));
+        }
+        else {
+          Alert.alert('Invalid username or password');
+        }
       })
-      .finally(() => {
-        dispatch(setLogin(true));
-      });
+      .catch(err => console.error(err));
+
+
   };
 }
 
@@ -39,7 +32,7 @@ export function fetchUser(username: string, password: string) {
 // }
 
 
-export const userLogin = (user: Req) => ({
+export const userLogin = (user: any) => ({
   type: USER_LOGIN,
   payload: user
 });

@@ -1,4 +1,4 @@
-const baseUrl = 'http://192.168.2.107:3000/api/v1';
+
 
 // Login
 export const fetchUserData = (username: string, password: string) =>
@@ -9,9 +9,8 @@ export const fetchUserData = (username: string, password: string) =>
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ username, password })
   })
-    .then(res => res.status <= 400 ? res : Promise.reject())
+    .then(res => res.status <= 401 ? res : Promise.reject())
     .then(res => res.status === 204 ? res : res.json())
-    .then(res => res.status === 401 && console.log('401', res))
     .catch(err => console.log('error goes here', err));
 
 

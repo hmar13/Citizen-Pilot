@@ -12,7 +12,6 @@ export default function Login({ navigation }): JSX.Element {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  // API logic goes here
   const handleButtonPress = async () => {
     if (!email) {
       setPassword('');
@@ -25,22 +24,10 @@ export default function Login({ navigation }): JSX.Element {
       return Alert.alert('Password field is required.');
     }
 
-    // redux/fetch logic
     const action = await fetchUser(email, password);
-    await dispatch(action)
-
-
-
-
-    // if (dispatch was a success) {
-    // setPassword('');
-    // setEmail('');
-    // return navigation.navigate('Dashboard');
-    // } else {
-    // setPassword('');
-    // setEmail('');
-    // return Alert.alert('Something went wrong. Please try again');
-    // }
+    await dispatch(action);
+    setPassword('');
+    setEmail('');
   };
 
   return (
