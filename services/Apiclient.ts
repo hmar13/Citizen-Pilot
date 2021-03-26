@@ -33,10 +33,10 @@ export const postNewUser = (fname: string, lname: string, email: string, passwor
 
 // Dashboard
 export const getAllNews = () =>
-  fetch(`${baseUrl}/`)
-    .then(res => res.status <= 400 ? res : Promise.reject())
+  fetch(`${baseUrl}/news`)
+    .then(res => res.status <= 401 ? res : Promise.reject())
     .then(res => res.status === 204 ? res : res.json())
-//     .catch(err => console.log('error is:', err));
+    .catch(err => console.log('error is:', err));
 
 // getContacts()
 // getProjects()

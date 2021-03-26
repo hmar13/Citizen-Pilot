@@ -10,13 +10,13 @@ import {
 } from 'react-native';
 import Modal from 'react-native-modal';
 import { useSelector, useDispatch } from 'react-redux';
-// import {
-//   fetchNews,
-//   fetchContacts,
-//   fetchProjects,
-//   fetchProposals
-// }
-//   from '../store/actions/user';
+import {
+  fetchNews,
+  fetchContacts,
+  fetchProjects,
+  fetchProposals
+}
+  from '../store/actions/dashboard';
 
 import { Button, Divider, Card, Title, Paragraph, IconButton } from 'react-native-paper';
 import { RootState } from '../store/reducer';
@@ -45,8 +45,19 @@ export default function Dashboard({ navigation }): JSX.Element {
   // DELETE ONCE API implemented
   const allNews = useSelector((state: RootState) => {
     return state.newsData.news;
+  })
+
+  const realNews = useSelector((state: RootState) => {
+    return state.realNews;
   });
 
+  console.log(realNews);
+
+
+  useEffect(() => {
+    const news = fetchNews();
+    dispatch(news);
+  }, [])
 
 
   // To get news, contacts, projects, proposals
