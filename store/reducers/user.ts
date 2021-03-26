@@ -5,12 +5,17 @@ import { USER_LOGIN, SET_LOADING } from '../actions/ActionTypes';
 import { userData } from '../mock';
 
 
-const initialState = {};
+const initialState = {
+  user: null,
+  isLoggedIn: false
+};
 
 const user = (state = initialState, action: PayloadAction<string>) => {
   switch (action.type) {
     case USER_LOGIN:
       return { ...state, state: action.payload };
+    case SET_LOADING:
+      return { ...state, isLoggedIn: action.payload };
     default:
       return state;
   }
