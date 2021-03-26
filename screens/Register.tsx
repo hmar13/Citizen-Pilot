@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import { View, StyleSheet, Text, TouchableOpacity } from 'react-native';
+import { View, StyleSheet, Text, TouchableOpacity, Alert } from 'react-native';
 import ButtonComponent from '../components/WelcomeComponents/Button';
 import BannerComponent from '../components/BannerComponent';
 import LogoComponent from '../components/LogoComponent';
 import QRCodeModal from './QRCodeModal';
 import TextInputComponent from '../components/LoginSignupComponents/TextInputcomponent';
 import ScanPrompt from '../components/LoginSignupComponents/ScanPromptComponent';
-// import { postNewUser } from '../services/Apiclient';
+import { postNewUser } from '../services/Apiclient';
 
 
 export default function Register({ navigation }): JSX.Element {
@@ -36,33 +36,28 @@ export default function Register({ navigation }): JSX.Element {
     setConfirmPassword('');
   };
 
-  const handleButtonPress = () => {
-    // if (!firstName) {
-    //   Alert.alert('First name is required. Please scan your QR code');
-    // } else if (!email) {
-    //   Alert.alert('Email field is required.');
-    // } else if (!password) {
-    //   Alert.alert('Password field is required.');
-    // } else if (!confirmPassword) {
-    //   setPassword('');
-    //   Alert.alert('Confirm password field is required.');
-    // } else if (password !== confirmPassword) {
-    //   Alert.alert('Password does not match!');
+  const handleButtonPress = async () => {
+    if (!firstName) {
+      Alert.alert('First name is required. Please scan your QR code');
+      return navigation.navigate('Login');
+    } else if (!email) {
+      Alert.alert('Email field is required.');
+      return navigation.navigate('Login');
+    } else if (!password) {
+      Alert.alert('Password field is required.');
+      return navigation.navigate('Login');
+    } else if (!confirmPassword) {
+      setPassword('');
+      Alert.alert('Confirm password field is required.');
+      return navigation.navigate('Login');
+    } else if (password !== confirmPassword) {
+      Alert.alert('Password does not match!');
+      return navigation.navigate('Login');
+    }
 
-    // APICLIENTSERVICE to save new user
-    // I guess we won't need redux --> only want to save new user to db
-    // const action =  await postNewUser(firstName, lastName, email, password);
-
-
-    // if POST REQ was a success
-    // emptyState()
-    // return navigation.navigate('Login');
-    // else
-    // emptyState()
-    // Alert.alert('Something went wrong. Please try again');
-    // return navigation.navigate('Dashboard');
-
-    navigation.navigate('Login');
+    await postNewUser(firstName, lastName, email, password);
+    emptyState()
+    return navigation.navigate('Login');
   };
 
   return (

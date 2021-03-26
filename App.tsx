@@ -11,6 +11,7 @@ import SafeViewAndroid from './components/SafeViewAndroid';
 import { reducers } from './store/reducer';
 import Index from './index';
 
+
 const theme = {
   ...DefaultTheme,
   roundness: 2,
