@@ -11,12 +11,12 @@ import { BottomTabBar } from '@react-navigation/bottom-tabs';
 import BottomTabs from '../navigation/navBarBare';
 
 const Contacts = () => {
-  const allContacts = useSelector((state: RootState) => {
-    return state.cityContacts.contacts;
-  });
   // const allContacts = useSelector((state: RootState) => {
-  //   return state.realContacts.state;
+  //   return state.cityContacts.contacts;
   // });
+  const allContacts = useSelector((state: RootState) => {
+    return state.realContacts.state;
+  });
 
 
   return (
@@ -36,11 +36,11 @@ const Contacts = () => {
       <FlatList
         style={styles.flatlistContainer}
         data={allContacts}
-        keyExtractor={item => item.id}
+        keyExtractor={item => String(item.id)}
         renderItem={({ item }) => (
           <ContactItems
             title={item.title}
-            phoneNumber={item.phoneNumber}
+            phoneNumber={item.phone}
             email={item.email}
             img={item.img}
           />

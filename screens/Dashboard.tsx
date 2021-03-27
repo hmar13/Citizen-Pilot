@@ -14,7 +14,8 @@ import {
   fetchNews,
   fetchContacts,
   fetchProjects,
-  fetchProposals
+  fetchProposals,
+  fetchFavourites
 }
   from '../store/actions/dashboard';
 
@@ -33,7 +34,7 @@ const modalInitalState = {
   shortDescription: 'Description',
   longDescription: 'Description',
   location: 'In the city',
-  img: 'img',
+  image: 'img',
   date: 'date',
 };
 
@@ -43,26 +44,30 @@ export default function Dashboard({ navigation }): JSX.Element {
   const [isModalVisible, setModalVisible] = useState(false);
   const [isDialogVisible, setIsDialogVisible] = useState(false);
   // DELETE ONCE API implemented
-  const allNews = useSelector((state: RootState) => {
-    return state.newsData.news;
-  })
-
   // const allNews = useSelector((state: RootState) => {
-  //   return state.realNews.state;
-  // });
+  //   return state.newsData.news;
+  // })
 
+  const allNews = useSelector((state: RootState) => {
+    return state.realNews.state;
+  });
 
-
-
+  const token: string = useSelector((state: RootState) => {
+    return state.user.userData.token;
+  });
 
 
   useEffect(() => {
-    // const news = fetchNews();
-    // dispatch(news);
+    const news = fetchNews();
+    dispatch(news);
     const contacts = fetchContacts();
     dispatch(contacts);
     const projects = fetchProjects();
     dispatch(projects);
+    const proposals = fetchProposals();
+    dispatch(proposals);
+    const favourites = fetchFavourites(token);
+    dispatch(favourites);
   }, [])
 
 
@@ -101,7 +106,7 @@ export default function Dashboard({ navigation }): JSX.Element {
           />
         </View>
         {
-          allNews.length === 0 &&
+          (allNews === undefined || allNews.length === 0) &&
           <View>
             <Image
               style={styles.picture}
@@ -128,7 +133,7 @@ export default function Dashboard({ navigation }): JSX.Element {
               }}
             >
               <View >
-                <Image style={styles.picture} source={{ uri: item.img }} />
+                <Image style={styles.picture} source={{ uri: item.image }} />
                 <View style={styles.textConteiner}>
                   <Text style={styles.newsText}>{item.shortDescription}</Text>
                 </View>
@@ -151,7 +156,7 @@ export default function Dashboard({ navigation }): JSX.Element {
           {/* how do I make Paragraph scrollable? if there is too much text, it will spill over card*/}
           <Card style={{ width: '110%', height: 490 }}>
             <Card.Content>
-              <Card.Cover style={styles.cardCover} source={{ uri: modalInfo.img }} />
+              <Card.Cover style={styles.cardCover} source={{ uri: modalInfo.image }} />
               <Title style={{ marginTop: 7 }}>{modalInfo.title}</Title>
               <Divider />
               <Paragraph style={{ marginTop: 10 }}>{modalInfo.longDescription}</Paragraph>

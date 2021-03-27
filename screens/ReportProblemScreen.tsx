@@ -9,7 +9,7 @@ import {
   ScrollView,
 } from 'react-native';
 import { TextInput, Button } from 'react-native-paper';
-// import { postProblem } from '../services/Apiclient';
+import { postProblem } from '../services/Apiclient';
 import CameraComponent from '../components/ReportProblem/CameraComponent';
 import UrgentButton from '../components/ReportProblem/UrgentButtonComponent';
 import ListAccordion from '../components/ReportProblem/ListAccordion';
@@ -21,12 +21,13 @@ import { Foundation } from '@expo/vector-icons';
 
 export default function ReportProblem({ navigation }): JSX.Element {
   const [isModalVisible, setModalVisible] = useState(false);
-  const [text, setText] = useState('');
-  const [categoryTitle, setCategoryTitle] = useState('Choose a category');
+  const [description, setText] = useState('');
+  const [category, setCategory] = useState('Choose a category');
   const [imageUri, setImageUri] = useState('');
   const [urgency, setUrgency] = useState(true);
   const [latitude, setLatitude] = useState(0);
   const [longitude, setLongitude] = useState(0);
+
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(position => {
@@ -37,11 +38,14 @@ export default function ReportProblem({ navigation }): JSX.Element {
 
   // handles API call to save new problem to database
   async function handleButtonClick() {
-    // if (categoryTitle === 'Choose a category') {
-    //   return Alert.alert('Please add a category');
-    // }
+    if (category === 'Choose a category') {
+      return Alert.alert('Please add a category');
+    }
     // const imageUrl = await firebasecall(imageUri);
-    // await postProblem(categoryTitle, imageUrl, urgency, text, latitude, longitude );
+    await postProblem(urgency, description, longitude, latitude, category, imageUri);
+
+
+
     setModalVisible(true);
     setTimeout(() => {
       setModalVisible(false);
@@ -59,8 +63,8 @@ export default function ReportProblem({ navigation }): JSX.Element {
 
       <ScrollView >
         <ListAccordion
-          setCategoryTitle={setCategoryTitle}
-          categoryTitle={categoryTitle}
+          setCategory={setCategory}
+          category={category}
         />
 
         <View>
@@ -76,7 +80,7 @@ export default function ReportProblem({ navigation }): JSX.Element {
             <TextInput
               label="Description"
               multiline
-              value={text}
+              value={description}
               mode="outlined"
               style={styles.input}
               onChangeText={input => setText(input)}

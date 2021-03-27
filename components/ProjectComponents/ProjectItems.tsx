@@ -32,7 +32,8 @@ const ProjectItems: React.FC<ProjectItemsInterface> = ({
     setModalVisible(!isModalVisible);
   };
 
-  let projectProgress = parseFloat(projectedCompletion);
+
+  let projectProgress = +projectedCompletion;
 
   const [heartColour, setHeartColour] = useState('grey')
   const handleAddtoFavouritesPress = () => {
