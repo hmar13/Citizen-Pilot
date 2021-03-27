@@ -16,9 +16,6 @@ const Projects = () => {
   const allProjects = useSelector((state: RootState) => {
     return state.realProjects.state;
   });
-  console.log(allProjects);
-
-
 
 
   return (

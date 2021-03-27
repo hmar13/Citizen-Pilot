@@ -9,8 +9,9 @@ import {
   ScrollView,
 } from 'react-native';
 import { TextInput, Button } from 'react-native-paper';
-// import { postProposal } from '../services/Apiclient';
-
+import { postProposal } from '../services/Apiclient';
+import { useSelector } from 'react-redux';
+import { RootState } from '../store/reducer';
 import CameraComponent from '../components/ReportProblem/CameraComponent';
 import MessageReceivedModal from './MessageReceivedModal';
 import ListAccordion from '../components/ProposeSolution/ListAccordion';
@@ -20,17 +21,42 @@ import { FontAwesome5 } from '@expo/vector-icons';
 
 export default function ProposeSolution({ navigation }): JSX.Element {
   const [isModalVisible, setModalVisible] = useState(false);
-  const [titleText, setTitleText] = useState('');
-  const [descriptionText, setDescriptionText] = useState('');
-  const [categoryTitle, setCategoryTitle] = useState('Choose a Location');
-  const [imageUri, setImageUri] = useState('');
+  const [title, setTitleText] = useState('');
+  const [description, setDescriptionText] = useState('');
+  const [location, setCategoryTitle] = useState('Choose a Location');
+  const [image, setImageUri] = useState('');
+
+  const token: string = useSelector((state: RootState) => {
+    return state.user.userData.token;
+  });
+
+  const details = {
+    "title": title,
+    "description": description,
+    "location": location,
+    "image": image,
+    "votes": 0,
+    "approved": false
+  }
+
 
   async function handleButtonClick() {
-    // if (categoryTitle === 'Choose a category') {
-    //   Alert.alert('Please choose a location');
-    // }
-    // const imageUrl = await firebasecall(imageUri);
-    // await postProposal(titleText, descriptionText, categoryTitle, imageUrl);
+    if (title === 'Choose a category') {
+      Alert.alert('Please choose a location');
+    }
+
+    // code to url encode
+    const formBody = [];
+    for (let property in details) {
+      const encodedKey = encodeURIComponent(property);
+      const encodedValue = encodeURIComponent(details[property]);
+      formBody.push(`${encodedKey}=${encodedValue}`);
+    };
+    const result = formBody.join("&");
+
+    await postProposal(token, result);
+
+
     setModalVisible(true);
     setTimeout(() => {
       setModalVisible(false);
@@ -55,7 +81,7 @@ export default function ProposeSolution({ navigation }): JSX.Element {
           <Text style={styles.text}>Give your project a name</Text>
           <TextInput
             label="Title"
-            value={titleText}
+            value={title}
             mode="outlined"
             style={styles.titleInput}
             onChangeText={input => setTitleText(input)}
@@ -67,7 +93,7 @@ export default function ProposeSolution({ navigation }): JSX.Element {
             label="Tell us a little bit about your idea..."
             multiline
             numberOfLines={10}
-            value={descriptionText}
+            value={description}
             mode="outlined"
             style={styles.proposalInput}
             onChangeText={input => setDescriptionText(input)}
@@ -77,10 +103,10 @@ export default function ProposeSolution({ navigation }): JSX.Element {
 
         <ListAccordion
           setCategoryTitle={setCategoryTitle}
-          categoryTitle={categoryTitle}
+          categoryTitle={location}
         />
         <CameraComponent
-          imageUri={imageUri}
+          imageUri={image}
           setImageUri={setImageUri}
           headerText="Your picture"
           needImage={true}

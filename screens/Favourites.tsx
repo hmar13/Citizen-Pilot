@@ -22,7 +22,6 @@ const Favourites = () => {
   const myFavourites = useSelector((state: RootState) => {
     return state.realFavourites.state;
   });
-  console.log(myFavourites);
 
 
   return (

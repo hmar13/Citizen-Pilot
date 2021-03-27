@@ -78,27 +78,24 @@ export const postProblem = (token: string, report: any) =>
     },
     body: report
   })
-    .then(res => { console.log(res); return res })
     .then(res => res.status <= 401 ? res : Promise.reject(new Error('fail')))
     .then(res => res.status === 204 ? res : res.json())
     .catch(err => console.log('err', err));
 
 
 // Propose a solution
-export const postProposal = (token: string, proposal: any) =>
+export const postProposal = (token: string, report: any) =>
   fetch(`${baseUrl}/proposal`, {
     method: 'POST',
-    credentials: 'include',
-    mode: 'cors',
     headers: {
-      'Content-Type': 'application/json',
+      'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
       'Authorization': `Bearer ${token}`
     },
-    body: JSON.stringify(proposal)
+    body: report
   })
-    .then(res => res.status <= 401 ? res : Promise.reject())
+    .then(res => res.status <= 401 ? res : Promise.reject(new Error('fail')))
     .then(res => res.status === 204 ? res : res.json())
-    .catch(err => console.log(err));
+    .catch(err => console.log('err', err));
 
 
 // Proposals
