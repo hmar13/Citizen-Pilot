@@ -9,7 +9,10 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 
 export default function CurrentProposalScreen(): JSX.Element {
-  const currentProposal = useSelector<RootState, any>(state => state.Proposals);
+  // const currentProposal = useSelector<RootState, any>(state => state.Proposals);
+  const currentProposal = useSelector<RootState, any>(state => state.realProposals.state);
+
+
   return (
     <View style={styles.container}>
       <HorizontalBanner />
@@ -17,6 +20,13 @@ export default function CurrentProposalScreen(): JSX.Element {
         <MaterialCommunityIcons name="vote" size={35} color="#3A4276" />
         <Text style={styles.headerText}>Vote</Text>
       </View>
+      {
+        currentProposal.length === 0 &&
+        <View style={{ marginLeft: 20, marginTop: '5%' }}>
+          <Text style={styles.noProposalText}>Sorry, there isn't anything to vote on at the moment</Text>
+        </View>
+
+      }
       <FlatList
         data={currentProposal}
         keyExtractor={item => String(item.id)}
@@ -58,5 +68,13 @@ const styles = StyleSheet.create({
     marginLeft: 10,
     fontSize: 25,
     fontWeight: 'bold',
-  }
+  },
+  noProposalText: {
+    paddingLeft: 15,
+    fontSize: 16,
+    width: 300,
+    fontWeight: 'bold',
+    top: 6,
+    color: 'black',
+  },
 })

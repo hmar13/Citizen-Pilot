@@ -123,6 +123,7 @@ const styles = StyleSheet.create({
     paddingLeft: 8,
   },
   title: {
+    flexWrap: 'wrap',
     fontSize: 18,
     fontWeight: 'bold',
     paddingLeft: 6,

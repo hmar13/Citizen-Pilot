@@ -12,13 +12,18 @@ import FavouriteProposalItems from '../components/FavouriteComponents/FavouriteP
 import HorizontalBannerComponent from '../components/HorizontalBannerComponent';
 import { MaterialIcons } from '@expo/vector-icons';
 
+
 const Favourites = () => {
-  const myFavourites = useSelector((state: RootState) => {
-    return state.myFavourites.favourites;
-  });
   // const myFavourites = useSelector((state: RootState) => {
-  //   return state.user.userData.user.favourites;
+  //   return state.myFavourites.favourites;
   // });
+
+
+  const myFavourites = useSelector((state: RootState) => {
+    return state.realFavourites.state;
+  });
+  console.log(myFavourites);
+
 
   return (
     <View style={styles.container}>
@@ -42,7 +47,7 @@ const Favourites = () => {
             description={item.description}
             location={item.location}
             vote={item.votes}
-            img={item.img}
+            img={item.image}
           />
         }
       />

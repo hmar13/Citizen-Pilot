@@ -8,6 +8,9 @@ import newsData from './reducers/news';
 import Proposals from './reducers/currentProposal'
 import realContacts from './reducers/realContacts'
 import realProjects from './reducers/realProjects'
+import realProposals from './reducers/realProposals'
+import realFavourites from './reducers/realFavourites'
+
 
 // Combining both reducers
 export const reducers = combineReducers({
@@ -19,7 +22,9 @@ export const reducers = combineReducers({
   Proposals,
   realNews,
   realContacts,
-  realProjects
+  realProjects,
+  realProposals,
+  realFavourites
 });
 
 export type RootState = ReturnType<typeof reducers>;
