@@ -28,7 +28,7 @@ const Contacts = () => {
       </View>
       {
         allContacts.length === 0 &&
-        <View style={{ marginLeft: 20, marginTop: '5%' }}>
+        <View>
           <Text style={styles.newsText}>Sorry, we haven't published any contacts yet!</Text>
         </View>
 
@@ -71,12 +71,10 @@ const styles = StyleSheet.create({
     paddingBottom: 5,
   },
   newsText: {
-    paddingLeft: 15,
-    fontSize: 16,
-    width: 300,
-    fontWeight: 'bold',
-    top: 6,
+    marginTop: '50%',
     color: 'black',
+    fontFamily: 'monospace',
+    textAlign: 'center'
   },
   headerText: {
     alignSelf: 'center',

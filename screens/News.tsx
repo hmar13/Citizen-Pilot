@@ -66,7 +66,7 @@ const News = () => {
       <SortByCategory sortCategory={sortCategory} />
       {
         allNews.length === 0 &&
-        <View style={{ marginLeft: 20, marginTop: '5%' }}>
+        <View>
           <Text style={styles.noNewsText}>Sorry, there aren't any public announcements at the moment</Text>
         </View>
 
@@ -139,12 +139,10 @@ const styles = StyleSheet.create({
     elevation: 3,
   },
   noNewsText: {
-    paddingLeft: 15,
-    fontSize: 16,
-    width: 300,
-    fontWeight: 'bold',
-    top: 6,
+    marginTop: '50%',
     color: 'black',
+    fontFamily: 'monospace',
+    textAlign: 'center'
   },
   banner: {
     borderBottomLeftRadius: 15,

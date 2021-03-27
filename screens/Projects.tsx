@@ -25,6 +25,13 @@ const Projects = () => {
         <FontAwesome5 name="hammer" size={35} color="#3A4276" />
         <Text style={styles.headerText}>Work in progress</Text>
       </View>
+      {
+        allProjects.length === 0 &&
+        <View>
+          <Text style={styles.newsText}>Sorry, there are no projects happening right now</Text>
+        </View>
+
+      }
       <FlatList
         style={styles.flatlistContainer}
         data={allProjects}
@@ -70,5 +77,11 @@ const styles = StyleSheet.create({
   },
   flatlistContainer: {
     paddingHorizontal: 25,
+  },
+  newsText: {
+    marginTop: '50%',
+    color: 'black',
+    fontFamily: 'monospace',
+    textAlign: 'center'
   },
 });
