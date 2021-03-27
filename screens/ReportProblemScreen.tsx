@@ -8,7 +8,9 @@ import {
   Text,
   ScrollView,
 } from 'react-native';
-import { TextInput, Button } from 'react-native-paper';
+import { TextInput, Button } from 'react-native-paper'
+import { useSelector } from 'react-redux';
+import { RootState } from '../store/reducer';
 import { postProblem } from '../services/Apiclient';
 import CameraComponent from '../components/ReportProblem/CameraComponent';
 import UrgentButton from '../components/ReportProblem/UrgentButtonComponent';
@@ -23,10 +25,14 @@ export default function ReportProblem({ navigation }): JSX.Element {
   const [isModalVisible, setModalVisible] = useState(false);
   const [description, setText] = useState('');
   const [category, setCategory] = useState('Choose a category');
-  const [imageUri, setImageUri] = useState('');
+  const [image, setImageUri] = useState('');
   const [urgency, setUrgency] = useState(true);
   const [latitude, setLatitude] = useState(0);
   const [longitude, setLongitude] = useState(0);
+
+  const token: string = useSelector((state: RootState) => {
+    return state.user.userData.token;
+  });
 
 
   useEffect(() => {
@@ -36,16 +42,29 @@ export default function ReportProblem({ navigation }): JSX.Element {
     });
   }, []);
 
-  // handles API call to save new problem to database
+  const details = {
+    "urgency": urgency,
+    "description": description,
+    "longitude": longitude,
+    "latitude": latitude,
+    "category": category,
+    "image": image
+  }
+
   async function handleButtonClick() {
     if (category === 'Choose a category') {
       return Alert.alert('Please add a category');
     }
-    // const imageUrl = await firebasecall(imageUri);
-    await postProblem(urgency, description, longitude, latitude, category, imageUri);
+    // code to url encode
+    const formBody = [];
+    for (let property in details) {
+      const encodedKey = encodeURIComponent(property);
+      const encodedValue = encodeURIComponent(details[property]);
+      formBody.push(`${encodedKey}=${encodedValue}`);
+    };
+    const result = formBody.join("&");
 
-
-
+    await postProblem(token, result);
     setModalVisible(true);
     setTimeout(() => {
       setModalVisible(false);
@@ -69,7 +88,7 @@ export default function ReportProblem({ navigation }): JSX.Element {
 
         <View>
           <CameraComponent
-            imageUri={imageUri}
+            imageUri={image}
             setImageUri={setImageUri}
             headerText="Then take a picture"
             needImage={false}

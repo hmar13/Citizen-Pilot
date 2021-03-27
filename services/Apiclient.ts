@@ -10,7 +10,7 @@ export const fetchUserData = (username: string, password: string) =>
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ username, password })
   })
-    .then(res => res.status <= 401 ? res : Promise.reject())
+    .then(res => res.status <= 401 ? res : Promise.reject(new Error('fail')))
     .then(res => res.status === 204 ? res : res.json())
     .catch(err => console.error('error', err));
 
@@ -25,7 +25,7 @@ export const postNewUser = (fname: string, lname: string, email: string, passwor
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ fname, lname, email, password })
   })
-    .then(res => res.status <= 401 ? res : Promise.reject())
+    .then(res => res.status <= 401 ? res : Promise.reject(new Error('fail')))
     .then(res => res.status === 204 ? res : res.json())
     .catch(err => console.error(err));
 
@@ -33,21 +33,21 @@ export const postNewUser = (fname: string, lname: string, email: string, passwor
 // Dashboard
 export const getAllNews = () =>
   fetch(`${baseUrl}/news`)
-    .then(res => res.status <= 401 ? res : Promise.reject())
+    .then(res => res.status <= 401 ? res : Promise.reject(new Error('fail')))
     .then(res => res.status === 204 ? res : res.json())
     .catch(err => console.log('error is:', err));
 
 // city contacts
 export const getContacts = () =>
   fetch(`${baseUrl}/contacts`)
-    .then(res => res.status <= 401 ? res : Promise.reject())
+    .then(res => res.status <= 401 ? res : Promise.reject(new Error('fail')))
     .then(res => res.status === 204 ? res : res.json())
     .catch(err => console.log('error is:', err));
 
 // projects
 export const getProjects = () =>
   fetch(`${baseUrl}/projects`)
-    .then(res => res.status <= 401 ? res : Promise.reject())
+    .then(res => res.status <= 401 ? res : Promise.reject(new Error('fail')))
     .then(res => res.status === 204 ? res : res.json())
     .catch(err => console.log('error is:', err));
 
@@ -63,43 +63,42 @@ export const getFavourites = (token: string) =>
       'Authorization': `Bearer ${token}`
     },
   })
-    .then(res => res.status <= 401 ? res : Promise.reject())
+    .then(res => res.status <= 401 ? res : Promise.reject(new Error('fail')))
     .then(res => res.status === 204 ? res : res.json())
     .catch(err => console.error(err));
 
 
-
-
 // Report a problem
-export const postProblem = (
-  urgency: boolean,
-  description: string,
-  longitude: number,
-  latitude: number,
-  category: string,
-  image: string,) =>
+export const postProblem = (token: string, report: any) =>
   fetch(`${baseUrl}/reports`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
+      'Authorization': `Bearer ${token}`
+    },
+    body: report
+  })
+    .then(res => { console.log(res); return res })
+    .then(res => res.status <= 401 ? res : Promise.reject(new Error('fail')))
+    .then(res => res.status === 204 ? res : res.json())
+    .catch(err => console.log('err', err));
+
+
+// Propose a solution
+export const postProposal = (token: string, proposal: any) =>
+  fetch(`${baseUrl}/proposal`, {
     method: 'POST',
     credentials: 'include',
     mode: 'cors',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ urgency, description, longitude, latitude, category, image })
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    },
+    body: JSON.stringify(proposal)
   })
     .then(res => res.status <= 401 ? res : Promise.reject())
     .then(res => res.status === 204 ? res : res.json())
     .catch(err => console.log(err));
-
-
-// Propose a solution
-// export const postProposal = (titleText: string, descriptionText: string, categoryTitle: string, imageUrl: string) =>
-//   fetch(`${baseUrl}/`, {
-//     method: 'POST',
-//     headers: { 'Content-Type': 'application/json' },
-//     body: JSON.stringify({})
-//   })
-//     .then(res => res.status <= 400 ? res : Promise.reject())
-//     .then(res => res.status === 204 ? res : res.json())
-//     .catch(err => console.log(err));
 
 
 // Proposals
