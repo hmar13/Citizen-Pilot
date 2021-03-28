@@ -26,7 +26,7 @@ export default function ReportProblem({ navigation }): JSX.Element {
   const [description, setText] = useState('');
   const [category, setCategory] = useState('Choose a category');
   const [image, setImageUri] = useState('');
-  const [urgency, setUrgency] = useState(true);
+  const [urgency, setUrgency] = useState(null);
   const [latitude, setLatitude] = useState(0);
   const [longitude, setLongitude] = useState(0);
 
@@ -54,6 +54,9 @@ export default function ReportProblem({ navigation }): JSX.Element {
   async function handleButtonClick() {
     if (category === 'Choose a category') {
       return Alert.alert('Please add a category');
+    }
+    if (image.length === 0 || description.length === 0) {
+      return Alert.alert('Please add a picture or add a description');
     }
     // code to url encode
     const formBody = [];
@@ -85,42 +88,54 @@ export default function ReportProblem({ navigation }): JSX.Element {
           setCategory={setCategory}
           category={category}
         />
-
-        <View>
-          <CameraComponent
-            imageUri={image}
-            setImageUri={setImageUri}
-            headerText="Then take a picture"
-            needImage={false}
-          />
-
-          <View style={styles.descriptionBox}>
-            <Text style={styles.text}>Write a brief description</Text>
-            <TextInput
-              label="Description"
-              multiline
-              value={description}
-              mode="outlined"
-              style={styles.input}
-              onChangeText={input => setText(input)}
+        {
+          (category !== 'Choose a category') &&
+          <View>
+            <CameraComponent
+              imageUri={image}
+              setImageUri={setImageUri}
+              headerText="Then take a picture"
+              needImage={false}
             />
           </View>
-        </View>
 
-        <View style={styles.urgent}>
-          <Text style={styles.text}>How urgent is your problem?</Text>
-          <UrgentButton setUrgency={setUrgency} />
-        </View>
+        }
+        {
+          (image.length !== 0) &&
+          <View>
+            <View style={styles.descriptionBox}>
+              <Text style={styles.text}>Write a brief description</Text>
+              <TextInput
+                label="Description"
+                multiline
+                value={description}
+                mode="outlined"
+                style={styles.input}
+                onChangeText={input => setText(input)}
+              />
+            </View>
+          </View>
+        }
+        {
+          description.length !== 0 &&
+          <View style={styles.urgent}>
+            <Text style={styles.text}>How urgent is your problem?</Text>
+            <UrgentButton setUrgency={setUrgency} />
+          </View>
+        }
 
-        <View style={styles.map}>
-          <Text style={styles.mapText}>Drag the pin to where the problem is</Text>
-          <MapPinDrop
-            latitude={latitude}
-            setLatitude={setLatitude}
-            longitude={longitude}
-            setLongitude={setLongitude}
-          />
-        </View>
+        {
+          (urgency !== null) &&
+          <View style={styles.map}>
+            <Text style={styles.mapText}>Drag the pin to where the problem is</Text>
+            <MapPinDrop
+              latitude={latitude}
+              setLatitude={setLatitude}
+              longitude={longitude}
+              setLongitude={setLongitude}
+            />
+          </View>
+        }
 
         <View style={styles.bottom}>
           <MessageReceivedModal isModalVisible={isModalVisible} setModalVisible={setModalVisible} />

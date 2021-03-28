@@ -110,7 +110,7 @@ export default function Camera({
       {imageUri.length > 0 && (
         <Card style={styles.image}>
           <Card.Cover source={{ uri: imageUri }} />
-          <Card.Actions>
+          <Card.Actions style={{ flexDirection: 'row-reverse' }}>
             <Button onPress={deletePicture}>Retake</Button>
           </Card.Actions>
         </Card>
