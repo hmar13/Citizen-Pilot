@@ -41,7 +41,7 @@ export default function ProposeSolution({ navigation }): JSX.Element {
 
 
   async function handleButtonClick() {
-    if (title === 'Choose a category') {
+    if (title === 'Choose a Location') {
       Alert.alert('Please choose a location');
     }
 
@@ -56,12 +56,11 @@ export default function ProposeSolution({ navigation }): JSX.Element {
 
     await postProposal(token, result);
 
-
     setModalVisible(true);
     setTimeout(() => {
       setModalVisible(false);
       navigation.navigate('Dashboard');
-    }, 2000);
+    }, 1600);
 
     setTitleText('');
     setDescriptionText('');
