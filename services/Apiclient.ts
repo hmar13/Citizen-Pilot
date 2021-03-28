@@ -67,6 +67,20 @@ export const getFavourites = (token: string) =>
     .then(res => res.status === 204 ? res : res.json())
     .catch(err => console.error(err));
 
+// add a favourite
+export const addFavourite = (token: string, favourite: any) =>
+  fetch(`${baseUrl}/favourites`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
+      'Authorization': `Bearer ${token}`
+    },
+    body: favourite
+  })
+    .then(res => res.status <= 401 ? res : Promise.reject(new Error('fail')))
+    .then(res => res.status === 204 ? res : res.json())
+    .catch(err => console.log('err', err));
+
 
 // Report a problem
 export const postProblem = (token: string, report: any) =>
@@ -118,3 +132,17 @@ export const postVote = (token: string, id: number) =>
     .then(res => res.status <= 400 ? res : Promise.reject(new Error('fail')))
     .then(res => res.status === 204 ? res : res.json())
     .catch(err => console.log(err));
+
+export const getVotes = (token: string) =>
+  fetch(`${baseUrl}/votes`, {
+    method: 'GET',
+    credentials: 'include',
+    mode: 'cors',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    },
+  })
+    .then(res => res.status <= 401 ? res : Promise.reject(new Error('fail')))
+    .then(res => res.status === 204 ? res : res.json())
+    .catch(err => console.error(err));

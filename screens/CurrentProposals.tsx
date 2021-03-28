@@ -1,23 +1,15 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Text, View, FlatList, StyleSheet } from 'react-native';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { RootState } from '../store/reducer';
 import CurrentProposalCard from '../components/CurrentProposalComponents/CurrentProposalCard';
 import HorizontalBanner from '../components/HorizontalBannerComponent';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-import { fetchProposals } from '../store/actions/dashboard';
 
 export default function CurrentProposalScreen(): JSX.Element {
-  const dispatch = useDispatch();
+
   const currentProposal = useSelector<RootState, any>(state => state.realProposals.state);
-
-  useEffect(() => {
-    const proposals = fetchProposals();
-    dispatch(proposals);
-  }, [currentProposal])
-
-
 
   return (
     <View style={styles.container}>
@@ -42,7 +34,7 @@ export default function CurrentProposalScreen(): JSX.Element {
             title={item.title}
             description={item.description}
             location={item.location}
-            img={item.img}
+            img={item.image}
             votes={item.votes}
           />
         )}
