@@ -74,7 +74,7 @@ const News = () => {
       <FlatList
         style={styles.flatlistContainer}
         data={selectedNews}
-        keyExtractor={item => item.id}
+        keyExtractor={item => String(item.id)}
         renderItem={({ item }) => (
 
 

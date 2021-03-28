@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import { StyleSheet, View, Text, ScrollView } from 'react-native';
 import { Button, Divider, Card, Title, Paragraph, Avatar, IconButton, Colors } from 'react-native-paper';
 import Modal from 'react-native-modal';
-import { useDispatch, useSelector } from 'react-redux';
+import { postVote } from '../../services/Apiclient';
+import { useSelector } from 'react-redux';
 import { RootState } from '../../store/reducer';
-// import { addVote } from '../../store/actions/currentProposals'
 import { MaterialIcons } from '@expo/vector-icons';
 
 
@@ -19,21 +19,20 @@ interface CurrentPropsalTypes {
 
 
 const CurrentProposalCard: React.FC<CurrentPropsalTypes> = ({ id, title, description, location, votes, img }) => {
-  // const voteID = useSelector((state: RootState) => {
-  //   return state.user.user.votes;
-  // });
-
   const [isModalVisible, setModalVisible] = useState(false);
   const toggleModal = () => {
     setModalVisible(!isModalVisible);
   }
 
-  const dispatch = useDispatch()
+  const token: string = useSelector((state: RootState) => {
+    return state.user.userData.token;
+  });
+
+
+
 
   const handleUpVote = (id: number) => {
-    // redux logic
-    // const action = addVote(id);
-    // dispatch(action);
+    postVote(token, id);
     toggleModal();
   }
 

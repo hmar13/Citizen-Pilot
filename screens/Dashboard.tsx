@@ -43,10 +43,6 @@ export default function Dashboard({ navigation }): JSX.Element {
   const [modalInfo, setModalInfo] = useState<newsInterface>(modalInitalState);
   const [isModalVisible, setModalVisible] = useState(false);
   const [isDialogVisible, setIsDialogVisible] = useState(false);
-  // DELETE ONCE API implemented
-  // const allNews = useSelector((state: RootState) => {
-  //   return state.newsData.news;
-  // })
 
   const allNews = useSelector((state: RootState) => {
     return state.realNews.state;
@@ -55,6 +51,7 @@ export default function Dashboard({ navigation }): JSX.Element {
   const token: string = useSelector((state: RootState) => {
     return state.user.userData.token;
   });
+
 
 
   useEffect(() => {

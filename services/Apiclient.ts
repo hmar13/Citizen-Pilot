@@ -106,13 +106,15 @@ export const getProposals = () =>
     .catch(err => console.log('error is:', err));
 
 
-// postVote(id)
-// export const postVote = (id) =>
-//   fetch(`${baseUrl}/`, {
-//     method: 'POST',
-//     headers: { 'Content-Type': 'application/json' },
-//     body: JSON.stringify({id})
-//   })
-//     .then(res => res.status <= 400 ? res : Promise.reject())
-//     .then(res => res.status === 204 ? res : res.json())
-//     .catch(err => console.log(err));
+// vote on current proposals
+export const postVote = (token: string, id: number) =>
+  fetch(`${baseUrl}/proposal/vote/${id}`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    },
+  })
+    .then(res => res.status <= 400 ? res : Promise.reject(new Error('fail')))
+    .then(res => res.status === 204 ? res : res.json())
+    .catch(err => console.log(err));
