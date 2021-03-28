@@ -10,7 +10,6 @@ import {
 import { Button, Avatar, IconButton } from 'react-native-paper';
 import Modal from 'react-native-modal';
 import { AnimatedCircularProgress } from 'react-native-circular-progress';
-// import {saveToFavourites} from '../../store/actions/?';
 
 interface ProjectItemsInterface {
   title: string;
@@ -67,7 +66,7 @@ const ProjectItems: React.FC<ProjectItemsInterface> = ({
               tintColor="#5ba4fc"
               backgroundColor="#3A4276">
               {
-                (fill) => (
+                () => (
                   <Text style={{ fontSize: 9 }}>
                     { projectedCompletion}%
                   </Text>
@@ -85,7 +84,6 @@ const ProjectItems: React.FC<ProjectItemsInterface> = ({
             <Avatar.Image size={120} source={{ uri: img }} />
             <Text style={styles.modalTitle}>{title}</Text>
             {/*
-
             <IconButton
               animated
               icon="heart"

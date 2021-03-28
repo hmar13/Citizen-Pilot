@@ -9,8 +9,6 @@ interface ModalInterface {
 }
 
 export default function MessageReceivedModal({ isModalVisible, setModalVisible }: ModalInterface): JSX.Element {
-
-
   return (
     <Modal style={styles.container} isVisible={isModalVisible} onBackdropPress={() => {
       setModalVisible(false);
@@ -38,7 +36,6 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     paddingHorizontal: 20,
     borderRadius: 15,
-
   },
   headerContainer: {
     alignItems: 'center',

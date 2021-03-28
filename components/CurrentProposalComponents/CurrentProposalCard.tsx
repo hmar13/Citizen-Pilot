@@ -69,7 +69,6 @@ const CurrentProposalCard: React.FC<CurrentPropsalTypes> = ({ id, title, descrip
     toggleModal();
   }
 
-
   return (
     <View style={{ flex: 1 }}>
 
@@ -194,7 +193,6 @@ const styles = StyleSheet.create({
     textAlign: 'right',
   },
   modalContainer: {
-
     backgroundColor: 'white',
     paddingHorizontal: 20,
     borderRadius: 15,
@@ -210,7 +208,6 @@ const styles = StyleSheet.create({
     justifyContent: 'space-evenly',
     marginBottom: 10,
     flexWrap: 'wrap'
-
   },
   modalTitle: {
     fontWeight: 'bold',

@@ -3,7 +3,6 @@ import { SAVE_PROPOSALS, UPVOTE_PROPOSAL } from '../actions/ActionTypes';
 
 const initialState = {};
 
-
 const realProposals = (state = initialState, action: PayloadAction<any>) => {
   switch (action.type) {
     case SAVE_PROPOSALS:
@@ -17,7 +16,6 @@ const realProposals = (state = initialState, action: PayloadAction<any>) => {
       return state
   }
 };
-
 
 
 export default realProposals;

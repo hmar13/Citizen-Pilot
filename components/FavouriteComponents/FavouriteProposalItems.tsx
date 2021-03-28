@@ -54,7 +54,6 @@ const FavouriteProposalItems: React.FC<FavouriteProposalItemsInterface> = ({
         </View>
       </TouchableOpacity>
 
-      {/* TODO: modal should go into a new folder */}
       <Modal
         isVisible={isModalVisible}
         onBackdropPress={() => {

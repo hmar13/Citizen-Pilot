@@ -1,6 +1,5 @@
 import { baseUrl } from '../appConfig'
 
-
 // Login
 export const fetchUserData = (username: string, password: string) =>
   fetch(`${baseUrl}/auth/login/user`, {

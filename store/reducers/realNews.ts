@@ -1,7 +1,5 @@
-/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import { PayloadAction } from '@reduxjs/toolkit';
 import { SAVE_NEWS } from '../actions/ActionTypes';
-
 
 const initialState = [];
 

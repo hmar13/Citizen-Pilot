@@ -26,25 +26,19 @@ const modalInitalState = {
   shortDescription: 'Description',
   longDescription: 'Description',
   location: 'In the city',
-  imgage: 'img',
+  image: 'img',
   date: 'date',
 };
 
 const News = () => {
   const [modalInfo, setModalInfo] = useState<newsInterface>(modalInitalState);
   const [isModalVisible, setModalVisible] = useState(false);
-  // const allNews = useSelector((state: RootState) => {
-  //   return state.newsData.news;
-  // });
 
   const allNews = useSelector((state: RootState) => {
     return state.realNews.state;
   });
 
-
-
   const [selectedNews, setSelectedNews] = useState(allNews);
-
 
   const sortCategory = (categoryName: string) => {
     if (categoryName === 'All') {
@@ -103,7 +97,6 @@ const News = () => {
         }}
       >
         <View style={styles.modalView}>
-          {/* how do I make Paragraph scrollable? if there is too much text, it will spill over card*/}
           <Card style={{ width: '110%', height: 490 }}>
             <Card.Content>
               <Card.Cover style={styles.cardCover} source={{ uri: modalInfo.image }} />

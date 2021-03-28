@@ -1,5 +1,5 @@
 import { Dispatch } from 'redux';
-import { USER_LOGIN, SAVE_FAVOURITES, SET_LOADING } from '../actions/ActionTypes';
+import { USER_LOGIN, SET_LOADING } from '../actions/ActionTypes';
 import { fetchUserData } from '../../services/Apiclient';
 import { Alert } from 'react-native';
 
@@ -17,20 +17,8 @@ export function fetchUser(username: string, password: string) {
         }
       })
       .catch(err => console.error(err));
-
-
   };
 }
-
-// export function fetchFavourites (userID: number) {
-//   return function (dispatch: Dispatch) {
-//     getUserFavourites(userID)
-//       .then((favourites: []) => {
-//         dispatch(setFavourites(favourites));
-//       })
-//   };
-// }
-
 
 export const userLogin = (userData: any) => ({
   type: USER_LOGIN,
@@ -45,8 +33,4 @@ export function setLogin(isLoggedIn: boolean) {
 }
 
 
-export const setFavourites = (favourites: string) => ({
-  type: SAVE_FAVOURITES,
-  payload: favourites,
 
-});

@@ -1,8 +1,6 @@
 import { PayloadAction } from '@reduxjs/toolkit';
 import { SAVE_FAVOURITES } from '../actions/ActionTypes';
 
-
-
 const initialState = {};
 
 const realFavourites = (state = initialState, action: PayloadAction<string>) => {
@@ -13,7 +11,5 @@ const realFavourites = (state = initialState, action: PayloadAction<string>) => 
       return state;
   }
 };
-
-
 
 export default realFavourites;

@@ -11,8 +11,6 @@ import {
   from './ActionTypes';
 import { getAllNews, getContacts, getProjects, getProposals, getFavourites, getVotes } from '../../services/Apiclient';
 
-
-
 export function fetchNews() {
   return function (dispatch: Dispatch) {
     getAllNews()
@@ -63,13 +61,11 @@ export function fetchProposals() {
   };
 }
 
-
 export const setProposals = (proposals: []) => ({
   type: SAVE_PROPOSALS,
   payload: proposals
 
 });
-
 
 export function fetchFavourites(token: string) {
   return function (dispatch: Dispatch) {
@@ -87,7 +83,6 @@ export const setFavourites = (favourites: []) => ({
 });
 
 
-
 export function fetchVotes(token: string) {
   return function (dispatch: Dispatch) {
     getVotes(token)
@@ -96,7 +91,6 @@ export function fetchVotes(token: string) {
       })
   };
 }
-
 
 export const setVotes = (Votes: []) => ({
   type: SET_VOTES,

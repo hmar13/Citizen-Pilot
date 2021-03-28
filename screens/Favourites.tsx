@@ -63,7 +63,6 @@ export default function Favourites(): JSX.Element {
   );
 };
 
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,

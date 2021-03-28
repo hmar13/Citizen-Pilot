@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import { PayloadAction } from '@reduxjs/toolkit';
 import { SAVE_CONTACTS } from '../actions/ActionTypes';
 

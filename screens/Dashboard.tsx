@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import React, { useState, useEffect } from 'react';
 import {
   StyleSheet,
@@ -53,7 +52,6 @@ export default function Dashboard({ navigation }): JSX.Element {
     return state.user.userData.token;
   });
 
-
   useEffect(() => {
     const news = fetchNews();
     dispatch(news);
@@ -69,21 +67,7 @@ export default function Dashboard({ navigation }): JSX.Element {
     dispatch(votes);
   }, [])
 
-
-
-  // useEffect(() => {
-  //   const contacts = fetchContacts();
-  //   dispatch(contacts);
-  //   const projects = fetchProjects();
-  //   dispatch(projects);
-  //   const proposals = fetchProposals();
-  //   dispatch(proposals);
-  // }, [dispatch]);
-
-
   const showDialog = () => setIsDialogVisible(true);
-
-
 
   return (
     <View style={{ flex: 1, backgroundColor: '#E5E5E5' }}>
@@ -152,7 +136,6 @@ export default function Dashboard({ navigation }): JSX.Element {
         }}
       >
         <View style={styles.modalView}>
-          {/* how do I make Paragraph scrollable? if there is too much text, it will spill over card*/}
           <Card style={{ width: '110%', height: 490 }}>
             <Card.Content>
               <Card.Cover style={styles.cardCover} source={{ uri: modalInfo.image }} />
@@ -228,10 +211,6 @@ const styles = StyleSheet.create({
   newsCaption: {
     fontSize: 25,
     fontWeight: 'bold',
-    // paddingLeft: 25,
-
-    // marginTop: -10
-
   },
   modalView: {
     overflow: 'scroll',

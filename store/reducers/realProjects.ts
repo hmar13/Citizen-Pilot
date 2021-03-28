@@ -1,7 +1,5 @@
 import { PayloadAction } from '@reduxjs/toolkit';
-
 import { SAVE_PROJECTS } from '../actions/ActionTypes';
-
 
 const initialState = {};
 
@@ -13,7 +11,5 @@ const realProjects = (state = initialState, action: PayloadAction<string>) => {
       return state;
   }
 };
-
-
 
 export default realProjects;
