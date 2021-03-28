@@ -9,10 +9,6 @@ import { FontAwesome5 } from '@expo/vector-icons';
 
 
 const Projects = () => {
-  // const allProjects = useSelector((state: RootState) => {
-  //   return state.cityProjects.projects;
-  // });
-
   const allProjects = useSelector((state: RootState) => {
     return state.realProjects.state;
   });

@@ -4,10 +4,12 @@ import {
   SAVE_CONTACTS,
   SAVE_PROJECTS,
   SAVE_PROPOSALS,
-  SAVE_FAVOURITES
+  SAVE_FAVOURITES,
+  SET_VOTES
+
 }
   from './ActionTypes';
-import { getAllNews, getContacts, getProjects, getProposals, getFavourites } from '../../services/Apiclient';
+import { getAllNews, getContacts, getProjects, getProposals, getFavourites, getVotes } from '../../services/Apiclient';
 
 
 
@@ -82,6 +84,23 @@ export function fetchFavourites(token: string) {
 export const setFavourites = (favourites: []) => ({
   type: SAVE_FAVOURITES,
   payload: favourites
+});
+
+
+
+export function fetchVotes(token: string) {
+  return function (dispatch: Dispatch) {
+    getVotes(token)
+      .then((Votes: []) => {
+        dispatch(setVotes(Votes));
+      })
+  };
+}
+
+
+export const setVotes = (Votes: []) => ({
+  type: SET_VOTES,
+  payload: Votes
 });
 
 

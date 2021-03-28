@@ -15,7 +15,8 @@ import {
   fetchContacts,
   fetchProjects,
   fetchProposals,
-  fetchFavourites
+  fetchFavourites,
+  fetchVotes
 }
   from '../store/actions/dashboard';
 
@@ -53,7 +54,6 @@ export default function Dashboard({ navigation }): JSX.Element {
   });
 
 
-
   useEffect(() => {
     const news = fetchNews();
     dispatch(news);
@@ -65,6 +65,8 @@ export default function Dashboard({ navigation }): JSX.Element {
     dispatch(proposals);
     const favourites = fetchFavourites(token);
     dispatch(favourites);
+    const votes = fetchVotes(token);
+    dispatch(votes);
   }, [])
 
 

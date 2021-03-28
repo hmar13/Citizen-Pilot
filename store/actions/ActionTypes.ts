@@ -11,6 +11,8 @@ export const SAVE_NEWS = 'SAVE_NEWS';
 export const SAVE_CONTACTS = 'SAVE_CONTACTS';
 export const SAVE_PROJECTS = 'SAVE_PROJECTS';
 
+export const SET_VOTES = 'SET_VOTES';
+
 
 // Proposals
 export const SAVE_PROPOSALS = 'SAVE_PROPOSALS';

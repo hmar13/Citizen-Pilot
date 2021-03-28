@@ -1,27 +1,36 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   Text,
   View,
   FlatList,
   StyleSheet,
 } from 'react-native';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../store/reducer';
+import { fetchFavourites } from '../store/actions/dashboard';
 import FavouriteProposalItems from '../components/FavouriteComponents/FavouriteProposalItems';
 import HorizontalBannerComponent from '../components/HorizontalBannerComponent';
 import { MaterialIcons } from '@expo/vector-icons';
 
 
-const Favourites = () => {
-  // const myFavourites = useSelector((state: RootState) => {
-  //   return state.myFavourites.favourites;
-  // });
-
+export default function Favourites(): JSX.Element {
+  const dispatch = useDispatch();
 
   const myFavourites = useSelector((state: RootState) => {
     return state.realFavourites.state;
   });
+
+  const token: string = useSelector((state: RootState) => {
+    return state.user.userData.token;
+  });
+
+
+  useEffect(() => {
+    const favourites = fetchFavourites(token);
+    dispatch(favourites);
+  }, [])
+
 
 
   return (
@@ -39,7 +48,7 @@ const Favourites = () => {
           </Text>
 
         }
-        keyExtractor={item => item.id}
+        keyExtractor={item => String(item.id)}
         renderItem={({ item }) =>
           <FavouriteProposalItems
             title={item.title}
@@ -54,7 +63,6 @@ const Favourites = () => {
   );
 };
 
-export default Favourites;
 
 const styles = StyleSheet.create({
   container: {
