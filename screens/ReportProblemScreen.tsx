@@ -11,6 +11,7 @@ import {
 import { TextInput, Button } from 'react-native-paper'
 import { useSelector } from 'react-redux';
 import { RootState } from '../store/reducer';
+import { uploadImage } from '../services/Firebaseclient';
 import { postProblem } from '../services/Apiclient';
 import CameraComponent from '../components/ReportProblem/CameraComponent';
 import UrgentButton from '../components/ReportProblem/UrgentButtonComponent';
@@ -35,6 +36,7 @@ export default function ReportProblem({ navigation }): JSX.Element {
   });
 
 
+
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(position => {
       setLatitude(position.coords.latitude);
@@ -42,21 +44,24 @@ export default function ReportProblem({ navigation }): JSX.Element {
     });
   }, []);
 
-  const details = {
-    "urgency": urgency,
-    "description": description,
-    "longitude": longitude,
-    "latitude": latitude,
-    "category": category,
-    "image": image
-  }
 
-  async function handleButtonClick() {
+  const handleButtonClick = async () => {
     if (category === 'Choose a category') {
       return Alert.alert('Please add a category');
     }
     if (image.length === 0 || description.length === 0) {
       return Alert.alert('Please add a picture or add a description');
+    }
+
+    const imageurl = await uploadImage(image, 'reportedProblems', description);
+
+    const details = {
+      "urgency": urgency,
+      "description": description,
+      "longitude": longitude,
+      "latitude": latitude,
+      "category": category,
+      "image": imageurl
     }
     // code to url encode
     const formBody = [];
