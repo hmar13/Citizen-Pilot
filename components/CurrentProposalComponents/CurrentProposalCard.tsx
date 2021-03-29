@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { StyleSheet, View, Text, ScrollView } from 'react-native';
 import { Button, Divider, Card, Title, Paragraph, Avatar, IconButton, Colors } from 'react-native-paper';
 import Modal from 'react-native-modal';
-import { useDispatch, useSelector } from 'react-redux';
+import { fetchProposals, fetchVotes } from '../../store/actions/dashboard';
+import { postVote, addFavourite } from '../../services/Apiclient';
+import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../store/reducer';
-// import { addVote } from '../../store/actions/currentProposals'
 import { MaterialIcons } from '@expo/vector-icons';
 
 
@@ -19,24 +20,54 @@ interface CurrentPropsalTypes {
 
 
 const CurrentProposalCard: React.FC<CurrentPropsalTypes> = ({ id, title, description, location, votes, img }) => {
-  // const voteID = useSelector((state: RootState) => {
-  //   return state.user.user.votes;
-  // });
-
+  const dispatch = useDispatch();
+  const [render, setRender] = useState(false);
   const [isModalVisible, setModalVisible] = useState(false);
+
+  const token: string = useSelector((state: RootState) => {
+    return state.user.userData.token;
+  });
+
   const toggleModal = () => {
     setModalVisible(!isModalVisible);
   }
 
-  const dispatch = useDispatch()
+  const storeVotes = useSelector((state: RootState) => state.votes.state);
+  const filteredVotes = storeVotes.map((vote: any) => vote.proposalId)
 
-  const handleUpVote = (id: number) => {
-    // redux logic
-    // const action = addVote(id);
-    // dispatch(action);
-    toggleModal();
+
+  useEffect(() => {
+    const proposals = fetchProposals();
+    dispatch(proposals);
+    const votes = fetchVotes(token);
+    dispatch(votes);
+  }, [render])
+
+
+  const details = {
+    "title": title,
+    "type": 'something',
+    "description": description,
+    "location": location,
+    "image": img,
+    "votes": votes,
+    "completion": '0'
   }
 
+
+  const handleUpVote = (id: number) => {
+    const formBody = [];
+    for (let property in details) {
+      const encodedKey = encodeURIComponent(property);
+      const encodedValue = encodeURIComponent(details[property]);
+      formBody.push(`${encodedKey}=${encodedValue}`);
+    };
+    const favourite = formBody.join("&");
+    addFavourite(token, favourite)
+    postVote(token, id);
+    setRender(!render);
+    toggleModal();
+  }
 
   return (
     <View style={{ flex: 1 }}>
@@ -59,6 +90,7 @@ const CurrentProposalCard: React.FC<CurrentPropsalTypes> = ({ id, title, descrip
         </Card.Actions>
       </Card>
 
+
       <Modal isVisible={isModalVisible}>
         <ScrollView style={styles.modalContainer}>
           <View style={styles.modalInformationContainer}>
@@ -80,21 +112,27 @@ const CurrentProposalCard: React.FC<CurrentPropsalTypes> = ({ id, title, descrip
             <Text>{description}</Text>
           </View>
 
-          <View style={styles.modalVote}>
-            <Text style={{ textAlign: 'center', fontWeight: 'bold' }}>Give this project your vote and make your community a better place</Text>
-
-            {/* {if voteID.includes(id) ? disable IconButton : show IconButton } */}
-
-
-            <IconButton
-              icon="thumb-up"
-              color={Colors.blue500}
-              size={25}
-              animated
-              onPress={() => handleUpVote(id)}
-            />
-          </View>
-
+          {
+            (filteredVotes.includes(id)) ?
+              <View style={styles.modalVote}>
+                <Text style={{ textAlign: 'center', fontWeight: 'bold', marginBottom: 30 }}>
+                  You've already voted for this project!
+                </Text>
+              </View>
+              :
+              <View style={styles.modalVote}>
+                <Text style={{ textAlign: 'center', fontWeight: 'bold' }}>
+                  Give this project your vote and make your community a better place
+                </Text>
+                <IconButton
+                  icon="thumb-up"
+                  color={Colors.blue500}
+                  size={25}
+                  animated
+                  onPress={() => handleUpVote(id)}
+                />
+              </View>
+          }
 
           <Button style={{ alignSelf: 'flex-end' }} onPress={toggleModal}>close</Button>
         </ScrollView>
@@ -113,8 +151,6 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     width: '80%',
     marginBottom: 15,
-    // height: 490,
-
   },
   cardCover: {
     borderRadius: 10,
@@ -157,7 +193,6 @@ const styles = StyleSheet.create({
     textAlign: 'right',
   },
   modalContainer: {
-
     backgroundColor: 'white',
     paddingHorizontal: 20,
     borderRadius: 15,
@@ -173,7 +208,6 @@ const styles = StyleSheet.create({
     justifyContent: 'space-evenly',
     marginBottom: 10,
     flexWrap: 'wrap'
-
   },
   modalTitle: {
     fontWeight: 'bold',

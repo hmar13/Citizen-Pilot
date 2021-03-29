@@ -11,25 +11,36 @@ import { BottomTabBar } from '@react-navigation/bottom-tabs';
 import BottomTabs from '../navigation/navBarBare';
 
 const Contacts = () => {
+  // const allContacts = useSelector((state: RootState) => {
+  //   return state.cityContacts.contacts;
+  // });
   const allContacts = useSelector((state: RootState) => {
-    return state.cityContacts.contacts;
+    return state.realContacts.state;
   });
+
+
   return (
     <View style={styles.container}>
       <HorizontalBanner />
       <View style={styles.headerContainer}>
         <MaterialIcons name="contacts" size={35} color="#3A4276" />
-        {/* <FontAwesome5 name="hammer" size={35} color="#3A4276" /> */}
         <Text style={styles.headerText}>City Contacts</Text>
       </View>
+      {
+        allContacts.length === 0 &&
+        <View>
+          <Text style={styles.newsText}>Sorry, we haven't published any contacts yet!</Text>
+        </View>
+
+      }
       <FlatList
         style={styles.flatlistContainer}
         data={allContacts}
-        keyExtractor={item => item.id}
+        keyExtractor={item => String(item.id)}
         renderItem={({ item }) => (
           <ContactItems
             title={item.title}
-            phoneNumber={item.phoneNumber}
+            phoneNumber={item.phone}
             email={item.email}
             img={item.img}
           />
@@ -58,6 +69,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     paddingBottom: 5,
+  },
+  newsText: {
+    marginTop: '50%',
+    color: 'black',
+    fontFamily: 'monospace',
+    textAlign: 'center'
   },
   headerText: {
     alignSelf: 'center',

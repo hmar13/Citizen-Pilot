@@ -12,8 +12,7 @@ export default function Login({ navigation }): JSX.Element {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  // API logic goes here
-  const handleButtonPress = () => {
+  const handleButtonPress = async () => {
     if (!email) {
       setPassword('');
       setEmail('');
@@ -25,20 +24,10 @@ export default function Login({ navigation }): JSX.Element {
       return Alert.alert('Password field is required.');
     }
 
-    // redux/fetch logic
-    // const action = fetchUser(email, password);
-    // dispatch(action)
-
-
-    // if (dispatch was a success) {
-    // setPassword('');
-    // setEmail('');
-    // return navigation.navigate('Dashboard');
-    // } else {
-    // setPassword('');
-    // setEmail('');
-    // return Alert.alert('Something went wrong. Please try again');
-    // }
+    const action = await fetchUser(email, password);
+    await dispatch(action);
+    setPassword('');
+    setEmail('');
   };
 
   return (
@@ -54,6 +43,7 @@ export default function Login({ navigation }): JSX.Element {
             value={email}
             setItem={setEmail}
             isDisabled={false}
+            secureText={false}
           />
           <TextInputComponent
             text="Add your password"
@@ -61,6 +51,7 @@ export default function Login({ navigation }): JSX.Element {
             value={password}
             setItem={setPassword}
             isDisabled={false}
+            secureText={true}
           />
         </View>
         <ButtonComponent

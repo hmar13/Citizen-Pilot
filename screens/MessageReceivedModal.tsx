@@ -1,6 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, Text } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
+import { StyleSheet, View, Text, Image } from 'react-native';
 import Modal from 'react-native-modal';
 
 interface ModalInterface {
@@ -9,16 +8,14 @@ interface ModalInterface {
 }
 
 export default function MessageReceivedModal({ isModalVisible, setModalVisible }: ModalInterface): JSX.Element {
-
-
   return (
     <Modal style={styles.container} isVisible={isModalVisible} onBackdropPress={() => {
       setModalVisible(false);
     }} >
       <View style={styles.headerContainer}>
         <Text style={styles.headerText}>Thanks</Text>
-        {/* Đorđe's awesome animation  goes here */}
-        <Ionicons name="checkmark-circle" size={100} color="black" />
+        <Image source={require('../assets/9613-tick.gif')} style={styles.gif} />
+
       </View>
       <View style={styles.messageContainer}>
         <Text style={styles.message}> We have received your message</Text>
@@ -38,7 +35,6 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     paddingHorizontal: 20,
     borderRadius: 15,
-
   },
   headerContainer: {
     alignItems: 'center',
@@ -53,5 +49,10 @@ const styles = StyleSheet.create({
   },
   message: {
     marginBottom: 10,
+  },
+  gif: {
+    height: 180,
+    width: 180
+
   }
 })

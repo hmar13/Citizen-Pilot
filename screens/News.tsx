@@ -26,25 +26,25 @@ const modalInitalState = {
   shortDescription: 'Description',
   longDescription: 'Description',
   location: 'In the city',
-  img: 'img',
+  image: 'img',
   date: 'date',
 };
 
 const News = () => {
   const [modalInfo, setModalInfo] = useState<newsInterface>(modalInitalState);
   const [isModalVisible, setModalVisible] = useState(false);
+
   const allNews = useSelector((state: RootState) => {
-    return state.newsData.news;
+    return state.realNews.state;
   });
 
   const [selectedNews, setSelectedNews] = useState(allNews);
-
 
   const sortCategory = (categoryName: string) => {
     if (categoryName === 'All') {
       return setSelectedNews(allNews);
     }
-    const chosenNews = allNews.filter(newsItem => newsItem.category.includes(categoryName))
+    const chosenNews = allNews.filter((newsItem: any) => newsItem.categories.includes(categoryName))
     if (chosenNews.length === 0) return;
     setSelectedNews(chosenNews);
   }
@@ -58,11 +58,17 @@ const News = () => {
       </View>
 
       <SortByCategory sortCategory={sortCategory} />
+      {
+        allNews.length === 0 &&
+        <View>
+          <Text style={styles.noNewsText}>Sorry, there aren't any public announcements at the moment</Text>
+        </View>
 
+      }
       <FlatList
         style={styles.flatlistContainer}
         data={selectedNews}
-        keyExtractor={item => item.id}
+        keyExtractor={item => String(item.id)}
         renderItem={({ item }) => (
 
 
@@ -71,7 +77,7 @@ const News = () => {
             setModalVisible(true);
           }}>
             <View style={styles.container}>
-              <IconComponent category={item.category} />
+              <IconComponent category={item.categories} />
               <View style={styles.secondColumn}>
                 <View style={styles.textBox}>
                   <Text style={styles.title}>{item.title}</Text>
@@ -91,10 +97,9 @@ const News = () => {
         }}
       >
         <View style={styles.modalView}>
-          {/* how do I make Paragraph scrollable? if there is too much text, it will spill over card*/}
           <Card style={{ width: '110%', height: 490 }}>
             <Card.Content>
-              <Card.Cover style={styles.cardCover} source={{ uri: modalInfo.img }} />
+              <Card.Cover style={styles.cardCover} source={{ uri: modalInfo.image }} />
               <Title style={{ marginTop: 7 }}>{modalInfo.title}</Title>
               <Divider />
               <Paragraph style={{ marginTop: 10 }}>{modalInfo.longDescription}</Paragraph>
@@ -106,7 +111,6 @@ const News = () => {
           </Button>
         </View>
       </Modal>
-
     </Provider>
   );
 };
@@ -126,6 +130,12 @@ const styles = StyleSheet.create({
     shadowOpacity: 2,
     shadowRadius: 1,
     elevation: 3,
+  },
+  noNewsText: {
+    marginTop: '50%',
+    color: 'black',
+    fontFamily: 'monospace',
+    textAlign: 'center'
   },
   banner: {
     borderBottomLeftRadius: 15,

@@ -1,50 +1,36 @@
-import { SAVE_REPORT } from '../actions/ActionTypes';
-import { USER_LOGIN, SAVE_FAVOURITES, } from '../actions/ActionTypes';
-import problemInterface from '../../interfaces/problemInterface';
+import { Dispatch } from 'redux';
+import { USER_LOGIN, SET_LOADING } from '../actions/ActionTypes';
+import { fetchUserData } from '../../services/Apiclient';
+import { Alert } from 'react-native';
 
-// interface Req {
-//   user: {
-//     id: number;
-//     fname: string;
-//     lname: string;
-//     email: string;
-//     createdAt: string;
-//     updatedAt: string;
-//   },
-//   token: string;
-// }
 
-// import { fetchUserData } from '../../services/Apiclient';
-
-// export function fetchUser(username: string, password: string) {
-//   return function (dispatch) {
-//     fetchUserData(username, password)
-//       .then((user: Req) => {
-//         dispatch(userLogin(user));
-//       })
-    //     .finally(() => {
-    //       dispatch(setLoading(false));
-    //     });
+export function fetchUser(username: string, password: string) {
+  return function (dispatch: Dispatch) {
+    fetchUserData(username, password)
+      .then((user) => {
+        if (!user.error) {
+          dispatch(userLogin(user));
+          dispatch(setLogin(true));
+        }
+        else {
+          Alert.alert('Invalid username or password');
+        }
+      })
+      .catch(err => console.error(err));
   };
 }
 
-// export function fetchFavourites (userID: number) {
-//   return function (dispatch) {
-//     getUserFavourites(userID)
-//       .then((favourites: []) => {
-//         dispatch(setFavourites(favourites));
-//       })
-//   };
-// }
-
-
-export const userLogin = (user: Req) => ({
+export const userLogin = (userData: any) => ({
   type: USER_LOGIN,
-  payload: user
+  payload: userData,
 });
 
-export const setFavourites = (favourites: string) => ({
-  type: SAVE_FAVOURITES,
-  payload: favourites,
+export function setLogin(isLoggedIn: boolean) {
+  return {
+    type: SET_LOADING,
+    payload: isLoggedIn
+  };
+}
 
-});
+
+

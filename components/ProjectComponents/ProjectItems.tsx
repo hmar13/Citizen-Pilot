@@ -10,7 +10,6 @@ import {
 import { Button, Avatar, IconButton } from 'react-native-paper';
 import Modal from 'react-native-modal';
 import { AnimatedCircularProgress } from 'react-native-circular-progress';
-// import {saveToFavourites} from '../../store/actions/?';
 
 interface ProjectItemsInterface {
   title: string;
@@ -32,14 +31,15 @@ const ProjectItems: React.FC<ProjectItemsInterface> = ({
     setModalVisible(!isModalVisible);
   };
 
-  let projectProgress = parseFloat(projectedCompletion);
 
-  const [heartColour, setHeartColour] = useState('grey')
-  const handleAddtoFavouritesPress = () => {
-    setHeartColour('#ad0f5c');
-    //   const action = saveToFavourites();
-    //   dispatch(action);
-  }
+  let projectProgress = +projectedCompletion;
+
+  // const [heartColour, setHeartColour] = useState('grey')
+  // const handleAddtoFavouritesPress = () => {
+  //   setHeartColour('#ad0f5c');
+  //   //   const action = saveToFavourites();
+  //   //   dispatch(action);
+  // }
 
   return (
     <View>
@@ -66,9 +66,9 @@ const ProjectItems: React.FC<ProjectItemsInterface> = ({
               tintColor="#5ba4fc"
               backgroundColor="#3A4276">
               {
-                (fill) => (
+                () => (
                   <Text style={{ fontSize: 9 }}>
-                    { projectedCompletion}
+                    { projectedCompletion}%
                   </Text>
                 )
               }
@@ -83,15 +83,14 @@ const ProjectItems: React.FC<ProjectItemsInterface> = ({
           <View style={styles.modalInformationContainer}>
             <Avatar.Image size={120} source={{ uri: img }} />
             <Text style={styles.modalTitle}>{title}</Text>
-
-            {/* check if already added to favourites, show color accordingly */}
+            {/*
             <IconButton
               animated
               icon="heart"
               color={heartColour}
               size={20}
               onPress={handleAddtoFavouritesPress}
-            />
+            /> */}
           </View>
 
           <View style={styles.modalTextContainer}>

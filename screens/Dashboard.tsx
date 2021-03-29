@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import React, { useState, useEffect } from 'react';
 import {
   StyleSheet,
@@ -10,13 +9,15 @@ import {
 } from 'react-native';
 import Modal from 'react-native-modal';
 import { useSelector, useDispatch } from 'react-redux';
-// import {
-//   fetchNews,
-//   fetchContacts,
-//   fetchProjects,
-//   fetchProposals
-// }
-//   from '../store/actions/user';
+import {
+  fetchNews,
+  fetchContacts,
+  fetchProjects,
+  fetchProposals,
+  fetchFavourites,
+  fetchVotes
+}
+  from '../store/actions/dashboard';
 
 import { Button, Divider, Card, Title, Paragraph, IconButton } from 'react-native-paper';
 import { RootState } from '../store/reducer';
@@ -33,7 +34,7 @@ const modalInitalState = {
   shortDescription: 'Description',
   longDescription: 'Description',
   location: 'In the city',
-  img: 'img',
+  image: 'img',
   date: 'date',
 };
 
@@ -42,34 +43,31 @@ export default function Dashboard({ navigation }): JSX.Element {
   const [modalInfo, setModalInfo] = useState<newsInterface>(modalInitalState);
   const [isModalVisible, setModalVisible] = useState(false);
   const [isDialogVisible, setIsDialogVisible] = useState(false);
-  // DELETE ONCE API implemented
+
   const allNews = useSelector((state: RootState) => {
-    return state.newsData.news;
+    return state.realNews.state;
   });
 
-  // FOR API CALL
-  // const userID = useSelector((state: RootState) => {
-  //   return state.user.id;
-  // });
+  const token: string = useSelector((state: RootState) => {
+    return state.user.userData.token;
+  });
 
-  // To get news, contacts, projects, proposals
-  // NOTE: This doesn't feel right. Can I make this shorter?
-
-  // useEffect(() => {
-  //   const news = fetchNews();
-  //   dispatch(news);
-  //   const contacts = fetchContacts();
-  //   dispatch(contacts);
-  //   const projects = fetchProjects();
-  //   dispatch(projects);
-  //   const proposals = fetchProposals();
-  //   dispatch(proposals);
-  // }, [dispatch]);
-
+  useEffect(() => {
+    const news = fetchNews();
+    dispatch(news);
+    const contacts = fetchContacts();
+    dispatch(contacts);
+    const projects = fetchProjects();
+    dispatch(projects);
+    const proposals = fetchProposals();
+    dispatch(proposals);
+    const favourites = fetchFavourites(token);
+    dispatch(favourites);
+    const votes = fetchVotes(token);
+    dispatch(votes);
+  }, [])
 
   const showDialog = () => setIsDialogVisible(true);
-
-
 
   return (
     <View style={{ flex: 1, backgroundColor: '#E5E5E5' }}>
@@ -90,13 +88,24 @@ export default function Dashboard({ navigation }): JSX.Element {
             onPress={showDialog}
           />
         </View>
+        {
+          (allNews === undefined || allNews.length === 0) &&
+          <View>
+            <Image
+              style={styles.picture}
+              source={require('../assets/images/stockimages/Reminders.jpg')}
+            />
+            <View style={styles.textConteiner}>
+              <Text style={styles.newsText}>There is nothing to report at the moment</Text>
+            </View>
+          </View>
+
+        }
         <FlatList
-          decelerationRate="fast"
-          snapToInterval={350}
           showsHorizontalScrollIndicator={false}
           horizontal={true}
-          data={allNews.slice(0, 3)}
-          keyExtractor={item => item.id}
+          data={allNews}
+          keyExtractor={item => item.id.toString()}
           renderItem={({ item }) =>
 
             <TouchableOpacity
@@ -106,8 +115,8 @@ export default function Dashboard({ navigation }): JSX.Element {
                 setModalVisible(true);
               }}
             >
-              <View key={item.id} >
-                <Image style={styles.picture} source={{ uri: item.img }} />
+              <View >
+                <Image style={styles.picture} source={{ uri: item.image }} />
                 <View style={styles.textConteiner}>
                   <Text style={styles.newsText}>{item.shortDescription}</Text>
                 </View>
@@ -127,10 +136,9 @@ export default function Dashboard({ navigation }): JSX.Element {
         }}
       >
         <View style={styles.modalView}>
-          {/* how do I make Paragraph scrollable? if there is too much text, it will spill over card*/}
           <Card style={{ width: '110%', height: 490 }}>
             <Card.Content>
-              <Card.Cover style={styles.cardCover} source={{ uri: modalInfo.img }} />
+              <Card.Cover style={styles.cardCover} source={{ uri: modalInfo.image }} />
               <Title style={{ marginTop: 7 }}>{modalInfo.title}</Title>
               <Divider />
               <Paragraph style={{ marginTop: 10 }}>{modalInfo.longDescription}</Paragraph>
@@ -182,6 +190,7 @@ const styles = StyleSheet.create({
     height: 220,
   },
   newsText: {
+    paddingLeft: 15,
     fontSize: 16,
     textAlign: 'center',
     width: 300,
@@ -202,10 +211,6 @@ const styles = StyleSheet.create({
   newsCaption: {
     fontSize: 25,
     fontWeight: 'bold',
-    // paddingLeft: 25,
-
-    // marginTop: -10
-
   },
   modalView: {
     overflow: 'scroll',

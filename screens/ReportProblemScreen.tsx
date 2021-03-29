@@ -8,8 +8,10 @@ import {
   Text,
   ScrollView,
 } from 'react-native';
-import { TextInput, Button } from 'react-native-paper';
-// import { postProblem } from '../services/Apiclient';
+import { TextInput, Button } from 'react-native-paper'
+import { useSelector } from 'react-redux';
+import { RootState } from '../store/reducer';
+import { postProblem } from '../services/Apiclient';
 import CameraComponent from '../components/ReportProblem/CameraComponent';
 import UrgentButton from '../components/ReportProblem/UrgentButtonComponent';
 import ListAccordion from '../components/ReportProblem/ListAccordion';
@@ -21,12 +23,17 @@ import { Foundation } from '@expo/vector-icons';
 
 export default function ReportProblem({ navigation }): JSX.Element {
   const [isModalVisible, setModalVisible] = useState(false);
-  const [text, setText] = useState('');
-  const [categoryTitle, setCategoryTitle] = useState('Choose a category');
-  const [imageUri, setImageUri] = useState('');
-  const [urgency, setUrgency] = useState(true);
+  const [description, setText] = useState('');
+  const [category, setCategory] = useState('Choose a category');
+  const [image, setImageUri] = useState('');
+  const [urgency, setUrgency] = useState(null);
   const [latitude, setLatitude] = useState(0);
   const [longitude, setLongitude] = useState(0);
+
+  const token: string = useSelector((state: RootState) => {
+    return state.user.userData.token;
+  });
+
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(position => {
@@ -35,13 +42,32 @@ export default function ReportProblem({ navigation }): JSX.Element {
     });
   }, []);
 
-  // handles API call to save new problem to database
+  const details = {
+    "urgency": urgency,
+    "description": description,
+    "longitude": longitude,
+    "latitude": latitude,
+    "category": category,
+    "image": image
+  }
+
   async function handleButtonClick() {
-    // if (categoryTitle === 'Choose a category') {
-    //   return Alert.alert('Please add a category');
-    // }
-    // const imageUrl = await firebasecall(imageUri);
-    // await postProblem(categoryTitle, imageUrl, urgency, text, latitude, longitude );
+    if (category === 'Choose a category') {
+      return Alert.alert('Please add a category');
+    }
+    if (image.length === 0 || description.length === 0) {
+      return Alert.alert('Please add a picture or add a description');
+    }
+    // code to url encode
+    const formBody = [];
+    for (let property in details) {
+      const encodedKey = encodeURIComponent(property);
+      const encodedValue = encodeURIComponent(details[property]);
+      formBody.push(`${encodedKey}=${encodedValue}`);
+    };
+    const result = formBody.join("&");
+
+    await postProblem(token, result);
     setModalVisible(true);
     setTimeout(() => {
       setModalVisible(false);
@@ -59,45 +85,57 @@ export default function ReportProblem({ navigation }): JSX.Element {
 
       <ScrollView >
         <ListAccordion
-          setCategoryTitle={setCategoryTitle}
-          categoryTitle={categoryTitle}
+          setCategory={setCategory}
+          category={category}
         />
-
-        <View>
-          <CameraComponent
-            imageUri={imageUri}
-            setImageUri={setImageUri}
-            headerText="Then take a picture"
-            needImage={false}
-          />
-
-          <View style={styles.descriptionBox}>
-            <Text style={styles.text}>Write a brief description</Text>
-            <TextInput
-              label="Description"
-              multiline
-              value={text}
-              mode="outlined"
-              style={styles.input}
-              onChangeText={input => setText(input)}
+        {
+          (category !== 'Choose a category') &&
+          <View>
+            <CameraComponent
+              imageUri={image}
+              setImageUri={setImageUri}
+              headerText="Then take a picture"
+              needImage={false}
             />
           </View>
-        </View>
 
-        <View style={styles.urgent}>
-          <Text style={styles.text}>How urgent is your problem?</Text>
-          <UrgentButton setUrgency={setUrgency} />
-        </View>
+        }
+        {
+          (image.length !== 0) &&
+          <View>
+            <View style={styles.descriptionBox}>
+              <Text style={styles.text}>Write a brief description</Text>
+              <TextInput
+                label="Description"
+                multiline
+                value={description}
+                mode="outlined"
+                style={styles.input}
+                onChangeText={input => setText(input)}
+              />
+            </View>
+          </View>
+        }
+        {
+          description.length !== 0 &&
+          <View style={styles.urgent}>
+            <Text style={styles.text}>How urgent is your problem?</Text>
+            <UrgentButton setUrgency={setUrgency} />
+          </View>
+        }
 
-        <View style={styles.map}>
-          <Text style={styles.mapText}>Drag the pin to where the problem is</Text>
-          <MapPinDrop
-            latitude={latitude}
-            setLatitude={setLatitude}
-            longitude={longitude}
-            setLongitude={setLongitude}
-          />
-        </View>
+        {
+          (urgency !== null) &&
+          <View style={styles.map}>
+            <Text style={styles.mapText}>Drag the pin to where the problem is</Text>
+            <MapPinDrop
+              latitude={latitude}
+              setLatitude={setLatitude}
+              longitude={longitude}
+              setLongitude={setLongitude}
+            />
+          </View>
+        }
 
         <View style={styles.bottom}>
           <MessageReceivedModal isModalVisible={isModalVisible} setModalVisible={setModalVisible} />

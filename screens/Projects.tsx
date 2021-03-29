@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import React from 'react';
 import { Text, View, FlatList, StyleSheet } from 'react-native';
 import { useSelector } from 'react-redux';
@@ -10,8 +9,9 @@ import { FontAwesome5 } from '@expo/vector-icons';
 
 const Projects = () => {
   const allProjects = useSelector((state: RootState) => {
-    return state.cityProjects.projects;
+    return state.realProjects.state;
   });
+
 
   return (
     <View style={styles.container}>
@@ -20,16 +20,23 @@ const Projects = () => {
         <FontAwesome5 name="hammer" size={35} color="#3A4276" />
         <Text style={styles.headerText}>Work in progress</Text>
       </View>
+      {
+        allProjects.length === 0 &&
+        <View>
+          <Text style={styles.newsText}>Sorry, there are no projects happening right now</Text>
+        </View>
+
+      }
       <FlatList
         style={styles.flatlistContainer}
         data={allProjects}
-        keyExtractor={item => item.id}
+        keyExtractor={item => String(item.id)}
         renderItem={({ item }) => (
           <ProjectItems
             title={item.title}
             description={item.description}
             location={item.location}
-            projectedCompletion={item.projectedCompletion}
+            projectedCompletion={item.completion}
             img={item.img}
           />
         )}
@@ -65,5 +72,11 @@ const styles = StyleSheet.create({
   },
   flatlistContainer: {
     paddingHorizontal: 25,
+  },
+  newsText: {
+    marginTop: '50%',
+    color: 'black',
+    fontFamily: 'monospace',
+    textAlign: 'center'
   },
 });

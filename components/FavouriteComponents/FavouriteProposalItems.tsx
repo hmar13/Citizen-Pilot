@@ -42,7 +42,7 @@ const FavouriteProposalItems: React.FC<FavouriteProposalItemsInterface> = ({
           {
             vote !== undefined ?
               <View style={styles.voteContainer}>
-                <Ionicons name="ios-thumbs-up-sharp" size={15} color="#3A4276" />
+                <Ionicons name="heart" size={15} color="#ad0f5c" />
                 <Text style={styles.vote}>{vote}</Text>
 
               </View> :
@@ -54,7 +54,6 @@ const FavouriteProposalItems: React.FC<FavouriteProposalItemsInterface> = ({
         </View>
       </TouchableOpacity>
 
-      {/* TODO: modal should go into a new folder */}
       <Modal
         isVisible={isModalVisible}
         onBackdropPress={() => {
@@ -123,6 +122,7 @@ const styles = StyleSheet.create({
     paddingLeft: 8,
   },
   title: {
+    paddingRight: 5,
     fontSize: 18,
     fontWeight: 'bold',
     paddingLeft: 6,
@@ -162,6 +162,5 @@ const styles = StyleSheet.create({
     marginRight: -25,
     marginTop: 15,
     alignSelf: 'flex-end'
-
   },
 });
