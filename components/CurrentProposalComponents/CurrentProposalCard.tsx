@@ -44,26 +44,8 @@ const CurrentProposalCard: React.FC<CurrentPropsalTypes> = ({ id, title, descrip
   }, [render])
 
 
-  const details = {
-    "title": title,
-    "type": 'something',
-    "description": description,
-    "location": location,
-    "image": img,
-    "votes": votes,
-    "completion": '0'
-  }
-
-
   const handleUpVote = (id: number) => {
-    const formBody = [];
-    for (let property in details) {
-      const encodedKey = encodeURIComponent(property);
-      const encodedValue = encodeURIComponent(details[property]);
-      formBody.push(`${encodedKey}=${encodedValue}`);
-    };
-    const favourite = formBody.join("&");
-    addFavourite(token, favourite)
+    addFavourite(token, id)
     postVote(token, id);
     setRender(!render);
     toggleModal();
