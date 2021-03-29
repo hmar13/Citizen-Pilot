@@ -13,7 +13,6 @@ import CameraComponent from '../components/ReportProblem/CameraComponent';
 import ListAccordion from '../components/ProposeSolution/ListAccordion';
 import HorizontalBanner from '../components/HorizontalBannerComponent';
 
-
 export default function ProposeSolution(): JSX.Element {
   const [titleText, setTitleText] = useState('');
   const [descriptionText, setDescriptionText] = useState('');
@@ -24,13 +23,8 @@ export default function ProposeSolution(): JSX.Element {
     if (categoryTitle === 'Choose a category') {
       Alert.alert('Please choose a location');
     }
-<<<<<<< HEAD
-    //console.log('clicked!');
-    // dispatch(addNewReport());
-=======
     console.log('clicked!');
 
->>>>>>> 9d02b6c2ba252aa0e47f779f9d1ae0d93362cf13
     setTitleText('');
     setDescriptionText('');
   }
@@ -58,7 +52,6 @@ export default function ProposeSolution(): JSX.Element {
           mode="outlined"
           style={styles.proposalInput}
           onChangeText={input => setDescriptionText(input)}
-
         />
       </View>
 
@@ -70,7 +63,7 @@ export default function ProposeSolution(): JSX.Element {
         imageUri={imageUri}
         setImageUri={setImageUri}
         headerText="Your picture"
-        needImage={true}
+        needImage
       />
       <Button
         icon="email-send"

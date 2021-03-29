@@ -11,6 +11,7 @@ import SafeViewAndroid from './components/SafeViewAndroid';
 import MainRootStack from './RootStack';
 import { reducers } from './store/reducer';
 import BottomNavigationBar from './navigation/bottomNavBar';
+
 const middleware = applyMiddleware(ReduxThunk, logger);
 const store = createStore(reducers, middleware);
 
@@ -20,7 +21,7 @@ export default function App(): JSX.Element {
       <PaperProvider>
         <SafeAreaView style={SafeViewAndroid.AndroidSafeArea}>
           <NavigationContainer>
-            <BottomNavigationBar />
+            <MainRootStack />
           </NavigationContainer>
         </SafeAreaView>
       </PaperProvider>

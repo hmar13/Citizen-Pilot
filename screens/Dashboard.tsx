@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import React, { useState } from 'react';
+import { StackNavigationProp } from '@react-navigation/stack';
 import {
   StyleSheet,
   Text,
@@ -10,6 +11,7 @@ import {
 } from 'react-native';
 import Modal from 'react-native-modal';
 import { useSelector } from 'react-redux';
+
 import { RootState } from '../store/reducer';
 import CustomButton from '../components/CustomButton';
 import HorizontalBanner from '../components/HorizontalBannerComponent';

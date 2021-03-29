@@ -6,8 +6,8 @@ import {
   Text,
   Button,
   Image,
+
 } from 'react-native';
-import { Card, Title, Paragraph } from 'react-native-paper';
 import Modal from 'react-native-modal';
 import { useDispatch } from 'react-redux';
 import propAction from '../../store/actions/currentProposals'
@@ -37,13 +37,12 @@ interface CurrentPropsalTypes {
 
   return (
     <View>
-      <TouchableOpacity onPress={toggleModal}>
-        <Card style={styles.container}>
-          <Card.Content>
-            <Title style={styles.title}>{title}</Title>
-            <Paragraph style={styles.location}>{location}</Paragraph>
-          </Card.Content>
-        </Card>
+      <TouchableOpacity onPress={toggleModal} style={styles.container}>
+      <Image source={{ uri: img }} style={styles.image} />
+          <View style={styles.textContainer}>
+            <Text style={styles.title}>{title}</Text>
+            <Text style={styles.votes}>{votes} votes</Text>
+        </View>
       </TouchableOpacity>
       <Modal isVisible={isModalVisible}>
         <View style={styles.modal__container}>
@@ -65,16 +64,40 @@ export default CurrentProposalCard;
 
 const styles = StyleSheet.create({
   container: {
-    paddingHorizontal: 15,
+    height: 100, 
+    width: 350,
+    borderRadius: 10,
     backgroundColor: 'white',
-    borderRadius: 15,
-    marginBottom: 15,
+    marginTop: 10,
+    alignSelf: 'center',
+    flexDirection: 'row',
+    
+  },
+  textContainer: {
+    width: 250,
+    justifyContent: 'space-around',
+  },
+
+  image: {
+    height: 100,
+    width: 100,
+    borderTopLeftRadius: 10,
+    borderBottomLeftRadius: 10,
   },
   title: {
-    textAlign: 'left',
+    fontSize: 26,
+    fontWeight: 'bold',
+    alignSelf: 'center',
+    marginTop: 8,
   },
   location: {
-    textAlign: 'left',
+    
+  },
+
+  votes: {
+    alignSelf: 'flex-end',
+    marginRight: 10,
+    
   },
   progress: {
     textAlign: 'right',
@@ -85,10 +108,6 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     paddingHorizontal: 20,
     borderRadius: 15,
-  },
-  image: {
-    height: 200,
-    width: 200,
   },
   modal__information__container: {
     alignItems: 'center',

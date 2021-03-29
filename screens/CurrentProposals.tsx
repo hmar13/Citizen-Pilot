@@ -8,7 +8,7 @@ import CurrentProposalCard from '../components/CurrentProposalComponents/Current
 const CurrentProposalScreen = () => {
   const currentProposal = useSelector<RootState, any>(state => state.Proposals);
   return (
-		<View>
+		<View style={{flex: 1}}>
 			<View>
 				<Text> Current Proposals</Text>
 			</View>
