@@ -8,7 +8,7 @@ import {
   Text,
   ScrollView,
 } from 'react-native';
-import { TextInput, Button } from 'react-native-paper';
+import { TextInput, Button, ActivityIndicator } from 'react-native-paper';
 import { uploadImage } from '../services/Firebaseclient';
 import { postProposal } from '../services/Apiclient';
 import { useSelector } from 'react-redux';
@@ -22,6 +22,7 @@ import { FontAwesome5 } from '@expo/vector-icons';
 
 export default function ProposeSolution({ navigation }): JSX.Element {
   const [isModalVisible, setModalVisible] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [title, setTitleText] = useState('');
   const [description, setDescriptionText] = useState('');
   const [location, setCategoryTitle] = useState('Choose a Location');
@@ -42,6 +43,7 @@ export default function ProposeSolution({ navigation }): JSX.Element {
     if (image.length === 0) {
       return Alert.alert('Please add an image');
     }
+    setIsLoading(true);
 
     const imageurl = await uploadImage(image, 'proposals', title);
 
@@ -64,6 +66,7 @@ export default function ProposeSolution({ navigation }): JSX.Element {
     const result = formBody.join("&");
 
     await postProposal(token, result);
+    setIsLoading(false);
 
     setModalVisible(true);
     setTimeout(() => {
@@ -84,60 +87,69 @@ export default function ProposeSolution({ navigation }): JSX.Element {
         <Text style={styles.headline}>Propose a solution</Text>
       </View>
 
-      <ScrollView >
-        <View style={styles.titleContainer}>
-          <Text style={styles.text}>Give your project a name</Text>
-          <TextInput
-            label="Title"
-            value={title}
-            mode="outlined"
-            style={styles.titleInput}
-            onChangeText={input => setTitleText(input)}
-          />
-        </View>
-
-        {
-          (title.length > 0) &&
-          <View style={styles.proposalContainer}>
-            <Text style={styles.text}>What is your proposal about?</Text>
-            <TextInput
-              label="Tell us a little bit about your idea..."
-              multiline
-              numberOfLines={10}
-              value={description}
-              mode="outlined"
-              style={styles.proposalInput}
-              onChangeText={input => setDescriptionText(input)}
-
-            />
+      {
+        isLoading ?
+          <View style={{ marginTop: '50%' }}>
+            <ActivityIndicator animating={true} size='large' />
           </View>
-        }
-        {
-          (description.length > 0) &&
-          <ListAccordion
-            setCategoryTitle={setCategoryTitle}
-            categoryTitle={location}
-          />
-        }
-        {
-          (location !== 'Choose a Location') &&
-          <CameraComponent
-            imageUri={image}
-            setImageUri={setImageUri}
-            headerText="Your picture"
-            needImage={true}
-          />
-        }
-        <MessageReceivedModal isModalVisible={isModalVisible} setModalVisible={setModalVisible} />
-        <Button
-          icon="email-send"
-          mode="contained"
-          style={styles.button}
-          onPress={handleButtonClick}
-        >
-          Submit
+          :
+
+          <ScrollView >
+            <View style={styles.titleContainer}>
+              <Text style={styles.text}>Give your project a name</Text>
+              <TextInput
+                label="Title"
+                value={title}
+                mode="outlined"
+                style={styles.titleInput}
+                onChangeText={input => setTitleText(input)}
+              />
+            </View>
+
+            {
+              (title.length > 0) &&
+              <View style={styles.proposalContainer}>
+                <Text style={styles.text}>What is your proposal about?</Text>
+                <TextInput
+                  label="Tell us a little bit about your idea..."
+                  multiline
+                  numberOfLines={10}
+                  value={description}
+                  mode="outlined"
+                  style={styles.proposalInput}
+                  onChangeText={input => setDescriptionText(input)}
+
+                />
+              </View>
+            }
+            {
+              (description.length > 0) &&
+              <ListAccordion
+                setCategoryTitle={setCategoryTitle}
+                categoryTitle={location}
+              />
+            }
+            {
+              (location !== 'Choose a Location') &&
+              <CameraComponent
+                imageUri={image}
+                setImageUri={setImageUri}
+                headerText="Your picture"
+                needImage={true}
+              />
+            }
+            <MessageReceivedModal isModalVisible={isModalVisible} setModalVisible={setModalVisible} />
+            <Button
+              icon="email-send"
+              mode="contained"
+              style={styles.button}
+              onPress={handleButtonClick}
+            >
+              Submit
       </Button>
-      </ScrollView>
+          </ScrollView>
+      }
+
     </View>
   );
 }
