@@ -61,7 +61,7 @@ const News = () => {
       {
         allNews.length === 0 &&
         <View>
-          <Text style={styles.noNewsText}>Sorry, there aren't any public announcements at the moment</Text>
+          <Text style={styles.noNewsText}>Sorry! {'\n'} There aren't any public announcements at the moment</Text>
         </View>
 
       }
@@ -134,7 +134,6 @@ const styles = StyleSheet.create({
   noNewsText: {
     marginTop: '50%',
     color: 'black',
-    fontFamily: 'monospace',
     textAlign: 'center'
   },
   banner: {
