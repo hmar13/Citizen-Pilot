@@ -41,8 +41,14 @@ export default function ProposeSolution({ navigation }): JSX.Element {
 
 
   async function handleButtonClick() {
-    if (title === 'Choose a Location') {
-      Alert.alert('Please choose a location');
+    if (title.length === 0 || description.length === 0) {
+      return Alert.alert('Please add a title or description');
+    }
+    if (location === 'Choose a Location') {
+      return Alert.alert('Please choose a location');
+    }
+    if (image.length === 0) {
+      return Alert.alert('Please add an image');
     }
 
     // code to url encode
@@ -86,30 +92,39 @@ export default function ProposeSolution({ navigation }): JSX.Element {
             onChangeText={input => setTitleText(input)}
           />
         </View>
-        <View style={styles.proposalContainer}>
-          <Text style={styles.text}>What is your proposal about?</Text>
-          <TextInput
-            label="Tell us a little bit about your idea..."
-            multiline
-            numberOfLines={10}
-            value={description}
-            mode="outlined"
-            style={styles.proposalInput}
-            onChangeText={input => setDescriptionText(input)}
 
+        {
+          (title.length > 0) &&
+          <View style={styles.proposalContainer}>
+            <Text style={styles.text}>What is your proposal about?</Text>
+            <TextInput
+              label="Tell us a little bit about your idea..."
+              multiline
+              numberOfLines={10}
+              value={description}
+              mode="outlined"
+              style={styles.proposalInput}
+              onChangeText={input => setDescriptionText(input)}
+
+            />
+          </View>
+        }
+        {
+          (description.length > 0) &&
+          <ListAccordion
+            setCategoryTitle={setCategoryTitle}
+            categoryTitle={location}
           />
-        </View>
-
-        <ListAccordion
-          setCategoryTitle={setCategoryTitle}
-          categoryTitle={location}
-        />
-        <CameraComponent
-          imageUri={image}
-          setImageUri={setImageUri}
-          headerText="Your picture"
-          needImage={true}
-        />
+        }
+        {
+          (location !== 'Choose a Location') &&
+          <CameraComponent
+            imageUri={image}
+            setImageUri={setImageUri}
+            headerText="Your picture"
+            needImage={true}
+          />
+        }
         <MessageReceivedModal isModalVisible={isModalVisible} setModalVisible={setModalVisible} />
         <Button
           icon="email-send"
