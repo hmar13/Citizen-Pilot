@@ -35,8 +35,6 @@ export default function ReportProblem({ navigation }): JSX.Element {
     return state.user.userData.token;
   });
 
-
-
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(position => {
       setLatitude(position.coords.latitude);

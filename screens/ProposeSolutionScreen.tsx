@@ -9,6 +9,7 @@ import {
   ScrollView,
 } from 'react-native';
 import { TextInput, Button } from 'react-native-paper';
+import { uploadImage } from '../services/Firebaseclient';
 import { postProposal } from '../services/Apiclient';
 import { useSelector } from 'react-redux';
 import { RootState } from '../store/reducer';
@@ -30,15 +31,6 @@ export default function ProposeSolution({ navigation }): JSX.Element {
     return state.user.userData.token;
   });
 
-  const details = {
-    "title": title,
-    "description": description,
-    "location": location,
-    "image": image,
-    "votes": 0,
-    "approved": false
-  }
-
 
   async function handleButtonClick() {
     if (title.length === 0 || description.length === 0) {
@@ -49,6 +41,17 @@ export default function ProposeSolution({ navigation }): JSX.Element {
     }
     if (image.length === 0) {
       return Alert.alert('Please add an image');
+    }
+
+    const imageurl = await uploadImage(image, 'proposals', title);
+
+    const details = {
+      "title": title,
+      "description": description,
+      "location": location,
+      "image": imageurl,
+      "votes": 0,
+      "approved": false
     }
 
     // code to url encode
