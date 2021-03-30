@@ -67,14 +67,14 @@ export const getFavourites = (token: string) =>
     .catch(err => console.error(err));
 
 // add a favourite
-export const addFavourite = (token: string, favourite: any) =>
+export const addFavourite = (token: string, proposalId: any) =>
   fetch(`${baseUrl}/favourites`, {
     method: 'POST',
     headers: {
-      'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
+      'Content-Type': 'application/json',
       'Authorization': `Bearer ${token}`
     },
-    body: favourite
+    body: JSON.stringify({ proposalId })
   })
     .then(res => res.status <= 401 ? res : Promise.reject(new Error('fail')))
     .then(res => res.status === 204 ? res : res.json())
@@ -114,7 +114,14 @@ export const postProposal = (token: string, report: any) =>
 // Proposals
 export const getProposals = () =>
   fetch(`${baseUrl}/proposal/approved`)
-    .then(res => res.status <= 401 ? res : Promise.reject())
+    .then(res => res.status <= 401 ? res : Promise.reject(new Error('fail')))
+    .then(res => res.status === 204 ? res : res.json())
+    .catch(err => console.log('error is:', err));
+
+// liked proposals
+export const getLikedProposal = (id: number) =>
+  fetch(`${baseUrl}/proposal/${id}`)
+    .then(res => res.status <= 401 ? res : Promise.reject(new Error('fail')))
     .then(res => res.status === 204 ? res : res.json())
     .catch(err => console.log('error is:', err));
 

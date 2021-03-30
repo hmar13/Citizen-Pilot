@@ -18,8 +18,8 @@ export default function MessageReceivedModal({ isModalVisible, setModalVisible }
 
       </View>
       <View style={styles.messageContainer}>
-        <Text style={styles.message}> We have received your message</Text>
-        <Text>You will hear back from us as soon as possible</Text>
+        <Text style={styles.message}> We have received your message!</Text>
+        <Text>You will hear back from us as soon as possible.</Text>
       </View>
     </Modal >
   );
