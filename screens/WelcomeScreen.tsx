@@ -1,4 +1,3 @@
-/* eslint-disable global-require */
 import React from 'react';
 import { View, StyleSheet, Text } from 'react-native';
 import ButtonComponent from '../components/WelcomeComponents/Button';
@@ -6,7 +5,6 @@ import BannerComponent from '../components/BannerComponent';
 import LogoComponent from '../components/LogoComponent';
 
 export default function WelcomeScreen({ navigation }): JSX.Element {
-  // this probably won't be necessary if this becomes a loading screen to check if user is logged in or not.
   const handleButtonPress = () => {
     navigation.navigate('Login');
   };

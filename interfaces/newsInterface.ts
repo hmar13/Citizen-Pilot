@@ -5,6 +5,6 @@ export default interface newsInterface {
   shortDescription: string;
   longDescription: string;
   location: string;
-  img: string;
+  image: string;
   date: string;
 }

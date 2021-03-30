@@ -1,5 +1,4 @@
-/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   StyleSheet,
   Text,
@@ -9,14 +8,24 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import Modal from 'react-native-modal';
-import { Button, Divider, Card, Title, Paragraph } from 'react-native-paper';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import {
+  fetchNews,
+  fetchContacts,
+  fetchProjects,
+  fetchProposals,
+  fetchFavourites,
+  fetchVotes
+}
+  from '../store/actions/dashboard';
+
+import { Button, Divider, Card, Title, Paragraph, IconButton } from 'react-native-paper';
 import { RootState } from '../store/reducer';
 import CustomButton from '../components/CustomButton';
 import HorizontalBanner from '../components/HorizontalBannerComponent';
 import newsInterface from '../interfaces/newsInterface';
-import BottomNavigationBar from '../navigation/bottomNavBar';
-import BottomTabs from '../navigation/navBarBare';
+import AskForHelp from '../components/DashboardComponents/AskForHelpComponent';
+
 
 const modalInitalState = {
   id: '1',
@@ -25,40 +34,89 @@ const modalInitalState = {
   shortDescription: 'Description',
   longDescription: 'Description',
   location: 'In the city',
-  img: 'img',
+  image: 'img',
   date: 'date',
 };
 
-export default function Dashboard({ navigation }) {
+export default function Dashboard({ navigation }): JSX.Element {
+  const dispatch = useDispatch();
   const [modalInfo, setModalInfo] = useState<newsInterface>(modalInitalState);
   const [isModalVisible, setModalVisible] = useState(false);
+  const [isDialogVisible, setIsDialogVisible] = useState(false);
+
   const allNews = useSelector((state: RootState) => {
-    return state.newsData.news;
+    return state.realNews.state;
   });
+
+  const token: string = useSelector((state: RootState) => {
+    return state.user.userData.token;
+  });
+
+  useEffect(() => {
+    const news = fetchNews();
+    dispatch(news);
+    const contacts = fetchContacts();
+    dispatch(contacts);
+    const projects = fetchProjects();
+    dispatch(projects);
+    const proposals = fetchProposals();
+    dispatch(proposals);
+    const favourites = fetchFavourites(token);
+    dispatch(favourites);
+    const votes = fetchVotes(token);
+    dispatch(votes);
+  }, [])
+
+  const showDialog = () => setIsDialogVisible(true);
 
   return (
     <View style={{ flex: 1, backgroundColor: '#E5E5E5' }}>
       <HorizontalBanner />
       <View style={{ justifyContent: 'center' }}>
-        <Text style={styles.newsCaption}>Latest News</Text>
+        <View style={styles.headerContainer}>
+
+          <Text style={styles.newsCaption}>Latest News</Text>
+          <AskForHelp
+            isDialogVisible={isDialogVisible}
+            setIsDialogVisible={setIsDialogVisible}
+          />
+          <IconButton
+            style={{ paddingTop: 5 }}
+            icon="help-circle"
+            color={'#ee9a2f'}
+            size={22}
+            onPress={showDialog}
+          />
+        </View>
+        {
+          (allNews === undefined || allNews.length === 0) &&
+          <View>
+            <Image
+              style={styles.picture}
+              source={require('../assets/images/stockimages/Reminders.jpg')}
+            />
+            <View style={styles.textConteiner}>
+              <Text style={styles.newsText}>There is nothing to report at the moment</Text>
+            </View>
+          </View>
+
+        }
         <FlatList
-          style={{ marginRight: 20 }}
-          decelerationRate="fast"
-          snapToInterval={350}
           showsHorizontalScrollIndicator={false}
           horizontal={true}
           data={allNews}
-          keyExtractor={item => item.id}
+          keyExtractor={item => item.id.toString()}
           renderItem={({ item }) =>
 
             <TouchableOpacity
+              style={styles.imageContainer}
               onPress={() => {
                 setModalInfo(item);
                 setModalVisible(true);
               }}
             >
-              <View key={item.id} style={{ position: 'relative' }}>
-                <Image style={styles.picture} source={{ uri: item.img }} />
+              <View >
+                <Image style={styles.picture} source={{ uri: item.image }} />
                 <View style={styles.textConteiner}>
                   <Text style={styles.newsText}>{item.shortDescription}</Text>
                 </View>
@@ -67,7 +125,10 @@ export default function Dashboard({ navigation }) {
           }>
         </FlatList>
       </View>
+
       <CustomButton navigation={navigation} />
+
+
       <Modal
         isVisible={isModalVisible}
         onBackdropPress={() => {
@@ -75,16 +136,18 @@ export default function Dashboard({ navigation }) {
         }}
       >
         <View style={styles.modalView}>
-          {/* how do I make Paragraph scrollable? if I don't set card height, content will spill over card. with height, the rest of the content won't show */}
           <Card style={{ width: '110%', height: 490 }}>
             <Card.Content>
-              <Card.Cover style={styles.cardCover} source={{ uri: modalInfo.img }} />
+              <Card.Cover style={styles.cardCover} source={{ uri: modalInfo.image }} />
               <Title style={{ marginTop: 7 }}>{modalInfo.title}</Title>
               <Divider />
               <Paragraph style={{ marginTop: 10 }}>{modalInfo.longDescription}</Paragraph>
             </Card.Content>
           </Card>
-          <Button style={styles.button} icon="newspaper-variant-outline" mode="contained" onPress={() => console.log('navigation.navigate')}>
+          <Button style={styles.button} icon="newspaper-variant-outline" mode="contained" onPress={() => {
+            setModalVisible(false);
+            navigation.navigate('news');
+          }}>
             More
           </Button>
         </View>
@@ -96,9 +159,23 @@ export default function Dashboard({ navigation }) {
 const styles = StyleSheet.create({
   picture: {
     height: 200,
-    width: 320,
+    width: 325,
     marginLeft: 30,
     borderRadius: 20,
+  },
+  imageContainer: {
+    marginLeft: 5,
+  },
+  textConteiner: {
+    position: 'absolute',
+    top: 140,
+    left: 30,
+    width: 325,
+    height: '30%',
+    backgroundColor: 'grey',
+    opacity: 0.9,
+    borderBottomLeftRadius: 20,
+    borderBottomRightRadius: 20,
   },
   button: {
     justifyContent: 'center',
@@ -112,18 +189,8 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     height: 220,
   },
-  textConteiner: {
-    position: 'absolute',
-    top: 140,
-    left: 30,
-    width: 320,
-    height: '30%',
-    backgroundColor: 'grey',
-    opacity: 0.9,
-    borderBottomLeftRadius: 20,
-    borderBottomRightRadius: 20,
-  },
   newsText: {
+    paddingLeft: 15,
     fontSize: 16,
     textAlign: 'center',
     width: 300,
@@ -131,12 +198,19 @@ const styles = StyleSheet.create({
     top: 6,
     color: 'white',
   },
+  headerContainer: {
+    justifyContent: 'space-between',
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginTop: 15,
+    marginLeft: 40,
+    marginRight: 10,
+    marginBottom: 10,
+
+  },
   newsCaption: {
     fontSize: 25,
     fontWeight: 'bold',
-    marginLeft: 42,
-    marginBottom: 5,
-    marginTop: '5%'
   },
   modalView: {
     overflow: 'scroll',

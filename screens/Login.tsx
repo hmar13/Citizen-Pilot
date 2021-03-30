@@ -1,27 +1,33 @@
 import React, { useState } from 'react';
-import { View, StyleSheet, Text, TouchableOpacity } from 'react-native';
+import { View, StyleSheet, Text, TouchableOpacity, Alert } from 'react-native';
+import { useDispatch } from "react-redux";
+import { fetchUser } from '../store/actions/user';
 import ButtonComponent from '../components/WelcomeComponents/Button';
 import BannerComponent from '../components/BannerComponent';
 import LogoComponent from '../components/LogoComponent';
 import TextInputComponent from '../components/LoginSignupComponents/TextInputcomponent';
 
 export default function Login({ navigation }): JSX.Element {
+  const dispatch = useDispatch();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  // API logic goes here
-  const handleButtonPress = () => {
-    // if (!email) {
-    //   setPassword('');
-    //   setEmail('');
-    //   return Alert.alert('Email field is required.');
-    // }
-    // if (!password) {
-    //   setPassword('');
-    //   setEmail('');
-    //   return Alert.alert('Password field is required.');
-    // }
-    navigation.navigate('Dashboard');
+  const handleButtonPress = async () => {
+    if (!email) {
+      setPassword('');
+      setEmail('');
+      return Alert.alert('Email field is required.');
+    }
+    if (!password) {
+      setPassword('');
+      setEmail('');
+      return Alert.alert('Password field is required.');
+    }
+
+    const action = await fetchUser(email, password);
+    await dispatch(action);
+    setPassword('');
+    setEmail('');
   };
 
   return (
@@ -37,6 +43,7 @@ export default function Login({ navigation }): JSX.Element {
             value={email}
             setItem={setEmail}
             isDisabled={false}
+            secureText={false}
           />
           <TextInputComponent
             text="Add your password"
@@ -44,6 +51,7 @@ export default function Login({ navigation }): JSX.Element {
             value={password}
             setItem={setPassword}
             isDisabled={false}
+            secureText={true}
           />
         </View>
         <ButtonComponent

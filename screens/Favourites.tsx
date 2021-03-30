@@ -1,83 +1,73 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   Text,
   View,
   FlatList,
   StyleSheet,
 } from 'react-native';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../store/reducer';
+import { fetchFavourites } from '../store/actions/dashboard';
 import FavouriteProposalItems from '../components/FavouriteComponents/FavouriteProposalItems';
-import FavourteProjectItems from '../components/FavouriteComponents/FavouriteProjectItems';
 import HorizontalBannerComponent from '../components/HorizontalBannerComponent';
 import { MaterialIcons } from '@expo/vector-icons';
 
-const Favourites = () => {
+
+export default function Favourites(): JSX.Element {
+  const dispatch = useDispatch();
+
   const myFavourites = useSelector((state: RootState) => {
-    return state.myFavourites.favourites;
+    return state.realFavourites.state;
   });
+
+  const token: string = useSelector((state: RootState) => {
+    return state.user.userData.token;
+  });
+
+
+  useEffect(() => {
+    const favourites = fetchFavourites(token);
+    dispatch(favourites);
+  }, [])
+
 
   return (
     <View style={styles.container}>
       <HorizontalBannerComponent />
-      <View style={styles.headline__container}>
+      <View style={styles.headlineContainer}>
         <MaterialIcons name="favorite" size={35} color="#ad0f5c" />
-        <Text style={styles.header__text}>Favourites</Text>
+        <Text style={styles.headerText}>Favourites</Text>
       </View>
       <FlatList
-        // horizontal={true}
-        style={styles.flatlist__container}
+        style={styles.flatlistContainer}
         data={myFavourites}
-        keyExtractor={item => item.id}
-        renderItem={({ item }) =>
-          item.votes ? (
-            <FavouriteProposalItems
-              title={item.title}
-              description={item.description}
-              location={item.location}
-              vote={item.votes}
-              img={item.img}
-            />
-          ) : null
+        ListEmptyComponent={
+          <Text style={styles.text}>You haven't saved any favourites yet{'\n'}
+          </Text>
+
         }
-      />
-      <Text style={styles.header__text}>Projects</Text>
-      <FlatList
-        style={styles.flatlist__container}
-        data={myFavourites}
-        keyExtractor={item => item.id}
+        keyExtractor={item => String(item.id)}
         renderItem={({ item }) =>
-          !item.votes ? (
-            <FavourteProjectItems
-              title={item.title}
-              description={item.description}
-              location={item.location}
-              img={item.img}
-            />
-          ) : null
+          <FavouriteProposalItems
+            title={item.title}
+            description={item.description}
+            location={item.location}
+            vote={item.votes}
+            img={item.image}
+          />
         }
       />
     </View>
   );
 };
 
-export default Favourites;
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#E5E5E5',
   },
-  header__container: {
-    overflow: 'hidden',
-    marginRight: 25,
-    marginBottom: 15,
-    borderBottomRightRadius: 30,
-    height: 70,
-    justifyContent: 'center',
-    paddingBottom: 5,
-  },
-  headline__container: {
+  headlineContainer: {
     flexDirection: 'row',
     backgroundColor: 'white',
     marginRight: 25,
@@ -90,17 +80,18 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingBottom: 5,
   },
-  header__text: {
+  text: {
+    marginTop: '50%',
+    color: 'black',
+    textAlign: 'center'
+  },
+  headerText: {
     alignSelf: 'center',
     marginLeft: 10,
     fontSize: 25,
     fontWeight: 'bold',
   },
-  flatlist__container: {
+  flatlistContainer: {
     paddingHorizontal: 25,
-
-  },
-  footer__container: {
-    backgroundColor: 'white',
   },
 });

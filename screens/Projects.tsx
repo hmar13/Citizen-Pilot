@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import React from 'react';
 import { Text, View, FlatList, StyleSheet } from 'react-native';
 import { useSelector } from 'react-redux';
@@ -6,40 +5,42 @@ import { RootState } from '../store/reducer';
 import ProjectItems from '../components/ProjectComponents/ProjectItems';
 import HorizontalBannerComponent from '../components/HorizontalBannerComponent';
 import { FontAwesome5 } from '@expo/vector-icons';
-import { NavigationContainer } from '@react-navigation/native';
-import BottomNavigationBar from '../navigation/bottomNavBar'
-import BottomTabs from '../navigation/navBarBare';
 
 
 const Projects = () => {
   const allProjects = useSelector((state: RootState) => {
-    return state.cityProjects.projects;
+    return state.realProjects.state;
   });
+
 
   return (
     <View style={styles.container}>
       <HorizontalBannerComponent />
-      <View style={styles.header__container}>
+      <View style={styles.headerContainer}>
         <FontAwesome5 name="hammer" size={35} color="#3A4276" />
-        <Text style={styles.header__text}>Work in progress</Text>
+        <Text style={styles.headerText}>Work in progress</Text>
       </View>
+      {
+        allProjects.length === 0 &&
+        <View>
+          <Text style={styles.newsText}>Sorry! {'\n'} There are no projects happening right now.</Text>
+        </View>
+
+      }
       <FlatList
-        style={styles.flatlist__container}
+        style={styles.flatlistContainer}
         data={allProjects}
-        keyExtractor={item => item.id}
+        keyExtractor={item => String(item.id)}
         renderItem={({ item }) => (
           <ProjectItems
             title={item.title}
             description={item.description}
             location={item.location}
-            projectedCompletion={item.projectedCompletion}
+            projectedCompletion={item.completion}
             img={item.img}
           />
         )}
       />
-    
-        
-     
     </View>
   );
 };
@@ -50,7 +51,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
-  header__container: {
+  headerContainer: {
     flexDirection: 'row',
     backgroundColor: 'white',
     marginRight: 25,
@@ -63,16 +64,18 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingBottom: 5,
   },
-  header__text: {
+  headerText: {
     alignSelf: 'center',
     marginLeft: 10,
     fontSize: 25,
     fontWeight: 'bold',
   },
-  flatlist__container: {
+  flatlistContainer: {
     paddingHorizontal: 25,
   },
-  footer__container: {
-    backgroundColor: 'white',
+  newsText: {
+    marginTop: '50%',
+    color: 'black',
+    textAlign: 'center'
   },
 });

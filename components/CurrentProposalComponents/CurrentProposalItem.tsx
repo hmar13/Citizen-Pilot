@@ -9,19 +9,16 @@ interface CurrentPropsalTypes {
   img: string,
 }
 
-
-
-
-const CurrentProposalInput: React.FC<CurrentPropsalTypes> = ({ title, description, location, vote, img}) => {
-     return (
-        <View>
-            <Text>{title}</Text>
-            <Text>{description}</Text>
-            <Text>{location}</Text>
-            <Text>{vote}</Text>
-            <Text>{img}</Text>
-        </View>
-    )
+const CurrentProposalInput: React.FC<CurrentPropsalTypes> = ({ title, description, location, vote, img }) => {
+  return (
+    <View>
+      <Text>{title}</Text>
+      <Text>{description}</Text>
+      <Text>{location}</Text>
+      <Text>{vote}</Text>
+      <Text>{img}</Text>
+    </View>
+  )
 }
 
 const styles = StyleSheet.create({})

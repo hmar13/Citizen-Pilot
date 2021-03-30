@@ -1,16 +1,18 @@
-/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
-
 import { PayloadAction } from '@reduxjs/toolkit';
-import { userData } from '../mock';
+import { USER_LOGIN, SET_LOADING } from '../actions/ActionTypes';
+
 
 const initialState = {
-  userData,
+  userData: null,
+  isLoggedIn: false
 };
 
 const user = (state = initialState, action: PayloadAction<string>) => {
   switch (action.type) {
-    case 'userData':
-      return state;
+    case USER_LOGIN:
+      return { ...state, userData: action.payload };
+    case SET_LOADING:
+      return { ...state, isLoggedIn: action.payload };
     default:
       return state;
   }
