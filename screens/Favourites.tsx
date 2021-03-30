@@ -32,7 +32,6 @@ export default function Favourites(): JSX.Element {
   }, [])
 
 
-
   return (
     <View style={styles.container}>
       <HorizontalBannerComponent />
@@ -84,7 +83,6 @@ const styles = StyleSheet.create({
   text: {
     marginTop: '50%',
     color: 'black',
-    fontFamily: 'monospace',
     textAlign: 'center'
   },
   headerText: {

@@ -9,7 +9,7 @@ import {
 
 }
   from './ActionTypes';
-import { getAllNews, getContacts, getProjects, getProposals, getFavourites, getVotes } from '../../services/Apiclient';
+import { getAllNews, getContacts, getProjects, getProposals, getFavourites, getVotes, getLikedProposal } from '../../services/Apiclient';
 
 export function fetchNews() {
   return function (dispatch: Dispatch) {
@@ -67,17 +67,31 @@ export const setProposals = (proposals: []) => ({
 
 });
 
+interface favouriteInterface {
+  createdAt: string;
+  id: number;
+  proposalId: number;
+  updatedAt: string;
+  userId: number
+}
+
 export function fetchFavourites(token: string) {
   return function (dispatch: Dispatch) {
     getFavourites(token)
-      .then((favourites: []) => {
-        dispatch(setFavourites(favourites));
+      .then((favArray: []) => {
+        const promises = favArray.map((favourite: favouriteInterface) => {
+          return getLikedProposal(favourite.proposalId)
+        })
+        Promise.all(promises)
+          .then((realProp: favouriteInterface[]) => {
+            dispatch(setFavourites(realProp));
+          })
       })
   };
 }
 
 
-export const setFavourites = (favourites: []) => ({
+export const setFavourites = (favourites: favouriteInterface[]) => ({
   type: SAVE_FAVOURITES,
   payload: favourites
 });
@@ -96,5 +110,3 @@ export const setVotes = (Votes: []) => ({
   type: SET_VOTES,
   payload: Votes
 });
-
-

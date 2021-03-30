@@ -23,7 +23,7 @@ const Projects = () => {
       {
         allProjects.length === 0 &&
         <View>
-          <Text style={styles.newsText}>Sorry, there are no projects happening right now</Text>
+          <Text style={styles.newsText}>Sorry! {'\n'} There are no projects happening right now.</Text>
         </View>
 
       }
@@ -76,7 +76,6 @@ const styles = StyleSheet.create({
   newsText: {
     marginTop: '50%',
     color: 'black',
-    fontFamily: 'monospace',
     textAlign: 'center'
   },
 });

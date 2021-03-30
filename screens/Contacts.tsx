@@ -29,7 +29,7 @@ const Contacts = () => {
       {
         allContacts.length === 0 &&
         <View>
-          <Text style={styles.newsText}>Sorry, we haven't published any contacts yet!</Text>
+          <Text style={styles.newsText}>Sorry! {'\n'} We haven't published any contacts yet!</Text>
         </View>
 
       }
@@ -73,7 +73,6 @@ const styles = StyleSheet.create({
   newsText: {
     marginTop: '50%',
     color: 'black',
-    fontFamily: 'monospace',
     textAlign: 'center'
   },
   headerText: {
