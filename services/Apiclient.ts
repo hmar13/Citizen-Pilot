@@ -67,7 +67,7 @@ export const getFavourites = (token: string) =>
     .catch(err => console.error(err));
 
 // add a favourite
-export const addFavourite = (token: string, proposalId: any) =>
+export const addFavourite = (token: string, proposalId: number) =>
   fetch(`${baseUrl}/favourites`, {
     method: 'POST',
     headers: {

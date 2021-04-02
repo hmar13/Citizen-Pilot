@@ -1,13 +1,12 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import React from 'react';
+import React, { SetStateAction } from 'react';
 import MapView, { Marker } from 'react-native-maps';
 import { StyleSheet, View, Dimensions } from 'react-native';
 
 interface Coordination {
   latitude: number;
-  setLatitude: any;
+  setLatitude: React.Dispatch<SetStateAction<number>>;
   longitude: number;
-  setLongitude: any;
+  setLongitude: React.Dispatch<SetStateAction<number>>;
 }
 
 export default function MapPinDrop({

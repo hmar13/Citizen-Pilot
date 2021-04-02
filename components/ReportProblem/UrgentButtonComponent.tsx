@@ -1,10 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, SetStateAction } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { RadioButton } from 'react-native-paper';
 
 interface urgencyStatus {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  setUrgency: any;
+  setUrgency: React.Dispatch<SetStateAction<boolean>>;
 }
 
 export default function UrgentButton({

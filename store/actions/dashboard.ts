@@ -6,7 +6,6 @@ import {
   SAVE_PROPOSALS,
   SAVE_FAVOURITES,
   SET_VOTES
-
 }
   from './ActionTypes';
 import { getAllNews, getContacts, getProjects, getProposals, getFavourites, getVotes, getLikedProposal } from '../../services/Apiclient';

@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import React from 'react';
 import { Text, View, FlatList, StyleSheet } from 'react-native';
 import { useSelector } from 'react-redux';
@@ -23,7 +22,6 @@ export default function CurrentProposalScreen(): JSX.Element {
         <View style={{ marginLeft: 20, marginTop: '5%' }}>
           <Text style={styles.noProposalText}>Sorry! {'\n'} There isn't anything to vote on at the moment</Text>
         </View>
-
       }
       <FlatList
         data={currentProposal}

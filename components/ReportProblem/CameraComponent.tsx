@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, SetStateAction } from 'react';
 import {
   StyleSheet,
   View,
@@ -12,8 +12,7 @@ import * as ImagePicker from 'expo-image-picker';
 
 interface imageUri {
   imageUri: string;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  setImageUri: any;
+  setImageUri: React.Dispatch<SetStateAction<string>>;
   headerText: string;
   needImage: boolean;
 }

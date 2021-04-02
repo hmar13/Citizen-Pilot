@@ -1,11 +1,10 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import React from 'react';
 import { StyleSheet } from 'react-native';
 import { Button } from 'react-native-paper';
 
 interface buttonT {
   buttonText: string;
-  handleButtonPress: any;
+  handleButtonPress: () => void;
 }
 export default function ButtonComponent({
   buttonText,

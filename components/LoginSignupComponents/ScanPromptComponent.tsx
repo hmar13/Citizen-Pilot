@@ -1,12 +1,11 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import React from 'react';
+import React, { SetStateAction } from 'react';
 import { Button, Paragraph, Dialog, Portal } from 'react-native-paper';
 
 interface Dialog {
   isDialogVisible: boolean;
-  setIsDialogVisible: any;
-  handlePressCancel: any;
-  handlePressScan: any;
+  setIsDialogVisible: React.Dispatch<SetStateAction<boolean>>;
+  handlePressCancel: () => void;
+  handlePressScan: () => void;
 }
 
 export default function ScanPrompt({

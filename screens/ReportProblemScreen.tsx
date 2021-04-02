@@ -53,8 +53,10 @@ export default function ReportProblem({ navigation }): JSX.Element {
     }
 
     setIsLoading(true);
+    const random = String(Math.floor(Math.random() * 500));
 
-    const imageurl = await uploadImage(image, 'reportedProblems', description);
+
+    const imageurl = await uploadImage(image, 'reportedProblems', random);
 
     const details = {
       "urgency": urgency,
