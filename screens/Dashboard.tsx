@@ -22,12 +22,12 @@ import { Button, Divider, Card, Title, Paragraph, IconButton } from 'react-nativ
 import { RootState } from '../store/reducer';
 import CustomButton from '../components/CustomButton';
 import HorizontalBanner from '../components/HorizontalBannerComponent';
-import newsInterface from '../interfaces';
+import { newsInterface } from '../interfaces';
 import AskForHelp from '../components/DashboardComponents/AskForHelpComponent';
 
 
 const modalInitalState = {
-  id: '1',
+  id: 1,
   title: 'News Title',
   category: 'Category',
   shortDescription: 'Description',

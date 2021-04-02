@@ -9,8 +9,6 @@ import { RootState } from './store/reducer';
 
 export default function Index(): JSX.Element {
   const isLoggedIn = useSelector<RootState, any>(state => state.user.isLoggedIn);
-  // const isLoggedIn = true;
-
   const content = !isLoggedIn ? <MainRootStack /> : <BottomTabs />
   return content;
 }

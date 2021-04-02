@@ -7,7 +7,7 @@ import { postVote, addFavourite } from '../../services/Apiclient';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../store/reducer';
 import { MaterialIcons } from '@expo/vector-icons';
-import CurrentPropsalTypes from '../../interfaces';
+import { CurrentPropsalTypes } from '../../interfaces';
 
 
 const CurrentProposalCard: React.FC<CurrentPropsalTypes> = ({ id, title, description, location, votes, img }) => {

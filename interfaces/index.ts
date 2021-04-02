@@ -1,4 +1,4 @@
-export default interface newsInterface {
+export interface newsInterface {
   id: number;
   title: string;
   category: string;
@@ -9,14 +9,14 @@ export default interface newsInterface {
   date: string;
 }
 
-export default interface ContactItemsInterface {
+export interface ContactItemsInterface {
   title: string;
   phoneNumber: string;
   email: string;
   img: string;
 }
 
-export default interface CurrentPropsalTypes {
+export interface CurrentPropsalTypes {
   id: number,
   title: string,
   description: string,
