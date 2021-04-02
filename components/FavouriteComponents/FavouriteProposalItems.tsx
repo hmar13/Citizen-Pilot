@@ -41,12 +41,12 @@ const FavouriteProposalItems: React.FC<FavouriteProposalItemsInterface> = ({
           <Text style={styles.location}>Location: {location}</Text>
           {
             vote !== undefined ?
-              <View style={styles.vote__container}>
-                <Ionicons name="ios-thumbs-up-sharp" size={15} color="#3A4276" />
+              <View style={styles.voteContainer}>
+                <Ionicons name="heart" size={15} color="#ad0f5c" />
                 <Text style={styles.vote}>{vote}</Text>
 
               </View> :
-              <View style={styles.vote__container}>
+              <View style={styles.voteContainer}>
                 <FontAwesome5 name="hammer" size={20} color="#3A4276" />
                 <Text style={[styles.vote, { fontSize: 12 }]}>In progress</Text>
               </View>
@@ -54,7 +54,6 @@ const FavouriteProposalItems: React.FC<FavouriteProposalItemsInterface> = ({
         </View>
       </TouchableOpacity>
 
-      {/* TODO: modal should go into a new folder */}
       <Modal
         isVisible={isModalVisible}
         onBackdropPress={() => {
@@ -68,21 +67,19 @@ const FavouriteProposalItems: React.FC<FavouriteProposalItemsInterface> = ({
               <Title style={{ marginTop: 7 }}>{title}</Title>
               {
                 vote !== undefined ?
-                  <View style={[styles.vote__container, { marginBottom: 10 }]}>
+                  <View style={[styles.voteContainer, { marginBottom: 10 }]}>
                     <MaterialIcons name="favorite" size={15} color="#ad0f5c" />
                     <Text style={styles.vote}>{vote}</Text>
                   </View> :
-                  <View style={styles.vote__container}>
+                  <View style={styles.voteContainer}>
                     <Text style={[styles.vote, { fontSize: 12, marginBottom: 10 }]}>In progress</Text>
                   </View>
               }
               <Divider />
               <Paragraph style={{ marginTop: 10 }}>{description}</Paragraph>
             </Card.Content>
-            <Card.Actions>
-              <Button style={styles.button} >More</Button>
-            </Card.Actions>
           </Card>
+          <Button style={styles.button} onPress={toggleModal}>close</Button>
         </View>
       </Modal>
     </View>
@@ -114,7 +111,7 @@ const styles = StyleSheet.create({
     width: 105,
     borderRadius: 13,
   },
-  vote__container: {
+  voteContainer: {
     alignSelf: 'flex-end',
     alignItems: 'center',
     flexDirection: 'row',
@@ -125,6 +122,7 @@ const styles = StyleSheet.create({
     paddingLeft: 8,
   },
   title: {
+    paddingRight: 5,
     fontSize: 18,
     fontWeight: 'bold',
     paddingLeft: 6,
@@ -161,6 +159,8 @@ const styles = StyleSheet.create({
     height: 220,
   },
   button: {
+    marginRight: -25,
     marginTop: 15,
+    alignSelf: 'flex-end'
   },
 });

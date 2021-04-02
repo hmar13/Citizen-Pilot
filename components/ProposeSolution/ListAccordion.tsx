@@ -1,10 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, SetStateAction } from 'react';
 import { View, Text, Dimensions, StyleSheet } from 'react-native';
 import { List, Colors } from 'react-native-paper';
 
 interface CategoryTitle {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  setCategoryTitle: any;
+  setCategoryTitle: React.Dispatch<SetStateAction<string>>;
   categoryTitle: string;
 }
 
@@ -58,8 +57,7 @@ export default function ListAccordion({
   );
 }
 
-const { height } = Dimensions.get('window');
-const { width } = Dimensions.get('window');
+const { height, width } = Dimensions.get('window');
 
 const styles = StyleSheet.create({
   category: {

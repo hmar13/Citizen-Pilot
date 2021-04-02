@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
-import { View, StyleSheet, Text, TouchableOpacity } from 'react-native';
+import { View, StyleSheet, Text, TouchableOpacity, Alert } from 'react-native';
 import ButtonComponent from '../components/WelcomeComponents/Button';
 import BannerComponent from '../components/BannerComponent';
 import LogoComponent from '../components/LogoComponent';
 import QRCodeModal from './QRCodeModal';
 import TextInputComponent from '../components/LoginSignupComponents/TextInputcomponent';
 import ScanPrompt from '../components/LoginSignupComponents/ScanPromptComponent';
+import { postNewUser } from '../services/Apiclient';
+
 
 export default function Register({ navigation }): JSX.Element {
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -26,21 +28,36 @@ export default function Register({ navigation }): JSX.Element {
     navigation.navigate('Welcome');
   };
 
-  const handleButtonPress = () => {
-    // if (!firstName) {
-    //   Alert.alert('First name is required. Please scan your QR code');
-    // } else if (!email) {
-    //   Alert.alert('Email field is required.');
-    // } else if (!password) {
-    //   Alert.alert('Password field is required.');
-    // } else if (!confirmPassword) {
-    //   setPassword('');
-    //   Alert.alert('Confirm password field is required.');
-    // } else if (password !== confirmPassword) {
-    //   Alert.alert('Password does not match!');
+  const emptyState = () => {
+    setFirstName('');
+    setLastName('');
+    setEmail('');
+    setPassword('');
+    setConfirmPassword('');
+  };
 
-    // API call to save user with first, lastname, address, email, password
-    navigation.navigate('Login');
+  const handleButtonPress = async () => {
+    if (!firstName) {
+      Alert.alert('First name is required. Please scan your QR code');
+      return navigation.navigate('Login');
+    } else if (!email) {
+      Alert.alert('Email field is required.');
+      return navigation.navigate('Login');
+    } else if (!password) {
+      Alert.alert('Password field is required.');
+      return navigation.navigate('Login');
+    } else if (!confirmPassword) {
+      setPassword('');
+      Alert.alert('Confirm password field is required.');
+      return navigation.navigate('Login');
+    } else if (password !== confirmPassword) {
+      Alert.alert('Password does not match!');
+      return navigation.navigate('Login');
+    }
+
+    await postNewUser(firstName, lastName, email, password);
+    emptyState()
+    return navigation.navigate('Login');
   };
 
   return (
@@ -68,6 +85,7 @@ export default function Register({ navigation }): JSX.Element {
             value={firstName}
             setItem={setFirstName}
             isDisabled
+            secureText={false}
           />
           <TextInputComponent
             text="Last Name"
@@ -75,6 +93,7 @@ export default function Register({ navigation }): JSX.Element {
             value={lastName}
             setItem={setLastName}
             isDisabled
+            secureText={false}
           />
           <TextInputComponent
             text="Enter your email address"
@@ -82,6 +101,7 @@ export default function Register({ navigation }): JSX.Element {
             value={email}
             setItem={setEmail}
             isDisabled={false}
+            secureText={false}
           />
           <TextInputComponent
             text="Add your password"
@@ -89,6 +109,7 @@ export default function Register({ navigation }): JSX.Element {
             value={password}
             setItem={setPassword}
             isDisabled={false}
+            secureText={true}
           />
           <TextInputComponent
             text="Confirm your password"
@@ -96,6 +117,7 @@ export default function Register({ navigation }): JSX.Element {
             value={confirmPassword}
             setItem={setConfirmPassword}
             isDisabled={false}
+            secureText={true}
           />
         </View>
         <ButtonComponent

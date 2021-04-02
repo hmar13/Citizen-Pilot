@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, SetStateAction } from 'react';
 import {
   StyleSheet,
   View,
@@ -12,8 +12,7 @@ import * as ImagePicker from 'expo-image-picker';
 
 interface imageUri {
   imageUri: string;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  setImageUri: any;
+  setImageUri: React.Dispatch<SetStateAction<string>>;
   headerText: string;
   needImage: boolean;
 }
@@ -66,7 +65,7 @@ export default function Camera({
         }
       }
     })();
-    // TODO: NOT SURE IF THIS SHOULD GO THERE!!!
+
     const result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.All,
       aspect: [4, 3],
@@ -110,7 +109,7 @@ export default function Camera({
       {imageUri.length > 0 && (
         <Card style={styles.image}>
           <Card.Cover source={{ uri: imageUri }} />
-          <Card.Actions>
+          <Card.Actions style={{ flexDirection: 'row-reverse' }}>
             <Button onPress={deletePicture}>Retake</Button>
           </Card.Actions>
         </Card>
@@ -119,13 +118,12 @@ export default function Camera({
   );
 }
 
-const { height } = Dimensions.get('window');
-const { width } = Dimensions.get('window');
+const { height, width } = Dimensions.get('window');
 const styles = StyleSheet.create({
   button: {
     marginTop: 20,
     justifyContent: 'center',
-    height: 60,
+    height: 50,
     borderRadius: 15,
     alignSelf: 'center',
   },
@@ -150,7 +148,7 @@ const styles = StyleSheet.create({
     marginBottom: -10,
   },
   noPicture: {
-    height: 120,
+    height: 112,
   },
   PictureView: {
     height: 315,

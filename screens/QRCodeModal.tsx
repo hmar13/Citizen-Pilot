@@ -1,13 +1,12 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import React from 'react';
+import React, { SetStateAction } from 'react';
 import { Modal, StyleSheet, View } from 'react-native';
 import QRCodeComponent from '../components/LoginSignupComponents/QRCodeReaderComponent';
 
 interface ModalVisiblity {
   isModalVisible: boolean;
-  setIsModalVisible: any;
-  setFirstName: any;
-  setLastName: any;
+  setIsModalVisible: React.Dispatch<SetStateAction<boolean>>;
+  setFirstName: React.Dispatch<SetStateAction<string>>;
+  setLastName: React.Dispatch<SetStateAction<string>>;
 }
 
 export default function QRCodeModal({

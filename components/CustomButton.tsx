@@ -1,6 +1,5 @@
 import React from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-// import CustomButtonInterface from '../interfaces/CustomButtonInterface';
 import { Foundation, FontAwesome5, MaterialCommunityIcons } from '@expo/vector-icons';
 
 export default function CustomButton({ navigation }) {
@@ -39,7 +38,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-evenly',
     alignItems: 'center',
     flexDirection: 'row',
-    marginBottom: '-15%'
+    marginBottom: -50
   },
   button: {
     justifyContent: 'center',

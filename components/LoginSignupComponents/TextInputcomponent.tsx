@@ -1,5 +1,4 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import React from 'react';
+import React, { SetStateAction } from 'react';
 import { View, StyleSheet, Text } from 'react-native';
 import { TextInput } from 'react-native-paper';
 
@@ -7,8 +6,9 @@ interface Input {
   text: string;
   label: string;
   value: string;
-  setItem: any;
+  setItem: React.Dispatch<SetStateAction<string>>;
   isDisabled: boolean;
+  secureText: boolean
 }
 
 export default function TextInputComponent({
@@ -17,6 +17,7 @@ export default function TextInputComponent({
   value,
   setItem,
   isDisabled,
+  secureText,
 }: Input): JSX.Element {
   return (
     <View>
@@ -27,6 +28,7 @@ export default function TextInputComponent({
         placeholder={label}
         mode="outlined"
         style={styles.textInput}
+        secureTextEntry={secureText}
         onChangeText={input => setItem(input)}
       />
     </View>

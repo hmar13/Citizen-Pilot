@@ -8,92 +8,175 @@ import {
   Text,
   ScrollView,
 } from 'react-native';
-import { TextInput, Button, Title } from 'react-native-paper';
+import { TextInput, Button, ActivityIndicator } from 'react-native-paper';
+import { uploadImage } from '../services/Firebaseclient';
+import { postProposal } from '../services/Apiclient';
+import { useSelector } from 'react-redux';
+import { RootState } from '../store/reducer';
 import CameraComponent from '../components/ReportProblem/CameraComponent';
+import MessageReceivedModal from './MessageReceivedModal';
 import ListAccordion from '../components/ProposeSolution/ListAccordion';
-import HorizontalBanner from '../components/HorizontalBannerComponent';
+import HorizontalBannerComponent from '../components/HorizontalBannerComponent';
+import { FontAwesome5 } from '@expo/vector-icons';
 
 
-export default function ProposeSolution(): JSX.Element {
-  const [titleText, setTitleText] = useState('');
-  const [descriptionText, setDescriptionText] = useState('');
-  const [categoryTitle, setCategoryTitle] = useState('Choose a Location');
-  const [imageUri, setImageUri] = useState('');
+export default function ProposeSolution({ navigation }): JSX.Element {
+  const [isModalVisible, setModalVisible] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [title, setTitleText] = useState('');
+  const [description, setDescriptionText] = useState('');
+  const [location, setCategoryTitle] = useState('Choose a Location');
+  const [image, setImageUri] = useState('');
 
-  function handleButtonClick() {
-    if (categoryTitle === 'Choose a category') {
-      Alert.alert('Please choose a location');
+  const token: string = useSelector((state: RootState) => {
+    return state.user.userData.token;
+  });
+
+
+  async function handleButtonClick() {
+    if (title.length === 0 || description.length === 0) {
+      return Alert.alert('Please add a title or description');
+    }
+    if (location === 'Choose a Location') {
+      return Alert.alert('Please choose a location');
+    }
+    if (image.length === 0) {
+      return Alert.alert('Please add an image');
+    }
+    setIsLoading(true);
+
+    const imageurl = await uploadImage(image, 'proposals', title);
+
+    const details = {
+      "title": title,
+      "description": description,
+      "location": location,
+      "image": imageurl,
+      "votes": 0,
+      "approved": false
     }
 
-    console.log('clicked!');
+    // code to url encode
+    const formBody = [];
+    for (let property in details) {
+      const encodedKey = encodeURIComponent(property);
+      const encodedValue = encodeURIComponent(details[property]);
+      formBody.push(`${encodedKey}=${encodedValue}`);
+    };
+    const result = formBody.join("&");
+
+    await postProposal(token, result);
+    setIsLoading(false);
+
+    setModalVisible(true);
+    setTimeout(() => {
+      setModalVisible(false);
+      navigation.navigate('Dashboard');
+    }, 1600);
 
     setTitleText('');
     setDescriptionText('');
   }
 
   return (
-    <ScrollView style={styles.container}>
-      <HorizontalBanner />
-      <View style={styles.titleContainer}>
-        <Text style={styles.text}>Give your project a name</Text>
-        <TextInput
-          label="Title"
-          value={titleText}
-          mode="outlined"
-          style={styles.titleInput}
-          onChangeText={input => setTitleText(input)}
-        />
-      </View>
-      <View style={styles.proposalContainer}>
-        <Text style={styles.text}>What is your proposal about?</Text>
-        <TextInput
-          label="Tell us a little bit about your idea..."
-          multiline
-          numberOfLines={10}
-          value={descriptionText}
-          mode="outlined"
-          style={styles.proposalInput}
-          onChangeText={input => setDescriptionText(input)}
+    <View style={styles.container}>
+      <HorizontalBannerComponent />
 
-        />
+      <View style={styles.headerContainer}>
+        <FontAwesome5 name="lightbulb" size={35} color="#3A4276" />
+        <Text style={styles.headline}>Propose a solution</Text>
       </View>
 
-      <ListAccordion
-        setCategoryTitle={setCategoryTitle}
-        categoryTitle={categoryTitle}
-      />
-      <CameraComponent
-        imageUri={imageUri}
-        setImageUri={setImageUri}
-        headerText="Your picture"
-        needImage={true}
-      />
-      <Button
-        icon="email-send"
-        mode="contained"
-        style={styles.button}
-        onPress={handleButtonClick}
-      >
-        Submit
+      {
+        isLoading ?
+          <View style={{ marginTop: '50%' }}>
+            <ActivityIndicator animating={true} size='large' />
+          </View>
+          :
+
+          <ScrollView >
+            <View style={styles.titleContainer}>
+              <Text style={styles.text}>Give your project a name</Text>
+              <TextInput
+                label="Title"
+                value={title}
+                mode="outlined"
+                style={styles.titleInput}
+                onChangeText={input => setTitleText(input)}
+              />
+            </View>
+
+            {
+              (title.length > 0) &&
+              <View style={styles.proposalContainer}>
+                <Text style={styles.text}>What is your proposal about?</Text>
+                <TextInput
+                  label="Tell us a little bit about your idea..."
+                  multiline
+                  numberOfLines={10}
+                  value={description}
+                  mode="outlined"
+                  style={styles.proposalInput}
+                  onChangeText={input => setDescriptionText(input)}
+
+                />
+              </View>
+            }
+            {
+              (description.length > 0) &&
+              <ListAccordion
+                setCategoryTitle={setCategoryTitle}
+                categoryTitle={location}
+              />
+            }
+            {
+              (location !== 'Choose a Location') &&
+              <CameraComponent
+                imageUri={image}
+                setImageUri={setImageUri}
+                headerText="Your picture"
+                needImage={true}
+              />
+            }
+            <MessageReceivedModal isModalVisible={isModalVisible} setModalVisible={setModalVisible} />
+            <Button
+              icon="email-send"
+              mode="contained"
+              style={styles.button}
+              onPress={handleButtonClick}
+            >
+              Submit
       </Button>
-    </ScrollView>
+          </ScrollView>
+      }
+
+    </View>
   );
 }
-const { height } = Dimensions.get('window');
-const { width } = Dimensions.get('window');
+const { height, width } = Dimensions.get('window');
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#E5E5E5',
   },
   headerContainer: {
-    height: 85,
-    width: 311,
-    backgroundColor: 'yellow',
-    borderBottomRightRadius: 53.5,
+    flexDirection: 'row',
+    backgroundColor: 'white',
+    marginRight: 25,
+    marginLeft: 25,
+    marginBottom: 15,
+    borderBottomRightRadius: 30,
+    borderBottomLeftRadius: 30,
+    height: 70,
     justifyContent: 'center',
-    alignItems: 'flex-start',
-    alignSelf: 'flex-start',
+    alignItems: 'center',
+    paddingBottom: 5,
+  },
+  headline: {
+    alignSelf: 'center',
+    marginLeft: 10,
+    fontSize: 25,
+    fontWeight: 'bold',
   },
   headerText: {
     marginLeft: 35,

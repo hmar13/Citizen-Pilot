@@ -26,25 +26,25 @@ const modalInitalState = {
   shortDescription: 'Description',
   longDescription: 'Description',
   location: 'In the city',
-  img: 'img',
+  image: 'img',
   date: 'date',
 };
 
 const News = () => {
   const [modalInfo, setModalInfo] = useState<newsInterface>(modalInitalState);
   const [isModalVisible, setModalVisible] = useState(false);
+
   const allNews = useSelector((state: RootState) => {
-    return state.newsData.news;
+    return state.realNews.state;
   });
 
   const [selectedNews, setSelectedNews] = useState(allNews);
-
 
   const sortCategory = (categoryName: string) => {
     if (categoryName === 'All') {
       return setSelectedNews(allNews);
     }
-    const chosenNews = allNews.filter(newsItem => newsItem.category.indexOf(categoryName) !== -1)
+    const chosenNews = allNews.filter((newsItem: any) => newsItem.categories.includes(categoryName))
     if (chosenNews.length === 0) return;
     setSelectedNews(chosenNews);
   }
@@ -52,17 +52,23 @@ const News = () => {
   return (
     <Provider >
       <HorizontalBannerComponent />
-      <View style={styles.header__container}>
+      <View style={styles.headerContainer}>
         <FontAwesome name="newspaper-o" size={35} color="#3A4276" />
-        <Text style={styles.header__text}>News</Text>
+        <Text style={styles.headerText}>News</Text>
       </View>
 
       <SortByCategory sortCategory={sortCategory} />
+      {
+        allNews.length === 0 &&
+        <View>
+          <Text style={styles.noNewsText}>Sorry! {'\n'} There aren't any public announcements at the moment</Text>
+        </View>
 
+      }
       <FlatList
-        style={styles.flatlist__container}
+        style={styles.flatlistContainer}
         data={selectedNews}
-        keyExtractor={item => item.id}
+        keyExtractor={item => String(item.id)}
         renderItem={({ item }) => (
 
 
@@ -71,7 +77,7 @@ const News = () => {
             setModalVisible(true);
           }}>
             <View style={styles.container}>
-              <IconComponent category={item.category} />
+              <IconComponent category={item.categories} />
               <View style={styles.secondColumn}>
                 <View style={styles.textBox}>
                   <Text style={styles.title}>{item.title}</Text>
@@ -91,21 +97,20 @@ const News = () => {
         }}
       >
         <View style={styles.modalView}>
-          {/* how do I make Paragraph scrollable? if there is too much text, it will spill over card*/}
           <Card style={{ width: '110%', height: 490 }}>
             <Card.Content>
-              <Card.Cover style={styles.cardCover} source={{ uri: modalInfo.img }} />
+              <Card.Cover style={styles.cardCover} source={{ uri: modalInfo.image }} />
               <Title style={{ marginTop: 7 }}>{modalInfo.title}</Title>
               <Divider />
               <Paragraph style={{ marginTop: 10 }}>{modalInfo.longDescription}</Paragraph>
             </Card.Content>
           </Card>
-          <Button style={styles.button} icon="newspaper-variant-outline" mode="contained" onPress={() => console.log('navigation.navigate')}>
-            More
+
+          <Button style={styles.button} onPress={() => setModalVisible(false)}>
+            close
           </Button>
         </View>
       </Modal>
-
     </Provider>
   );
 };
@@ -126,6 +131,11 @@ const styles = StyleSheet.create({
     shadowRadius: 1,
     elevation: 3,
   },
+  noNewsText: {
+    marginTop: '50%',
+    color: 'black',
+    textAlign: 'center'
+  },
   banner: {
     borderBottomLeftRadius: 15,
     borderTopLeftRadius: 15,
@@ -138,14 +148,14 @@ const styles = StyleSheet.create({
   },
   button: {
     justifyContent: 'center',
-    alignSelf: 'center',
+    alignSelf: 'flex-end',
     height: 45,
     width: '40%',
-    borderRadius: 15,
     marginTop: 20,
+    marginRight: -40,
   },
 
-  flatlist__container: {
+  flatlistContainer: {
     paddingHorizontal: 25,
   },
   secondColumn: {
@@ -156,10 +166,6 @@ const styles = StyleSheet.create({
     marginLeft: '8%',
     width: '75%',
     height: '90%',
-  },
-  progress__container: {
-    alignSelf: 'flex-end',
-    justifyContent: 'flex-end',
   },
   textBox: {
   },
@@ -203,7 +209,7 @@ const styles = StyleSheet.create({
     shadowRadius: 4,
     elevation: 5,
   },
-  header__container: {
+  headerContainer: {
     flexDirection: 'row',
     backgroundColor: 'white',
     marginRight: 25,
@@ -216,7 +222,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingBottom: 5,
   },
-  header__text: {
+  headerText: {
     alignSelf: 'center',
     marginLeft: 10,
     fontSize: 25,

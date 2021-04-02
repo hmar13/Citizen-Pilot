@@ -1,13 +1,12 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import React, { useState, useEffect } from 'react';
+import React, { useState, SetStateAction, useEffect } from 'react';
 import { Text, View, StyleSheet } from 'react-native';
 import { ActivityIndicator, Colors } from 'react-native-paper';
 import { BarCodeScanner } from 'expo-barcode-scanner';
 
 interface QRComponent {
-  setFirstName: any;
-  setLastName: any;
-  setIsModalVisible: any;
+  setFirstName: React.Dispatch<SetStateAction<string>>;
+  setLastName: React.Dispatch<SetStateAction<string>>;
+  setIsModalVisible: React.Dispatch<SetStateAction<boolean>>;
 }
 
 export default function QRCodeComponent({
@@ -31,11 +30,8 @@ export default function QRCodeComponent({
   const handleBarCodeScanned = ({ data }: Data) => {
     setScanned(true);
     const dataArray: string[] = data.split(' ');
-    // refactor: first or last name could be longer
     const firstName = dataArray[0];
     const lastName = dataArray[1];
-    // probably with streetName, houseNumber, postcode for database/location
-
     setFirstName(firstName);
     setLastName(lastName);
     setIsModalVisible(false);
