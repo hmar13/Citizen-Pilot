@@ -1,10 +1,10 @@
 # Citizen-Pilot
 
 <p align="center">
-  <img src="assets/images/logo.png" />
+  <img src="assets/images/logo.png" width="300" />
 </p>
 
-> developing nations through citizen participation
+> Increasing citizen participation in developing nations.
 
 ---
 
@@ -69,10 +69,10 @@ Getting started
 ## ScreenShots
 
 <p float='left'>
-<img src="assets/images/citizen-pilot-sample1.png" />
-<img src="assets/images/citizen-pilot-sample2.png" />
-<img src="assets/images/citizen-pilot-sample3.png" />
-<img src="assets/images/citizen-pilot-sample4.png" />
+  <img src="assets/images/citizen-pilot-sample1.png"/>
+  <img src="assets/images/citizen-pilot-sample2.png"/>
+  <img src="assets/images/citizen-pilot-sample3.png"/>
+  <img src="assets/images/citizen-pilot-sample4.png"/>
 </p>
 
 ## Technologies
