@@ -4,19 +4,19 @@ import { List, Colors } from 'react-native-paper';
 
 interface CategoryTitle {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  setCategoryTitle: any;
-  categoryTitle: string;
+  setCategory: any;
+  category: string;
 }
 
 export default function ListAccordion({
-  setCategoryTitle,
-  categoryTitle,
+  setCategory,
+  category,
 }: CategoryTitle): JSX.Element {
   const [expanded, setExpanded] = useState(false);
   const handleAccordionView = () => setExpanded(!expanded);
 
   const handlePress = (newTitle: string) => {
-    setCategoryTitle(newTitle);
+    setCategory(newTitle);
     setExpanded(!expanded);
   };
 
@@ -30,7 +30,7 @@ export default function ListAccordion({
       <Text style={styles.text}>First, choose a category</Text>
       <List.Section>
         <List.Accordion
-          title={categoryTitle}
+          title={category}
           expanded={expanded}
           onPress={handleAccordionView}
           left={() => <List.Icon icon="star" color={Colors.blue500} />}
@@ -61,13 +61,11 @@ export default function ListAccordion({
   );
 }
 
-const { height } = Dimensions.get('window');
-const { width } = Dimensions.get('window');
-
+const { height, width } = Dimensions.get('window');
 const styles = StyleSheet.create({
   category: {
     backgroundColor: 'white',
-    width: width - 20,
+    width: width - 30,
     alignSelf: 'center',
     borderRadius: 10,
     marginBottom: 7,

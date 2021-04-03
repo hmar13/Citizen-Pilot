@@ -15,12 +15,14 @@ interface imageUri {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   setImageUri: any;
   headerText: string;
+  needImage: boolean;
 }
 
 export default function Camera({
   imageUri,
   setImageUri,
   headerText,
+  needImage,
 }: imageUri): JSX.Element {
   const [isPictureTaken, setIsPictureTaken] = useState(false);
 
@@ -64,10 +66,9 @@ export default function Camera({
         }
       }
     })();
-    // TODO: NOT SURE IF THIS SHOULD GO THERE!!!
+
     const result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.All,
-      allowsEditing: true,
       aspect: [4, 3],
       quality: 0.5,
     });
@@ -87,30 +88,29 @@ export default function Camera({
       <Text style={styles.text}>{headerText}</Text>
       <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
         {imageUri.length === 0 && (
-          <Button
-            icon="camera"
-            mode="contained"
-            onPress={takePicture}
-            style={styles.button}
-          >
-            Camera
-          </Button>
-        )}
-        {imageUri.length === 0 && (
-          <Button
-            icon="account-box-multiple"
-            mode="contained"
-            onPress={pickImage}
-            style={styles.button}
-          >
-            Upload
-          </Button>
+          !needImage ?
+            <Button
+              icon="camera"
+              mode="contained"
+              onPress={takePicture}
+              style={styles.button}
+            >
+              Take a picture
+          </Button> :
+            <Button
+              icon="account-box-multiple"
+              mode="contained"
+              onPress={pickImage}
+              style={styles.button}
+            >
+              Upload an image
+        </Button>
         )}
       </View>
       {imageUri.length > 0 && (
         <Card style={styles.image}>
           <Card.Cover source={{ uri: imageUri }} />
-          <Card.Actions>
+          <Card.Actions style={{ flexDirection: 'row-reverse' }}>
             <Button onPress={deletePicture}>Retake</Button>
           </Card.Actions>
         </Card>
@@ -119,14 +119,12 @@ export default function Camera({
   );
 }
 
-const { height } = Dimensions.get('window');
-const { width } = Dimensions.get('window');
+const { height, width } = Dimensions.get('window');
 const styles = StyleSheet.create({
   button: {
     marginTop: 20,
     justifyContent: 'center',
-    height: 60,
-    width: '30%',
+    height: 50,
     borderRadius: 15,
     alignSelf: 'center',
   },
@@ -137,8 +135,9 @@ const styles = StyleSheet.create({
     marginBottom: '10%',
   },
   container: {
+    flex: 1,
     backgroundColor: 'white',
-    width: width - 20,
+    width: width - 30,
     alignSelf: 'center',
     borderRadius: 10,
     marginBottom: 7,
@@ -150,9 +149,9 @@ const styles = StyleSheet.create({
     marginBottom: -10,
   },
   noPicture: {
-    height: height / 6,
+    height: 112,
   },
   PictureView: {
-    height: height / 2.4,
+    height: 315,
   },
 });

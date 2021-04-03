@@ -1,11 +1,14 @@
-/* eslint-disable global-require */
 import React from 'react';
 import { View, StyleSheet, Text } from 'react-native';
 import ButtonComponent from '../components/WelcomeComponents/Button';
 import BannerComponent from '../components/BannerComponent';
 import LogoComponent from '../components/LogoComponent';
 
-export default function WelcomeScreen(): JSX.Element {
+export default function WelcomeScreen({ navigation }): JSX.Element {
+  const handleButtonPress = () => {
+    navigation.navigate('Login');
+  };
+
   return (
     <View style={styles.container}>
       <BannerComponent />
@@ -13,7 +16,10 @@ export default function WelcomeScreen(): JSX.Element {
         <LogoComponent />
         <Text style={styles.text}>Log in and make your {'\n'} voice heard</Text>
         <View style={styles.buttonContainer}>
-          <ButtonComponent buttonText="Sign in" />
+          <ButtonComponent
+            buttonText="Sign in"
+            handleButtonPress={handleButtonPress}
+          />
         </View>
       </View>
     </View>
@@ -29,13 +35,12 @@ const styles = StyleSheet.create({
   secondColumn: {
     alignItems: 'center',
     justifyContent: 'center',
-    marginLeft: 36,
+    marginLeft: '10%',
   },
   text: {
     color: '#A9A9A9',
     fontSize: 15,
     textAlign: 'center',
-    fontStyle: 'italic',
   },
   buttonContainer: {
     marginTop: '120%',
