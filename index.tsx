@@ -5,12 +5,8 @@ import BottomTabs from './navigation/navBarBare';
 import { useSelector } from 'react-redux';
 import { RootState } from './store/reducer';
 
-
-
 export default function Index(): JSX.Element {
   const isLoggedIn = useSelector<RootState, any>(state => state.user.isLoggedIn);
   const content = !isLoggedIn ? <MainRootStack /> : <BottomTabs />
   return content;
 }
-
-
