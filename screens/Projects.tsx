@@ -12,7 +12,6 @@ const Projects = () => {
     return state.realProjects.state;
   });
 
-
   return (
     <View style={styles.container}>
       <HorizontalBannerComponent />
@@ -37,7 +36,7 @@ const Projects = () => {
             description={item.description}
             location={item.location}
             projectedCompletion={item.completion}
-            img={item.img}
+            img={item.image}
           />
         )}
       />

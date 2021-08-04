@@ -11,7 +11,6 @@ import SafeViewAndroid from './components/SafeViewAndroid';
 import { reducers } from './store/reducer';
 import Index from './index';
 
-// Firebase
 import * as firebase from 'firebase';
 import 'firebase/storage';
 import apiKeys from './config/keys';
@@ -33,7 +32,6 @@ const theme = {
 const middleware = applyMiddleware(ReduxThunk);
 const store = createStore(reducers, middleware);
 export default function App(): JSX.Element {
-  // Initialize Firebase
   if (!firebase.apps.length) {
     console.log('Connected with Firebase');
     firebase.initializeApp(apiKeys.firebaseConfig);

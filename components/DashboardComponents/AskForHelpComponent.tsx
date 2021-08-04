@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { SetStateAction } from 'react';
 import { StyleSheet } from 'react-native';
 import { Button, Paragraph, Portal, Dialog } from 'react-native-paper';
 
+
 interface DialogInterface {
   isDialogVisible: boolean;
-  setIsDialogVisible: any;
+  setIsDialogVisible: React.Dispatch<SetStateAction<boolean>>;
 }
 export default function AskForHelp({ isDialogVisible, setIsDialogVisible }: DialogInterface): JSX.Element {
   const hideDialog = () => setIsDialogVisible(false);

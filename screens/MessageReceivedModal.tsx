@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { SetStateAction } from 'react';
 import { StyleSheet, View, Text, Image } from 'react-native';
 import Modal from 'react-native-modal';
 
 interface ModalInterface {
   isModalVisible: boolean;
-  setModalVisible: any;
+  setModalVisible: React.Dispatch<SetStateAction<boolean>>;
 }
 
 export default function MessageReceivedModal({ isModalVisible, setModalVisible }: ModalInterface): JSX.Element {

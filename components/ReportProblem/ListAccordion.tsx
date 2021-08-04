@@ -1,10 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, SetStateAction } from 'react';
 import { View, Text, Dimensions, StyleSheet } from 'react-native';
 import { List, Colors } from 'react-native-paper';
 
 interface CategoryTitle {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  setCategory: any;
+  setCategory: React.Dispatch<SetStateAction<string>>;
   category: string;
 }
 

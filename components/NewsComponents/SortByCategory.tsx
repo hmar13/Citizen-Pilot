@@ -1,10 +1,9 @@
-import React, { useState } from 'react';
-
+import React, { useState, SetStateAction } from 'react';
 import { View } from 'react-native';
 import { IconButton, Colors, Menu } from 'react-native-paper';
 
 interface category {
-  sortCategory: any;
+  sortCategory: React.Dispatch<SetStateAction<any>>;
 }
 
 export default function SortByCategory({ sortCategory }: category): JSX.Element {

@@ -18,17 +18,16 @@ import {
   fetchVotes
 }
   from '../store/actions/dashboard';
-
 import { Button, Divider, Card, Title, Paragraph, IconButton } from 'react-native-paper';
 import { RootState } from '../store/reducer';
 import CustomButton from '../components/CustomButton';
 import HorizontalBanner from '../components/HorizontalBannerComponent';
-import newsInterface from '../interfaces/newsInterface';
+import { newsInterface } from '../interfaces';
 import AskForHelp from '../components/DashboardComponents/AskForHelpComponent';
 
 
 const modalInitalState = {
-  id: '1',
+  id: 1,
   title: 'News Title',
   category: 'Category',
   shortDescription: 'Description',
@@ -51,6 +50,8 @@ export default function Dashboard({ navigation }): JSX.Element {
   const token: string = useSelector((state: RootState) => {
     return state.user.userData.token;
   });
+
+
 
   useEffect(() => {
     const news = fetchNews();

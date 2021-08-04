@@ -7,7 +7,7 @@ import {
   Image,
   ScrollView,
 } from 'react-native';
-import { Button, Avatar, IconButton } from 'react-native-paper';
+import { Button, Avatar } from 'react-native-paper';
 import Modal from 'react-native-modal';
 import { AnimatedCircularProgress } from 'react-native-circular-progress';
 
@@ -33,13 +33,6 @@ const ProjectItems: React.FC<ProjectItemsInterface> = ({
 
 
   let projectProgress = +projectedCompletion;
-
-  // const [heartColour, setHeartColour] = useState('grey')
-  // const handleAddtoFavouritesPress = () => {
-  //   setHeartColour('#ad0f5c');
-  //   //   const action = saveToFavourites();
-  //   //   dispatch(action);
-  // }
 
   return (
     <View>
@@ -83,14 +76,6 @@ const ProjectItems: React.FC<ProjectItemsInterface> = ({
           <View style={styles.modalInformationContainer}>
             <Avatar.Image size={120} source={{ uri: img }} />
             <Text style={styles.modalTitle}>{title}</Text>
-            {/*
-            <IconButton
-              animated
-              icon="heart"
-              color={heartColour}
-              size={20}
-              onPress={handleAddtoFavouritesPress}
-            /> */}
           </View>
 
           <View style={styles.modalTextContainer}>
@@ -105,7 +90,7 @@ const ProjectItems: React.FC<ProjectItemsInterface> = ({
 
           <View style={styles.modalTextContainer}>
             <Text style={styles.modalHeaders}>For more information, visit: </Text>
-            <Text>www.somelink.com</Text>
+            <Text>www.ourcity.com</Text>
           </View>
           <Button style={{ alignSelf: 'flex-end', marginTop: '40%' }} onPress={toggleModal}>close</Button>
         </ScrollView>

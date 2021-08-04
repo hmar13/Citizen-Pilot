@@ -1,18 +1,12 @@
 import React from 'react';
 import { View, StyleSheet, Image, Text } from 'react-native';
-
-interface ContactItemsInterface {
-  title: string;
-  phoneNumber: string;
-  email: string;
-  img: string;
-}
+import { ContactItemsInterface } from '../../interfaces'
 
 const ContactItems: React.FC<ContactItemsInterface> = ({
   title,
   phoneNumber,
   email,
-  // img,
+  img,
 }) => {
   return (
     <View style={styles.container}>

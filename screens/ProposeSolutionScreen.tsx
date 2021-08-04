@@ -1,4 +1,3 @@
-/* eslint-disable global-require */
 import React, { useState } from 'react';
 import {
   View,
@@ -56,7 +55,6 @@ export default function ProposeSolution({ navigation }): JSX.Element {
       "approved": false
     }
 
-    // code to url encode
     const formBody = [];
     for (let property in details) {
       const encodedKey = encodeURIComponent(property);
